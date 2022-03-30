@@ -1,0 +1,33 @@
+########################################################################
+# smartcd enter - /Users/von/develop/www.vonwelch.com
+#
+# This is a smartcd script.  Commands you type will be run when you
+# enter this directory.  The string __PATH__ will be replaced with
+# the current path.  Some examples are editing your $PATH or creating
+# a temporary alias:
+#
+#     autostash PATH=__PATH__/bin:$PATH
+#     autostash alias restart="service stop; sleep 1; service start"
+#
+# See http://smartcd.org for more ideas about what can be put here
+########################################################################
+
+# Description: Work on www.vonwelch.com
+
+smartcd inform "Setting up www.vonwelch.com environment."
+
+autostash VIM_SESSION=www.vonwelch.com
+
+smartcd_virtualenv_activate ${WORKON_HOME}/pyder
+
+autostash pubtest publish
+
+# Publish to test.vonwelch.com
+pubtest() {
+  ~/develop/www.vonwelch.com/publish.sh test
+}
+
+# Publish to www.vonwelch.com
+publish() {
+  ~/develop/www.vonwelch.com/publish.sh production
+}

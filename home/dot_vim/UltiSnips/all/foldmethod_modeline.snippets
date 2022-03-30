@@ -1,0 +1,16 @@
+# VIM modeline for foldmethod=marker
+
+global !p
+
+from vimsnippets import get_comment_format
+
+def append_to_buffer_end(starting_text=''):
+  del snip.buffer[snip.line]
+  snip.buffer.append(starting_text)
+  snip.cursor.set(len(snip.buffer)-1, 0)
+endglobal
+
+pre_expand "append_to_buffer_end()"
+snippet modelinefoldmethod "Insert a VIM modeline specifying marker foldmethod"
+`!p snip.rv = get_comment_format()[0]` vim: foldmethod=marker: `!p snip.rv = get_comment_format()[2]`
+endsnippet

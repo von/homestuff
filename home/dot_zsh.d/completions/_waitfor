@@ -1,0 +1,16 @@
+#compdef waitfor
+# Completion for ../waitfor.zsh
+
+_waitfor() {
+  if (( CURRENT == 2 )); then
+    # Argument 1 is a pid of a running process
+    _pids
+  elif (( CURRENT > 2 )); then
+    # Arguments 2+ are any command
+    shift 2 words
+    (( CURRENT-=2 ))
+    _normal
+  fi
+}
+
+_waitfor

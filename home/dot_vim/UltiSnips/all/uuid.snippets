@@ -1,0 +1,8 @@
+# Snippets for generating uuids
+global !p
+import uuid
+endglobal
+
+snippet "uuid" "Insert a random uuid" r
+`!p snip.rv = str(uuid.uuid4()) if not snip.c else snip.c`
+endsnippet

@@ -1,0 +1,12 @@
+session_name: homestuff
+start_directory: ~/homestuff
+windows:
+  - window_name: shells
+    layout: even-horizontal
+    panes:
+      -
+      -
+  - window_name: vi
+    panes:
+      - shell_command:
+        - vi

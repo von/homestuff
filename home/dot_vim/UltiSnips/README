@@ -1,0 +1,21 @@
+See |UltiSnips-snippet-search-path| for an explanation of where directories
+with snippet definitions are expected.
+
+UltiSnips follows the same search pattern that Vim itself uses when searching
+for ftplugins: While iterating over the snippet definition directories found,
+files are listed with the following glob patterns: ft.snippets, ft_*.snippets,
+ft/*. ft is the current 'filetype', and the "*" matches anything, for example:
+   ruby.snippets
+   c.snippets
+   c_mine.snippets
+   c/a
+   c/b.snippets
+   perl.snippets
+Those files are than traversed in order to gather snippet definitions for the
+various file types. A special filetype is all, e.g.  >
+   all.snippets
+   all/a.snippets
+which contains snippets that are always expanded, no matter what file type is
+defined.
+
+For lots of example snippets see: https://github.com/honza/vim-snippets

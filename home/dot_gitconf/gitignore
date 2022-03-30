@@ -1,0 +1,30 @@
+# Any SVN, CVS or HG directory
+.svn/
+CVS/
+.hg/
+
+# Compiled files
+*.class
+*.pyc
+*.[oa]
+
+# Temporary files
+*~
+*.bak
+*.orig
+*.aside
+.#*
+\#*
+
+# Vim swap and recovery files
+*.swp
+*.swo
+*.swn
+
+# Python setuptools build directories
+build/*
+dist/*
+*.egg-info/*
+
+# Local virtualenv
+.virtualenv/

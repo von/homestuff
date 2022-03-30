@@ -1,0 +1,8 @@
+{
+  "ChromeCLI": {
+    "executable" : "/opt/homebrew/bin/chrome-cli"
+  },
+  "ipc": {
+    "path" : "/opt/homebrew"
+  }
+}

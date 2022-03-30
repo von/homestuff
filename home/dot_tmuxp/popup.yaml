@@ -1,0 +1,19 @@
+session_name: popup
+start_directory: ~/
+options:
+  detach-on-destroy: on
+windows:
+  - window_name: popup
+    layout: even-horizontal
+    panes:
+      -
+      -
+# Create a second window to work around "no previous window" bug
+# See https://github.com/tmux-python/tmuxp/issues/364#issuecomment-706946717
+# Set colors in as I cannot get them to work in options.
+  - window_name: workaround
+    panes:
+      - shell_command:
+        - tmux set pane-border-style 'fg=green,bg=colour236'
+        - tmux set pane-active-border-style 'fg=green,bg=colour236'
+        - exit

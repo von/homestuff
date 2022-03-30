@@ -1,0 +1,152 @@
+######################################################################
+# SSH Configuration File
+#
+# All Host entries matching are used. Use '!hostname' to cause a
+# block not to be processed.
+# Since the first obtained value for each parameter is used, more host-specific
+# declarations should be given near the beginning of the file, and general defaults at
+# the end.
+
+######################################################################
+# Enable ControlMaster
+# http://www.revsys.com/writings/quicktips/ssh-faster-connections.html
+# "the crappy thing is that the first connection cannot be closed out
+# until the rest are"
+
+# In general this is more confusing than it is worth, so disabled.
+
+#Host *
+#ControlMaster auto
+#ControlPath /tmp/ssh-%r@%h:%p
+
+# Note for SVN+SSH, add to ~/.subversion/config file:
+#[tunnels]
+#ssh = ssh -o ControlMaster=no
+
+
+######################################################################
+# Personal systems
+#
+Host casey
+  Hostname 192.168.2.10
+  User von
+  ForwardX11 yes
+  ForwardAgent yes
+
+# Synology NAS
+# For directions on setting up SSH access see:
+# http://techanic.net/2014/04/12/configuring_ssh_and_scp_sftp_on_dsm_5.0_for_synology_diskstations.html
+Host caseycrate
+  Hostname 192.168.1.22
+  User von
+  # For good LAN performance
+  # Compression no
+
+Host emmacrate
+  User von
+  Hostname 192.168.1.23
+
+# Dreamhost
+Host git.vwelch.com
+  User vwelch
+  # Fail if my Yubikey is not found
+  PasswordAuthentication No
+
+Host vwelch.com *.vwelch.com
+  User vwelch
+  ForwardAgent yes
+
+######################################################################
+# Github von-forks account
+#
+# Git hub only allows a key to be used for one account, so we
+# create von-forks.github.com that uses my alternate key.
+#
+# To clone from this account use:
+# git clone git@von-forks.github.com:von-forks/repo.git
+#
+# Note that any host using the non-default SSH key needs to also
+# appear negated in the IdentityFile section.
+
+Host von-forks.github.com
+  Hostname github.com
+  User git
+  IdentitiesOnly yes
+  IdentityFile ~/ssh-key/id_rsa_von_forks
+
+# zx2c4 (password-store)
+# I also use the von-forks key for zx2c4
+
+Host git.zx2c4.com
+  IdentitiesOnly yes
+  IdentityFile ~/ssh-key/id_rsa_von_forks
+
+######################################################################
+# Github von account
+Host github.com
+  User git
+  # Fall if my Yubikey is not found
+  PasswordAuthentication No
+
+######################################################################
+# Virtual machines
+#
+# Kudos: http://muffinresearch.co.uk/archives/2010/02/08/howto-ssh-into-virtualbox-3-linux-guests/
+
+# Work laptop
+Host osg-pki-vm
+  Hostname 192.168.56.10
+  User von
+
+######################################################################
+# IU systems
+#
+
+Host gocbox
+  Hostname gocbox.grid.iu.edu
+  User vwelch
+
+######################################################################
+# FNAL
+#
+
+Host *.fnal.gov
+  User vwelch
+  # Enable use of Kerberos credentials
+  GssapiDelegateCredentials yes
+  GSSAPIAuthentication yes
+
+######################################################################
+# UUCB (Dreamhost)
+#
+
+Host uubloomington.org
+  User uucb
+
+######################################################################
+# SWAMP
+#
+# Use 'passwd' to change password.
+# SSH pubkey must be registered with SWAMP LDAP
+
+Host swamp
+  Hostname swa-node1.cosalab.org
+
+######################################################################
+# Default
+#
+
+Host *
+
+  # Use protocol 2 over protocol 1
+  Protocol 2,1
+
+  # Make GSSAPI our preference
+  PreferredAuthentications gssapi-keyex,gssapi-with-mic,publickey,keyboard-interactive,password
+
+  # Don't forward anything
+  ForwardX11 no
+  ForwardAgent no
+
+  # Allow GSSAPI (Kerberos and GSI) authentication
+  GSSAPIAuthentication yes

@@ -1,0 +1,14 @@
+session_name: rotary
+start_directory: ~/Google Drive/My Drive/Rotary/
+windows:
+  - window_name: Rotary
+    layout: even-horizontal
+    panes:
+      -
+      -
+
+# Create a second window to work around "no previous window" bug
+# See https://github.com/tmux-python/tmuxp/issues/364#issuecomment-706946717
+  - window_name: workaround
+    panes:
+      - exit

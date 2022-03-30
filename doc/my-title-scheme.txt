@@ -1,0 +1,42 @@
+My window/tab title scheme
+
+Overview
+--------
+
+I use zsh in tmux in iTerm, and the following titles/names are in play:
+  * iTerm has a tab and window title
+  * tmux has a window name and pane title.
+
+If I'm not running in tmux, zsh sets the iTerm tab and window title.
+
+If I'm running in tmux, the window name is static and defined by my tm session
+scripts. The pane title is set by zsh or vim and propagated to the iTerm
+window and tab title by tmux.
+
+Zsh
+---
+
+If not in tmux, zsh sets the window and tab name via oh-my-zsh
+
+If in tmux, zsh sets the pane title when displaying the prompt and before
+running a command. Configuration is in zsh/zsh.d/title.zsh
+
+vim
+---
+
+vim will set the tmux pane title if it is running in tmux in
+vim/conf/title.vim
+
+tmux/tm
+-------
+
+tmux sets the iTerm tab and window titles based on set-titles-string in
+tmux/tmux.conf, which uses the session and window names.
+tmux also displays the session and window name at the bottom of it's window.
+Window names are set by tm startup scripts in tmux/sessions/
+
+iTerm
+-----
+
+iTerm adds iTerm profile name (unless it is Default) to the window name.
+  See iterm-configuration.txt

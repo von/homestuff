@@ -1,0 +1,48 @@
+# Snippets for generating a passwd
+global !p
+import os.path
+import random
+import string
+
+def gen_password(length, remove_lookalike=True):
+    """Generate a password of given length."""
+    alphabet = string.ascii_letters + string.digits + "!$#*&@=+"
+    if remove_lookalike:
+        lookalikes = "0O1l"
+        alphabet = alphabet.translate(str.maketrans("", "", lookalikes))
+    s = "".join([random.choice(alphabet) for i in range(length)])
+    return s
+
+def gen_pin(length):
+    """Generate a numerical pin of given length."""
+    alphabet = string.digits
+    s = "".join([random.choice(alphabet) for i in range(length)])
+    return s
+
+def gen_phrase(length):
+    """Generate a pass phrase of given length in words."""
+    dict = os.path.expanduser("~/lib/shared/words")
+    try:
+      with open(dict) as f:
+        words = f.readlines()
+    except IOError as e:
+      return str(e)
+    s = " ".join([random.choice(words).strip() for i in range(length)])
+    return s
+
+endglobal
+
+snippet "passwd(\d*)" "Insert a random password with optional length" r
+`!p length = int(match.group(1)) if match.group(1) else 12
+snip.rv = gen_password(length) if not snip.c else snip.c`
+endsnippet
+
+snippet "pin(\d*)" "Insert a random pin with optional length" r
+`!p length = int(match.group(1)) if match.group(1) else 4
+snip.rv = gen_pin(length) if not snip.c else snip.c`
+endsnippet
+
+snippet "phrase(\d*)" "Insert a pass phrase with optional number of words" r
+`!p length = int(match.group(1)) if match.group(1) else 4
+snip.rv = gen_phrase(length) if not snip.c else snip.c`
+endsnippet

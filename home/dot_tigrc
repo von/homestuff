@@ -1,0 +1,121 @@
+#
+# Configuration for tig
+#
+# Kudos: https://github.com/jonas/tig/wiki/Bindings
+
+########
+# Options
+
+# Update view after each command
+# XXX This doesn't seem to be working.
+# Seems to be broken in tig: https://github.com/jonas/tig/issues/794
+set refresh-mode = after-command
+
+#######
+#  Key Bindings
+
+######
+#  Generic: Used in all mappings
+
+# '+' or 'a' amends
+bind generic + !git commit --amend
+bind generic a !git commit --amend
+
+# Pull from remote
+bind generic p !git pull
+
+# Push to remote
+bind generic P !git push
+
+bind generic <Ctrl-F> move-page-down
+bind generic <Ctrl-B> move-page-up
+
+# Reload ~/.tigrc
+bind generic <Ctrl-R> :source ~/.tigrc
+
+######
+# Status view
+
+# R runs 'git rb' to rebase back to origin/master (my alias)
+bind status R !git rb
+
+# U uncommits last commit
+bind status U !git uncommit
+
+# Indicate intent to add a file
+bind status N !@git add -N %(file)
+
+# Delete a file
+bind status D !@?rm %(file)
+
+# Stash untaged changes
+bind status S !?git stash save --keep-index "WIP"
+bind status <Ctrl-S> !?git stash save --keep-index "%(prompt Enter stash name: )"
+
+######
+# Main and Log
+# It seems to make sense to have same key bindings for both.
+#
+
+bind main C !?git cherry-pick %(commit)
+bind log  C !?git cherry-pick %(commit)
+
+# -1 == patch only for the given commit
+bind main P !?git format-patch -1 %(commit)
+bind log  P !?git format-patch -1 %(commit)
+
+# Rebase to (and including current commit)
+bind main R !?git rebase --interactive %(commit)^1
+bind log  R !?git rebase --interactive %(commit)^1
+
+# Create a revert commit
+bind main ! !?git revert %(commit)
+bind log  ! !?git revert %(commit)
+
+# Undo commit
+bind main U !?git reset --soft HEAD^
+bind log  U !?git reset --soft HEAD^
+
+# Tag commit
+bind main T !@git tag "%(prompt Tag name: )" %(commit)
+bind log  T !@git tag "%(prompt Tag name: )" %(commit)
+
+# Copy commit hash (w/o CR) to clipboard (is Mac specific)
+bind main <hash> +sh -c "/bin/echo -n %(commit) | pbcopy && echo Commit hash in paste buffer"
+bind log <hash> +sh -c "/bin/echo -n %(commit) | pbcopy && echo Commit hash in paste buffer"
+
+# Copy oneline commit summary to clipboard (is Mac specific)
+bind main $ +sh -c "git log --pretty=oneline --abbrev-commit --max-count=1 %(commit) | pbcopy && echo Commit summary in paste buffer"
+bind log $ +sh -c "git log --pretty=oneline --abbrev-commit --max-count=1 %(commit) | pbcopy && echo Commit summary in paste buffer"
+
+######
+# Stage view
+#
+
+# Stage a single line
+bind stage 1 stage-update-line
+
+# C to commit
+bind stage C !git commit
+
+######
+# Diff view
+#
+# <Up> and <Down> scroll in the pane that created the diff (e.g. log)
+# Use J/K to move within diff
+bind diff <Up> previous
+bind diff <Down> next
+
+# C-B/F/R move whole pages
+bind diff <Ctrl-F> move-page-down
+bind diff <Ctrl-R> move-page-up
+bind diff <Ctrl-B> move-page-up
+
+######
+# Stash view
+#
+
+# Drop or apply stashes from stash view (y)
+bind stash P !?git stash pop %(stash)
+bind stash D !?git stash drop %(stash)
+bind stash A !?git stash apply %(stash)

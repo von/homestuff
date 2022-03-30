@@ -1,0 +1,15 @@
+# Snippets for pcall() and xpcall(): https://www.lua.org/pil/8.5.html
+#
+snippet pcall "Protected call"
+local result, err = xpcall(${1:func}, debug.traceback)
+if not result then
+  ${2:errorfunc}("Error calling $1: " .. errormsg)
+end
+endsnippet
+
+snippet xpcall "Extended protected call"
+local result, err = xpcall(${1:func}, debug.traceback)
+if not result then
+  ${2:errorfunc}("Error calling $1: " .. errormsg)
+end
+endsnippet

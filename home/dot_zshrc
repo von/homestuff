@@ -1,0 +1,203 @@
+#!/bin/zsh
+#####################################################################
+# Error handling
+# If we exit for any reason during processing, drop into an
+# emergency shell.
+
+function catch_err()
+{
+    echo "Caught error at line ${1}. Running emergency shell..."
+    exec /bin/zsh -f
+}
+
+# Resourcing zshrc always seems to cause an error in zcompdump
+#trap 'catch_err ${0}:${LINENO}' ERR
+
+function catch_exit()
+{
+    echo "Caught exit at ${1}. Running emergency shell..."
+    exec /bin/zsh -f
+}
+
+trap 'catch_exit ${0}:${LINENO}' EXIT
+
+#####################################################################
+# Enable profiling. Run zprof to see usage profile.
+# Kudos: https://stevenvanbael.com/profiling-zsh-startup
+zmodload zsh/zprof
+
+#####################################################################
+#
+# ZSH Configuration
+#
+
+# My custom ZSH configuration files
+export ZSH_CUSTOM=$HOME/.zsh.d/
+
+# Where my REPOS are
+export REPOS_PATH=$HOME/repos/
+
+#####################################################################
+# Debugging
+
+# Show all files sourced.
+# setopt SOURCE_TRACE
+
+# Turn on/off tracing of a function
+# Kudos: https://scriptingosx.com/2019/07/moving-to-zsh-part-4-aliases-and-functions/
+function debug_func() {
+  functions -t "${1}"
+}
+
+function undebug_func() {
+  functions +t "${1}"
+}
+
+#####################################################################
+# Find Homebrew prefix
+
+# Set a number of brew environment variables:
+# HOMEBREW_PREFIX, HOMEBREW_CELLAR, HOMEBREW_REPOSITORY
+# And modify some others: PATH, MANPATH, INFOPATH
+# Kudos: https://superuser.com/a/1626560/128341
+eval $(brew shellenv)
+
+#####################################################################
+# Clear hooks
+
+precmd_functions=()
+preexec_functions=()
+periodic_functions=()
+
+#####################################################################
+# Initialize zsh-async (installed by Homebrew)
+# https://github.com/mafredri/zsh-async
+# Use in my 'von' theme, so must be done before oh-my-zsh is initialized
+
+source ${HOMEBREW_PREFIX}/share/zsh/site-functions/async
+autoload -Uz async && async
+
+#####################################################################
+# Load to-env
+#
+source ${REPOS_PATH}/to-env/to-env.sh
+
+#####################################################################
+# Completion stuff
+# Add any completion stuff here as oh-my-zsh calls compinit
+
+# Pick up my completion scripts
+fpath=( ${ZSH_CUSTOM}/completions $fpath)
+
+# To pick up _tm for tm completion
+fpath=( ${REPOS_PATH}/tm $fpath)
+
+# Pick up completions forom hombrew
+# https://docs.brew.sh/Shell-Completion
+fpath=( ${HOMEBREW_PREFIX}/share/zsh/site-functions $fpath)
+
+#####################################################################
+# Plugins (loaded by Oh-my-zsh)
+# (From $ZSH/plugins/ or $ZSH_CUSTOM/plugins)
+
+plugins=()
+# Load vi-mode first to set base for key bindings
+plugins+=(vi-mode)  # from oh-my-zsh
+plugins+=(colonlist)
+plugins+=(colors256)
+plugins+=(fzf)  # from oh-my-zsh
+plugins+=(fzf-completion-ext)
+plugins+=(fzf_downloads_widget)
+plugins+=(fzf_git_widget)
+plugins+=(fzf_path_widget)
+plugins+=(fzf_task_spooler_widget)
+plugins+=(git)  # from oh-my-zsh
+plugins+=(git-prompt)  # from oh-my-zsh
+plugins+=(ignoreeof)
+plugins+=(ignoreinterrupt)
+plugins+=(increase-number)
+plugins+=(pass)  # from oh-my-zsh
+plugins+=(stack)
+plugins+=(theme)
+plugins+=(truecolors)
+
+#####################################################################
+# Oh-my-zsh configuration
+# https://github.com/robbyrussell/oh-my-zsh
+
+ZSH=$HOME/.oh-my-zsh  # Used by oh-my-zsh
+export OH_MY_ZSH=${ZSH}
+
+# Auto-update oh-my-zsh myself
+# (Also, it screws up initial input to tmux windows by eating stdin.)
+DISABLE_AUTO_UPDATE=true
+
+# Set name of the theme to load (from $ZSH/themes/ or $ZSH_CUSTOM/)
+ZSH_THEME="von"
+
+# Display red dots while waiting for completion
+COMPLETION_WAITING_DOTS="true"
+
+# Number of EOFs to ignore before exit (via ignoreeof plugin)
+IGNOREEOF=1
+
+# Don't load magic functions, specifically url-quote-magic, as it
+# breaks zsh-syntax-highlighting
+DISABLE_MAGIC_FUNCTIONS=true
+
+if test -f "${ZSH}/oh-my-zsh.sh" ; then
+  source "${ZSH}/oh-my-zsh.sh"
+else
+  echo "Warning: oh-my-zsh not found."
+fi
+
+#####################################################################
+# Initialize zsh-syntax-highlighting (installed by Homebrew)
+# https://github.com/zsh-users/zsh-syntax-highlighting
+# Note: Must be done after compinit is called by oh-my-zsh and
+#   before after/syntax-highlighting.zsh is sourced.
+
+source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#####################################################################
+# Load $ZSH_CUSTOM/after/*.zsh
+
+# (.N) is NULL_GLOB and causes an empty string to be returned if
+# the glob matches no files.
+for file in $ZSH_CUSTOM/after/*.zsh(.N) ; do
+  source ${file}
+done
+
+#####################################################################
+# Autoload zmv
+# http://zshwiki.org/home/builtin/functions/zmv
+#
+
+autoload -U zmv
+
+#####################################################################
+# Allow for easy resourcing of zshrc
+
+function zshrc()
+{
+    RELOAD_ZSHRC=1  # So zshrc knows it is being reloaded
+    # Clear all aliases
+    unalias -m "*" ; unalias -sm "*"
+    # Clear all functions
+    #unhash -fm "*"  # This breaks things...
+    # Source a basic configuration if it exists
+    test -f /etc/zshenv && source /etc/zshenv
+    test -f /etc/zsh/zshenv && source /etc/zsh/zshenv
+    source ~/.zshrc
+    unset RELOAD_ZSHRC
+}
+
+#####################################################################
+# Move cursor to bottom of screen
+# Kudos: https://superuser.com/a/1546467/128341
+tput cup "$LINES"
+
+#####################################################################
+# Clean up
+
+trap - ERR EXIT

@@ -1,0 +1,4 @@
+session_name="homestuff"
+# Create two verticle panes with shells in ~/homestuff
+session_cmds='send-keys "cd ~/homestuff" "Enter" \; split-window -h \; send-keys "cd ~/homestuff" "Enter"'
+# vim:set et sw=2 ts=8 ft=sh:

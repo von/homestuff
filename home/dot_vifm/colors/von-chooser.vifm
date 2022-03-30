@@ -1,0 +1,9 @@
+" von-chooser vifm colorscheme
+" Used when using a file
+
+" Make border LightCyan all around
+highlight Border ctermbg=LightCyan
+highlight TopLineSel ctermbg=LightCyan ctermfg=black
+" Following is needed to get top corners
+highlight TopLine ctermbg=LightCyan ctermfg=black
+highlight StatusLine ctermbg=LightCyan ctermfg=black

@@ -1,0 +1,8 @@
+session_name: cd-utils
+start_directory: ~/develop/cd-utils/
+windows:
+  - window_name: cd-utils
+    layout: even-horizontal
+    panes:
+      -
+      -

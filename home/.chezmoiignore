@@ -1,0 +1,6 @@
+.oh-my-zsh/cache/**
+{{- if ne .chezmoi.hostname "Vons-PL" }}
+.tmuxp/beacon.yaml
+.tmuxp/cd-utils.yaml
+.tmuxp/rotary.yaml
+{{- end }}

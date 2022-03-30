@@ -1,0 +1,33 @@
+Manual configuration to iTerm
+
+Note I don't set the following because I couldn't get vim inside of tmux
+to be able to access the clipboard.
+  * Preferences/General/Selection/Applications in terminal may access clipboard
+Also see https://evertpot.com/osx-tmux-vim-copy-paste-clipboard/
+
+For title (see my-title-scheme.txt):
+  * Preferences/Appearance:
+    * Window / "Show window number" should be off
+
+Disable Apple shortcuts for Control-<arrows>:
+  * Disable under System Preferences / Keyboard / Shortcuts / Mission Control
+
+For Tmux (see tmux/tmux.conf):
+  * Big Sur uses C-Space for selecting Input (not under Monterey)
+    Change under System Preferences / Keyboard / Shortcuts / Input Sources
+  * These cause C-Left and C-Right to send the sequence tmux expects
+    Under Preferences / Keys / Key Bindings:
+    * C-Right Send Escape Sequence [1;5C
+    * C-Left Send Escape Sequence [1;5D
+    * 2021-12 don't seem to be needed
+  * Rebind C-<num> per http://unix.stackexchange.com/a/96936/29832
+    * C-1: Send Escape Sequence [27;5;49~
+    * C-2: Send Escape Sequence [27;5;50~
+    * C-3: Send Escape Sequence [27;5;51~
+    * C-4: Send Escape Sequence [27;5;52~
+    * C-5: Send Escape Sequence [27;5;53~
+    * C-6: Send Escape Sequence [27;5;54~
+    * C-7: Send Escape Sequence [27;5;55~
+    * C-8: Send Escape Sequence [27;5;56~
+    * C-9: Send Escape Sequence [27;5;57~
+    * C-0: Send Escape Sequence [27;5;48~

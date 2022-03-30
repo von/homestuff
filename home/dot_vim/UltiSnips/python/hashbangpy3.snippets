@@ -1,0 +1,11 @@
+# Override default '#!' snippet with python3 version
+
+# Make the snippets in this file override the supplied
+# (which have priority of 0)
+# Kudos: https://stackoverflow.com/a/26246185/197789
+priority 1
+
+snippet #! "#!/usr/bin/env python3" b
+#!/usr/bin/env python3
+$0
+endsnippet

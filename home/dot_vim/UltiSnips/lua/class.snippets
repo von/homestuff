@@ -1,0 +1,80 @@
+# Kudos: http://lua-users.org/wiki/ObjectOrientationTutorial
+snippet class "Class template" b
+-- ${1:MyClass}
+-- The table representing the class, which will double as the metatable for the instances
+local $1 = {}
+-- Failed table lookups on the instances should fallback to the class table, to get methods
+$1.__index = $1
+
+-- Calls to $1() return $1.new()
+setmetatable($1, {
+  __call = function (cls, ...)
+    return cls.new(...)
+  end,
+})
+
+-- Set up logger
+$1.log = hs.logger.new("$1")
+
+function $1:debug(enable)
+  if enable then
+    self.log.setLogLevel('debug')
+    self.log.d("Debugging enabled")
+  else
+    self.log.d("Disabling debugging")
+    self.log.setLogLevel('info')
+  end
+end
+
+-- syntax equivalent to "$1.new = function..."
+function $1.new(init)
+  $1.log.d("new() called")
+  local self = setmetatable({}, $1)
+  self.value = init
+  return self
+end
+
+-- Examples methods
+-- The colon syntax automatically causes 'self' to be available
+function $1:set_value(newval)
+  self.value = newval
+end
+
+function $1:get_value()
+  return self.value
+end
+
+-- If module, return class definition
+return $1
+endsnippet
+
+#  Kudos: https://ozzypig.com/2018/05/10/object-oriented-programming-in-lua-part-5-inheritance
+snippet subclass "Sub-class template" b
+-- ${1:MySubClass} which inherits from ${2:MyClass}
+
+local $1 = {}
+
+-- Failed table lookups on instances fall back to the class table, to get methods
+$1.__index = $1
+
+setmetatable($1, {
+  -- Calls to $1() return $1.new()
+  __call = function (cls, ...)
+    return cls.new(...)
+  end,
+  -- Failed lookups on class go to superclass
+  __index = $2
+})
+
+function $1.new(init)
+  -- Create a new instance of superclass, but give it metatable of subclass
+  local self = setmetatable($2.new(init), $1)
+  return self
+end
+
+function $1:increment_value()
+  self.value = self.value + 1
+end
+
+return $1
+endsnippet

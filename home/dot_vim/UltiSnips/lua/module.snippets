@@ -1,0 +1,22 @@
+snippet module "Module file template" b
+-- ${1:Module} module
+local $1 = {}
+
+-- Set up logger for module
+$1.log = hs.logger.new("$1", "info")
+
+function $1:debug(enable)
+  if enable then
+    self.log.setLogLevel('debug')
+    self.log.d("Debugging enabled")
+  else
+    self.log.d("Disabling debugging")
+    self.log.setLogLevel('info')
+  end
+end
+
+-- Module contents here
+-- e.g. function $1.foo() hs.alert("Hello world") end
+
+return $1
+endsnippet
