@@ -1,0 +1,3 @@
+[diff]
+    # Don't show scripts in diffs
+    exclude = ["scripts"]

@@ -1,0 +1,12 @@
+
+File sources:
+tmux.vim: http://tmux.svn.sourceforge.net/viewvc/tmux/trunk/examples/tmux.vim?content-type=text%2Fplain
+
+pgn.vim: https://www.vim.org/scripts/script.php?script_id=5447
+  -see ../after/synyax/pgn.vim for customizations
+
+python.vim: http://www.vim.org/scripts/script.php?script_id=2462
+
+ini.vim: http://www.vim.org/scripts/script.php?script_id=2475
+
+snippets.vim: https://raw.github.com/SirVer/ultisnips/master/syntax/snippets.vim

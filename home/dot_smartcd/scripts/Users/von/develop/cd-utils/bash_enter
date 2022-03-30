@@ -1,0 +1,23 @@
+########################################################################
+# smartcd enter - /Users/von/develop/cd-utils
+#
+# This is a smartcd script.  Commands you type will be run when you
+# enter this directory.  The string __PATH__ will be replaced with
+# the current path.  Some examples are editing your $PATH or creating
+# a temporary alias:
+#
+#     autostash PATH=__PATH__/bin:$PATH
+#     autostash alias restart="service stop; sleep 1; service start"
+#
+# See http://smartcd.org for more ideas about what can be put here
+########################################################################
+
+# Description: Work on cd-utils
+
+smartcd inform "Setting up cd-utils environment."
+
+autostash VIM_SESSION=cd-utils
+autostash ABCDE_CONF=__PATH__/abcde.conf
+autostash PATH="__PATH__:${PATH}"
+
+smartcd_virtualenv_activate ${WORKON_HOME}/cd-utils

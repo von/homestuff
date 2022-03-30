@@ -1,0 +1,39 @@
+########################################################################
+# smartcd enter - /Users/von/homestuff
+#
+# This is a smartcd script.  Commands you type will be run when you
+# enter this directory.  The string __PATH__ will be replaced with
+# the current path.  Some examples are editing your $PATH or creating
+# a temporary alias:
+#
+#     autostash PATH=__PATH__/bin:$PATH
+#     autostash alias restart="service stop; sleep 1; service start"
+#
+# See http://smartcd.org for more ideas about what can be put here
+########################################################################
+
+# Description: Work on my homestuff
+
+smartcd inform "Setting up homestuff environment."
+
+autostash VIM_SESSION=homestuff
+autostash link_homestuff update_repos
+
+update_repos() {
+  # cd to ${HOME} so that all repos are updated
+  (cd ${HOME} || exit 1; mr -m checkout ; mr -j 4 -m update ; mr -m link )
+}
+
+# Update links in $HOME
+link_homestuff() {
+  (cd ~/homestuff && \
+    ~/homestuff/mysetup/90-homestuff-install.sh )
+}
+
+if test $(uname) = "Darwin" ; then
+  # Update Homebrew files
+  autostash update_homebrew
+  update_homebrew() {
+    ~/homestuff/mysetup/os/Darwin/40-homebrew-bundle.sh
+  }
+fi

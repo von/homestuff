@@ -1,0 +1,16 @@
+snippet complete "Python completion function for snippets"
+# Python completion function for use with Utilisnips
+# Kudos: http://www.sirver.net/blog/2012/03/31/fourth-episode-of-ultisnips-screencast/
+# To use:
+#   \$1\`!p snip.rv=complete(t[1], ['item1', 'item2', 'item3'])\`
+global !p
+def complete(t, opts):
+  if t:
+    opts = [ m[len(t):] for m in opts if m.startswith(t) ]
+  if len(opts) == 1:
+    return opts[0]
+  if len(opts) == 0:
+    return ""
+  return "(" + '|'.join(opts) + ')'
+endglobal
+endsnippet

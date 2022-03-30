@@ -1,0 +1,27 @@
+# getopts snippet
+
+snippet getopts "getopts snippet" !b
+usage()
+{
+  cat <<-END
+Usage: \$0 [<options>]
+
+Options:
+  -h              Print help and exit.
+END
+# Note 'END' above most be fully left justified.
+}
+
+# Leading colon means silent errors, script will handle them
+# Colon after a parameter, means that parameter has an argument in $OPTARG
+while getopts ":${1:h}" opt; do
+  case $opt in
+    h) usage ; exit 0 ;;
+    \?) echo "Invalid option: -$OPTARG" >&2 ;;
+  esac
+done
+
+shift $(($OPTIND - 1))
+
+endsnippet
+

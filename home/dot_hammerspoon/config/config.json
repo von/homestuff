@@ -1,0 +1,8 @@
+{
+  "URLDispatcher": {
+    "debugLevel" : "debug",
+    "defaultHandler" : "com.google.Chrome",
+    "redirectTeams" : false,
+    "useURLOpener" : false
+  }
+}

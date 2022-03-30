@@ -1,0 +1,59 @@
+= Search Engines for use in Chrome search bar =
+
+[[/index|Back to Index]]
+
+To configure in Chrome, right click on the search bar
+select "Edit Search Engines" and then, after the
+Default engines, select Add.
+
+For a list of engines see
+https://github.com/daturkel/custom-search-engines
+
+Note that as of v88.0.4324.150, Chrome has stopped recognizing
+customer searches by default:
+https://www.reddit.com/r/chrome/comments/lilkij/custom_automatic_searches_not_working/
+Solution: Go to chrome://flags/#omnibox-keyword-search-button and disable
+
+ Note that for Chrome, keywords are case-insensitive
+
+Search CACR website
+cacr: https://encrypted.google.com/search?q=%s+site%3Ahttps%3A%2F%2Fcacr.iu.edu%2F CACR
+
+Search my Google drive
+gd: https://drive.google.com/drive/search?q=%s Google Drive
+
+Search Github
+gh: https://github.com/search?q=%s&ref=opensearch Github
+
+Search Hammerspoon documentation
+hs: https://encrypted.google.com/search?q=%s+site%3Ahttps%3A%2F%2Fwww.hammerspoon.org%2Fdocs%2F Hammerspoon
+
+Search on www.iu.edu (using "iu" blocks my broader searchs for IU stuff)
+www-iu: http://www.iu.edu/search/index.shtml?q=%s&cse-search-submit=Go&cx=016278320858612601979%3Addl1l9og1w8&ie=UTF-8&nojs=1 IU
+
+Search IU Scholarworks
+iusw: https://scholarworks.iu.edu/dspace/discover?scope=%2F&query=%s&submit=Go
+
+NSF Award Search
+nsf-award: https://www.nsf.gov/awardsearch/simpleSearchResult?queryText=%s&ActiveAwards=true NSF Award Search
+
+Search Python 2.7 documentation
+p: https://docs.python.org/2/search.html?q=%s&check_keywords=yes&area=default Python2
+
+Search Python 3.4 documentatnion
+p3: https://docs.python.org/3.4/search.html?q=%s&check_keywords=yes&area=default Python3
+
+Search Stackoverflow
+so: http://stackoverflow.com/search?q=%s StackOverflow
+
+Search UUCB website
+uucb: https://encrypted.google.com/search?q=%s+site%3Ahttps%3A%2F%2Fwww.uubloomington.org%2F UUCB
+
+Search Wikipedia
+w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia
+
+IU Exchange Calendar (no search, just a shortcut)
+owa: https://www.exchange.iu.edu/owa/?bO=1#path=/calendar IU Exchange Calendar
+
+Google contacts
+gc: https://contacts.google.com/search/%s Google contacts

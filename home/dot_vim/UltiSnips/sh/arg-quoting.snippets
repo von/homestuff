@@ -1,0 +1,19 @@
+# Snippets for quoting arguments
+
+snippet bash-quote-args "Quote arguments"
+"$@"
+endsnippet
+
+######
+# zsh-specific
+snippet zsh-quote-args-if-needed "Quote arguments if needed"
+${(q)@}
+endsnippet
+
+snippet zsh-quote-args-forced "Quote arguments forced"
+${(qq)@}
+endsnippet
+
+snippet zsh-join-and-quote-args "Join and quote arguments"
+${(j. .)${(q)@}}
+endsnippet

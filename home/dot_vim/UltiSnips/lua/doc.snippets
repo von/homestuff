@@ -1,0 +1,29 @@
+# https://github.com/Hammerspoon/hammerspoon/blob/master/SPOONS.md#documentation
+
+# Python completion function for use with Utilisnips
+# Kudos: http://www.sirver.net/blog/2012/03/31/fourth-episode-of-ultisnips-screencast/
+# To use:
+#   $1`!p snip.rv=complete(t[1], ['item1', 'item2', 'item3'])`
+global !p
+def complete(t, opts):
+  if t:
+    opts = [ m[len(t):] for m in opts if m.startswith(t) ]
+  if len(opts) == 1:
+    return opts[0]
+  if len(opts) == 0:
+    return ""
+  return "(" + '|'.join(opts) + ')'
+endglobal
+
+# Hammerspoon uses '---' as prefix for its documentation which is a form of markdown
+snippet hsdoc "Hammerspoon documentation"
+--- ${1:function}
+--- $2`!p snip.rv=complete(t[2], ['Constant', 'Constructor', 'Method', 'Internal Function', 'Function'])`
+--- ${3:Description}
+---
+--- Parameters:
+--- * \`${4:param}\`: ${5:Parameter description}
+---
+--- Returns:
+--- * ${6:A description of what is returned}
+endsnippet

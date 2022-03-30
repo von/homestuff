@@ -1,0 +1,41 @@
+snippet main "Add standard main() function with argparse" b
+import argparse
+import sys
+
+
+def make_argparser():
+    """Return arparse.ArgumentParser instance"""
+    parser = argparse.ArgumentParser(
+        description=__doc__,  # printed with -h/--help
+        # Don't mess with format of description
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        # To have --help print defaults with trade-off it changes
+        # formatting, use: ArgumentDefaultsHelpFormatter
+    )
+    # Only allow one of debug/quiet mode
+    verbosity_group = parser.add_mutually_exclusive_group()
+    verbosity_group.add_argument("-d", "--debug",
+                                 action='store_true', default=False,
+                                 help="Turn on debugging")
+    verbosity_group.add_argument("-q", "--quiet",
+                                 action="store_true", default=False,
+                                 help="run quietly")
+    parser.add_argument("--version", action="version", version="%(prog)s 1.0")
+    parser.add_argument("args", metavar="args", type=str, nargs="+",
+                        help="some extra arguments")
+    return parser
+
+
+def main(argv=None):
+    parser = make_argparser()
+    args = parser.parse_args(argv if argv else sys.argv[1:])
+
+    for arg in args.args:
+        # Do something with arg
+        pass
+    # Rest of main() here
+    return(0)
+
+if __name__ == "__main__":
+    sys.exit(main())
+endsnippet

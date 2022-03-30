@@ -1,0 +1,69 @@
+
+# Python completion function
+# Kudos: http://www.sirver.net/blog/2012/03/31/fourth-episode-of-ultisnips-screencast/
+global !p
+def complete(t, opts):
+  if t:  # filter options if we have text
+    opts = [ m[len(t):] for m in opts if m.startswith(t) ]
+  if len(opts) == 1:
+    return opts[0]
+  if len(opts) == 0:
+    return ""
+  return "(" + '|'.join(opts) + ")"
+endglobal
+
+snippet bib "Bibliography entry" b
+
+[${1:Tag}]
+title: ${2:Title}
+author: ${3:Authors}
+booktitle: ${4:Conference}
+year: ${5:`date +%Y`}
+month: ${6:`date +%b`}`!p snip.rv=complete(t[6], ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'])`
+url: ${7:URL}
+type: paper
+project: ${8:Project}
+
+endsnippet
+
+snippet pres "Presentation entry" b
+
+[${1:Tag}]
+title: ${2:Title}
+author: ${3:Authors}
+HowPublished: ${4:Conference}
+year: ${5:`date +%Y`}
+month: ${6:`date +%b`}`!p snip.rv=complete(t[6], ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'])`
+url: ${7:URL}
+type: presentation
+project: ${8:Project}
+
+endsnippet
+
+snippet report "Report entry" b
+
+[${1:Tag}]
+title: ${2:Title}
+author: ${3:Authors}
+HowPublished: ${4:Conference}
+year: ${5:`date +%Y`}
+month: ${6:`date +%b`}`!p snip.rv=complete(t[6], ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'])`
+url: ${7:URL}
+type: report
+project: ${8:Project}
+
+endsnippet
+
+snippet workshop "Workshop entry" b
+
+[${1:Tag}]
+title: ${2:Title}
+author: ${3:Authors}
+HowPublished: ${4:Conference}
+year: ${5:`date +%Y`}
+month: ${6:`date +%b`}`!p snip.rv=complete(t[6], ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'])`
+url: ${7:URL}
+type: workshop
+project: ${8:Project}
+
+endsnippet

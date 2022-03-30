@@ -1,0 +1,10 @@
+snippet coroutine "Coroutine decorator" b
+# Decorator for PEP-342 coroutine
+# Kudos: https://www.dabeaz.com/coroutines/Coroutines.pdf (slide 27)
+# XXX Should this have a functools.wraps decorator?
+def coroutine(func):
+    def start(*args,**kwargs):
+        cr = func(*args,**kwargs) cr.next()
+        return cr
+    return start
+endsnippet

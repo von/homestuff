@@ -1,0 +1,138 @@
+snippet spoon "Spoon init.lua file template" b
+--- === ${1:Spoon} ===
+-- Above line identifies spoon name to documentation generator.
+-- Spoon names should use TitleCase
+-- Soons are basically classes who loading creates a new instance.
+-- https://github.com/Hammerspoon/hammerspoon/blob/master/SPOONS.md#how-do-i-create-a-spoon
+--- Documentation is prefixed with three dashes. Normal comments with two dashes.
+
+local $1 = {}
+
+
+-- Metadata
+$1.name="$1"
+$1.version="0.1"
+$1.author="$2"
+-- https://opensource.org/licenses/Apache-2.0
+$1.license="Apache-2.0"
+$1.homepage=""
+
+--- $1.some_variable
+--- Variable
+--- Some exposed configuration variable.
+$1.some_variable = 42
+
+--- $1:debug(enable)
+--- Method
+--- Enable or disable debugging
+---
+--- Parameters:
+---  * enable - Boolean indicating whether debugging should be on
+---
+--- Returns:
+---  * Nothing
+function $1:debug(enable)
+  if enable then
+    self.log.setLogLevel('debug')
+    self.log.d("Debugging enabled")
+  else
+    self.log.d("Disabling debugging")
+    self.log.setLogLevel('info')
+  end
+end
+
+-- Methods
+-- Spoon methods/variables/constants/etc. should use camelCase
+
+--- $1:init()
+--- Method
+--- Initializes a $1
+--- When a user calls hs.loadSpoon(), Hammerspoon will execute init()
+--- Do generally not perform any work, map any hotkeys, start any timers/watchers/etc.
+--- in the main scope of your init.lua. Instead, it should simply prepare an object
+--- with methods to be used later, then return the object.
+---
+--- Parameters:
+---  * None
+---
+--- Returns:
+---  * $1 object
+
+function $1:init()
+  -- Set up logger for spoon
+  self.log = hs.logger.new("$1")
+
+  -- Path to this file itself
+  -- See also http://www.hammerspoon.org/docs/hs.spoons.html#resourcePath
+  self.path = hs.spoons.scriptPath()
+
+  -- Other initialization code here
+
+  return self
+end
+
+--start() and stop()
+--If your Spoon provides some kind of background activity, e.g. timers, watchers,
+--spotlight searches, etc. you should generally activate them in a :start()
+--method, and de-activate them in a :stop() method
+
+--- $1:start()
+--- Method
+--- Start background activity.
+---
+--- Parameters:
+---  * None
+---
+--- Returns:
+---  * $1 object
+function $1:start()
+  -- Code here
+  return self
+end
+
+--- $1:stop()
+--- Method
+--- Stop background activity.
+---
+--- Parameters:
+---  * None
+---
+--- Returns:
+---  * $1 object
+function $1:stop()
+  -- Code here
+  return self
+end
+
+-- bindHotKeys()
+-- If your Spoon provides actions that a user can map to hotkeys, you
+-- should expose a :bindHotKeys() method.
+
+--- $1:bindHotKeys(table)
+--- Method
+--- The method accepts a single parameter, which is a table. The keys of the table
+--- are strings that describe the action performed, and the values of the table are
+--- tables containing modifiers and keynames/keycodes. E.g.
+---   {
+---     f1 = {{"cmd", "alt"}, "f"},
+---     f2 = {{"cmd", "alt"}, "g"}
+---    }
+---
+---
+--- Parameters:
+---  * mapping - Table of action to key mappings
+---
+--- Returns:
+---  * $1 object
+
+function $1:bindHotKeys(mapping)
+  local spec = {
+    f1 = hs.fnutils.partial(self.feature1, self),
+    f2 = hs.fnutils.partial(self.feature2, self)
+  }
+  hs.spoons.bindHotkeysToSpec(spec, mapping)
+  return self
+end
+
+return $1
+endsnippet

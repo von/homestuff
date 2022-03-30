@@ -1,0 +1,10 @@
+session_name: servers
+windows:
+  - window_name: py3doc
+    panes:
+      - shell_command:
+        - pydoc3 -p 7888
+  - window_name: hammerspoon
+    panes:
+      - shell_command:
+        - hs

@@ -1,0 +1,75 @@
+# External software we include
+# See https://www.chezmoi.io/reference/special-files-and-directories/chezmoiexternal-format/
+#
+# Note we use 'https' URLs for Github repos (even my own) so we can access them
+# when bootstraping and we don't have SSH keys set up. We then have git setup
+# to use SSH when pushing back, per https://gist.github.com/grawity/4392747
+#
+# Note that if a github url has a typo, git will ask for a username and password
+#
+
+[".oh-my-zsh"]
+  type = "archive"
+  url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
+[".tmux-plugins/tpm"]
+  type = "git-repo"
+  url = "https://github.com/tmux-plugins/tpm"
+  refreshPeriod = "168h"
+
+#
+# Utilities: clone to repo and then symlink into ~/bin
+#
+["repos/to-env"]
+  type = "git-repo"
+  url = "https://github.com/von/to-env.git"
+["repos/tmuxp-popup"]
+  type = "git-repo"
+  url = "https://github.com/von/tmuxp-popup.git"
+["repos/scripts"]
+  type = "git-repo"
+  url = "https://github.com/von/scripts.git"
+
+#
+# Bootstrap Hammerspoon
+#
+[".hammerspoon/Spoons/SpoonInstall.spoon"]
+  type = "archive"
+  url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/SpoonInstall.spoon.zip"
+  exact = true
+  stripComponents = 1
+#
+# My Hammerspoon Spoons
+#
+[".hammerspoon/MySpoons/PasteRegister.spoon"]
+  type = "git-repo"
+  url = "https://github.com/von/PasteRegister.spoon.git"
+[".hammerspoon/MySpoons/PasteStack.spoon"]
+  type = "git-repo"
+  url = "https://github.com/von/PasteStack.spoon.git"
+[".hammerspoon/MySpoons/PasteBoardExt.spoon"]
+  type = "git-repo"
+  url = "https://github.com/von/PasteBoardExt.spoon.git"
+[".hammerspoon/MySpoons/MouseBind.spoon"]
+  type = "git-repo"
+  url = "https://github.com/von/MouseBind.spoon.git"
+[".hammerspoon/MySpoons/Tiler.spoon"]
+  type = "git-repo"
+  url = "https://github.com/von/Tiler.spoon.git"
+[".hammerspoon/MySpoons/Contexts.spoon"]
+  type = "git-repo"
+  url = "https://github.com/von/Contexts.spoon.git"
+[".hammerspoon/MySpoons/YTMusic.spoon"]
+  type = "git-repo"
+  url = "https://github.com/von/YTMusic.spoon.git"
+[".hammerspoon/MySpoons/ScreenSaver.spoon"]
+  type = "git-repo"
+  url = "https://github.com/von/ScreenSaver.spoon.git"
+[".hammerspoon/MySpoons/ModalExt.spoon"]
+  type = "git-repo"
+  url = "https://github.com/von/ModalExt.spoon.git"
+[".hammerspoon/MySpoons/Email.spoon"]
+  type = "git-repo"
+  url = "https://github.com/von/Email.spoon.git"

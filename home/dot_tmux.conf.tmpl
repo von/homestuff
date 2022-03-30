@@ -1,0 +1,426 @@
+#
+# tmux.conf
+#
+
+#####################################################################
+# Set environment variables
+
+# Stop tmuxp from complaining
+set-environment DISABLE_AUTO_TITLE true
+
+#####################################################################
+# Reset key bindings to default
+source ~/.tmux/clean-keys.conf
+
+#####################################################################
+# Key bindings should be set up in iTerm2 as per ../iterm-configuration.txt
+#
+#####################################################################
+# Set prefix to C-space
+# Note: Don't forget to change iTerm key bindings above if you
+# change this.
+
+unbind C-b
+set -g prefix C-Space
+
+#####################################################################
+# Options
+
+######
+# Terminal setup
+# Set TERM to tmux-256color-italic so vim has 256 colors and we
+# can use italics. tmux-256-color-italic is created by ../mysetup/50-tmux-terminfo.sh
+# Kudos: http://stackoverflow.com/a/15378816/197789
+set -g default-terminal "tmux-256color-italic"
+
+# tell Tmux that outside terminal supports true color
+# Note the terminal type here must match the terminal tmux is running in
+# Kudos: https://github.com/tmux/tmux/issues/696#issuecomment-360629057
+set -ga terminal-overrides ",xterm-256color*:Tc"
+
+# Allow strikethrough to work
+# XXX This doesn't work in vim inside of tmux yet
+set -as terminal-overrides ',*:smxx=\E[9m'
+
+######
+# Pass keys (e.g. Shift-arrow) through so vim can use them
+# Kudos: http://superuser.com/a/402084/128341
+set -g xterm-keys on
+
+######
+# Turn off audio bell, use visual bell instead
+set -g bell-action current  # Only current window causes visual bell
+set -g visual-bell on
+
+######
+# Prepend tmux session to window title
+# My strategy here is that shell sets a window title that tmux then
+# prefixs with a descriptive session name. See ../my-title-scheme.txt
+#  #S   Session name
+#  #W   Window name
+#  #T   Pane title
+set-option -g set-titles on
+set-option -g set-titles-string "[#S/#W]"
+
+# Don't rename windows based on command running, let shell do this.
+set-window-option -g automatic-rename off
+
+# Don't let programs in a window rename it
+# This prevents my old bash configuration on remote hosts from
+# messing up my scheme.
+set-window-option -g allow-rename off
+
+######
+# Automatically renumber windows when I close them
+set-option -g renumber-windows on
+
+######
+# Use vi key bindings in copy mode
+set-option -g mode-keys vi
+
+######
+# Enable mouse interactions
+#
+# Note that inside of iTerm2, you can hold down 'option' when selecting
+# with mouse to get around tmux mouse mode. This is useful when ssh'ing
+# to a remote system running tmux.
+
+set-option -g mouse on
+
+######
+# Don't detach if we destroy a session (e.g. close last window)
+set-option -g detach-on-destroy off
+
+######
+# Configure active and inactive window appearance
+# Should make border background, as well as fold and linenumber
+# background in vim (see ../vim/plugin/colors.vim).
+set -g window-style 'bg=colour236'
+set -g window-active-style 'bg=black'
+
+######
+# Configure border appearance (to match inactive pane)
+set -g pane-border-style bg=colour236
+set -g -a pane-border-style fg=yellow
+set -g pane-active-border-style bg=colour236
+set -g -a pane-active-border-style fg=yellow
+set -g pane-border-status bottom
+set -g pane-border-format "#{pane_title}"
+
+######
+# Configure look of status bar
+# For colors, see http://superuser.com/a/285400/128341
+set-option -g status-justify centre
+set-option -g status-style "fg=white, bg=colour236"  # white on medium grey
+set-option -g status-left-style "fg=cyan"
+set-option -g status-right-style "fg=cyan"
+# Show session name and key table, if not root
+set-option -g status-left "[#{=18:session_name}]#{?#{==:#{client_key_table},root},,[#{client_key_table}]}"
+set-option -g status-left-length 20
+set-option -g status-right "#(~/.tmux/scripts/status-right.sh)"
+
+# Current window in statusbar
+set-window-option -g window-status-current-style "bg=red"
+
+# Show if current window is synchronized.
+# Kudos: https://superuser.com/a/908443/128341
+# "#I:#W#F" is the default format
+set-option -gw window-status-current-format '#I:#W#F#{?pane_synchronized,^,}'
+
+######
+# Don't exit if we have no clients attached
+set-option -g exit-unattached off
+
+#####################################################################
+# Mouse interactions
+
+######
+# Handle mouse scrolling in a pane nicely.
+# Check if copy-mode or any mouse flags, then send mouse events
+# or check if we're in alternate screen (vim,less,etc.) and if so, send
+# navigation keys (up, down)
+# Kudos: https://github.com/tmux/tmux/issues/157#issuecomment-150612608
+# Kudos: http://sc0ty.pl/2015/12/reasonable-mouse-support-in-tmux/
+bind -n WheelUpPane if-shell -Ft= '#{?pane_in_mode,1,#{mouse_any_flag}}' \
+        { send -Mt= } { if-shell -Ft= "#{alternate_on}" \
+                        { send -t= Up } { copy-mode -et= ; send -Mt= } }
+bind -n WheelDownPane if-shell -Ft = '#{?pane_in_mode,1,#{mouse_any_flag}}' \
+        { send -Mt= } { if-shell -Ft= "#{alternate_on}" \
+                        { send -t= Down} { send -Mt= } }
+
+######
+# Mouse double click in pane to zoom/unzoom
+
+bind -n DoubleClick1Pane resize-pane -Z
+bind -T copy-mode-vi -n DoubleClick1Pane resize-pane -Z
+
+######
+# Mouse interactions with statusbar
+
+# Scrolling changes window
+bind -n WheelUpStatus next-window
+bind -n WheelUpStatusDefault next-window
+bind -n WheelUpStatusLeft next-window
+bind -n WheelUpStatusRight next-window
+bind -n WheelDownStatus previous-window
+bind -n WheelDownStatusDefault previous-window
+bind -n WheelDownStatusLeft previous-window
+bind -n WheelDownStatusRight previous-window
+
+# Double click on status bar to toogle zoom of current pane
+bind -n DoubleClick1StatusDefault resize-pane -Z
+bind -n DoubleClick1StatusLeft resize-pane -Z
+bind -n DoubleClick1StatusRight resize-pane -Z
+
+######
+# Mouse interations with pane border
+
+# Scrolling changes active pane
+bind -n WheelUpBorder select-pane -t {next}
+bind -n WheelDownBorder select-pane -t {previous}
+
+# Double click toggles synchronization
+bind -n DoubleClick1Border setw synchronize-panes \; display-message '#{?pane_synchronized, Synchronization on, Synchronization off}'
+
+#####################################################################
+# Key bindings
+
+
+######
+# Control-Left and Control-Right move between windows
+bind -n C-Left previous-window
+bind -n C-Right next-window
+
+######
+# Meta-Left and Meta-Right move between windows
+bind -n M-Left previous-window
+bind -n M-Right next-window
+
+######
+# Layouts (C-0)
+
+# Control-0 (w/o prefix) to reset layout to main-horizontal
+# This requires ITerm key mappings in place
+bind -n C-0 select-layout main-horizontal
+
+######
+# Popup (C-Up)
+# Popup connecting to scratch session
+bind -n C-Up run-shell "tmuxp-popup -t popup"
+
+######
+# Choose session (C-Down)
+#   Filter out "popup-" sessions.
+bind -n C-Down choose-tree -s -Z -f '#{?#{m:popup-*,#{session_name}},0,1}'
+
+######
+# Zooming (Enter, C-1-9)
+
+# Prefix-<enter> toggle zooming current pane
+# I would map C-Enter here, but that doesn't seem to work
+bind Enter resize-pane -Z
+
+# Control-<1-9> (w/o prefix) to maximize panes
+# This requires ITerm key mappings in place
+
+bind -n C-1 resize-pane -Z -t .0
+bind -n C-2 resize-pane -Z -t .1
+bind -n C-3 resize-pane -Z -t .2
+bind -n C-4 resize-pane -Z -t .3
+bind -n C-5 resize-pane -Z -t .4
+bind -n C-6 resize-pane -Z -t .5
+bind -n C-7 resize-pane -Z -t .6
+bind -n C-8 resize-pane -Z -t .7
+bind -n C-9 resize-pane -Z -t .8
+
+######
+# keybindings to make resizing easier (C-hjkl)
+#   -r allows second key to be repeated
+bind -r C-h resize-pane -L
+bind -r C-j resize-pane -D
+bind -r C-k resize-pane -U
+bind -r C-l resize-pane -R
+
+######
+# Enter selection mode with <Space>
+# Works well with C-<Space> as prefix
+bind Space copy-mode
+
+######
+# Control-Space selects last active window
+bind C-Space select-window -l
+
+######
+# More straight forward key bindings for splitting panes (|-vh)
+bind | split-window -h
+bind v split-window -h
+bind - split-window -v
+bind h split-window -v
+
+
+######
+# Smart pane switching with awareness of vim vifm splits
+# https://github.com/christoomey/vim-tmux-navigator
+# Changes to use if-shell mine
+
+# Test for current window running vim
+# Kudos: https://github.com/christoomey/vim-tmux-navigator
+#
+# pane_current_command doesn't seem to be working, it is always returning 'zsh'
+# Use ps to print commands on pane's tty and their state, ignore stopped(T),
+# dead(X), or zombie(Z) processes, and then look for variants of vim.
+# Kudos: https://github.com/meain/dotfiles/blob/master/tmux/.tmux.conf
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+    | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+
+# Test for current window running vifm
+#
+# pane_current_command doesn't seem to be working, it is always returning 'zsh'
+# See is_vim above for documentation
+is_vifm="ps -o state= -o comm= -t '#{pane_tty}' \
+    | grep -iqE '^[^TXZ ]+ +vifm$'"
+
+# Shift-left/right are vim and vifm aware
+# Note second if-shell is single command, hence nested quotes
+# For vifm we send <C-w><C-h/l> which my vifmrc handles specially
+# to change either vifm or tmux pane appropriately.
+bind -n S-Left if-shell "$is_vim" { send-keys C-h } \
+    { if-shell "$is_vifm" { send-keys C-w C-h } { select-pane -L } }
+bind -n S-Right if-shell "$is_vim" { send-keys C-l } \
+    { if-shell "$is_vifm" { send-keys C-w C-l } { select-pane -R } }
+# Shift-up/down are just vim aware
+bind -n S-Down if-shell "$is_vim" { send-keys C-j } { select-pane -D }
+bind -n S-Up if-shell "$is_vim" { send-keys C-k } { select-pane -U }
+
+# C-\ switches to previous pane
+bind -n M-` if-shell "$is_vim" { send-keys 'C-\\' } { select-pane -l }
+
+######
+# Save buffer to file (B)
+# Kudos: http://unix.stackexchange.com/a/26568
+bind B command-prompt -p 'save history to filename:' -I '~/tmux.history' 'capture-pane -S -32768 ; save-buffer %1 ; delete-buffer'
+
+######
+# Create a new window, prompting for name (c)
+bind c command-prompt -p "Name:" -I "default" "new-window -n %1"
+
+######
+# Choose a new session for this client (C)
+#   Filter out "popup-" sessions.
+bind C choose-tree -s -Z -f '#{?#{m:popup-*,#{session_name}},0,1}'
+
+######
+# Join selected pane into this window (J)
+bind J choose-window "join-pane -s '%%'"
+
+######
+# Kill window with confrmation (K)
+bind K confirm kill-window
+
+######
+# Menu (m)
+ bind m run-shell "~/.tmux/scripts/tmux-menu.sh"
+
+######
+# Split window and show man page (M)
+bind M command-prompt -p "Man page:" "split-window -v 'man %1'"
+
+######
+# Rename window (n)
+bind n command-prompt -p "Window name:" "rename-window '%1'"
+
+######
+# Rename session (N)
+bind N command-prompt -p "Session name:" "rename-session '%1'"
+
+######
+# Jump to last prompt (p)
+# Kudos: https://unix.stackexchange.com/a/353415/29832
+# Note the search is for a non-breaking space and this requires a nbsp in my prompt.
+bind-key p copy-mode\;\
+           send-keys -X start-of-line\;\
+           send-keys -X search-backward " "
+######
+# Split window and open iPython (P)
+bind P split-window -v 'ipython'
+
+######
+# Reload configuration (R)
+bind R source-file ~/.tmux.conf \; display-message "Config reloaded..."
+
+######
+# Window selection mode (s)
+# Clients can configure additional bindings for this mode, e.g.:
+#   bind -T window v select-window -t vim
+bind s switch-client -T window \; display-message "Window selection mode"
+
+# Space takes us back to last window
+bind -T window Space select-window -l
+
+######
+# Toggle synchronization between panes in window (S)
+bind S setw synchronize-panes \; display-message '#{?pane_synchronized, Synchronization on, Synchronization off}'
+
+######
+# Tear (break) current pane off into own window (t)
+unbind t  # Normally displays time
+bind t break-pane -n "default"
+
+######
+# Unlink selected window (u)
+bind u unlink-window
+
+######
+# Split window and open vi (V)
+bind V command-prompt -p "VI:" "split-window -v 'vi %1'"
+
+######
+# Paste with C-v
+#   Note that this pastes tmux's paste buffer not the system clipboard
+bind C-v paste-buffer
+
+######
+# Link selected window into this session (w)
+unbind w  # choose-window
+bind w choose-tree "link-window -d -s '%%'"
+
+######
+# Chose a new window for this session (W)
+bind W choose-window
+
+######
+# switch between sessions (')
+bind "'" choose-session
+
+######
+# Make keys in selection (entered with <prefix>-[) more vi-like (v,y,C-c)
+bind -T copy-mode-vi v send-keys -X begin-selection
+bind -T copy-mode-vi y send-keys -X copy-selection
+bind -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel
+bind -T copy-mode-vi C-c send-keys -X clear-selection
+
+######
+# Forward and backword prompt in selection mode with n,p
+# Kudos: https://unix.stackexchange.com/a/353415/29832
+# Note the search is for a non-breaking space and this requires a nbsp in my prompt.
+bind -T copy-mode-vi n send-keys -X search-forward " "
+bind -T copy-mode-vi p send-keys -X search-backward " "
+
+#####################################################################
+# Load platform-specific configuration as linked by homestuff/install
+# Note that if-shell conditional source doesn't work here.
+# See: https://sourceforge.net/p/tmux/tickets/65/
+#
+#
+source ~/.tmux.sys.conf
+#####################################################################
+# Plugins
+
+set-environment -g TMUX_PLUGIN_MANAGER_PATH '~/.tmux-plugins/'
+
+# <Prefix>-<Tab> to select text on screen. <Tab> to insert. <Enter> to copy to pastebuffer.
+set -g @plugin 'laktak/extrakto'
+
+set -g @plugin 'tmux-plugins/tmux-sensible'
+
+run '~/.tmux-plugins/tpm/tpm'

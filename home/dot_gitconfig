@@ -1,0 +1,122 @@
+# -*- mode: conf -*-
+[advice]
+        # Don't complain about unexecutable hooks
+        # (this is untested)
+        ignoredHook = false
+[alias]
+        add-interactive = add --patch
+        amend = commit --amend
+        ctags = !.git/hooks/ctags
+        cleanup = rebase --interactive origin/master
+        # Show log of changes for a file
+        flog = log -u
+        glog = log --graph --abbrev-commit --decorate --all --full-history --format=format:\"%C(auto)%h - %ar - %an (%ar)%d%n %s\"
+        # Short hash of HEAD
+        head = rev-parse --short HEAD
+        index = diff --cached
+        # %w: set width, $C: color, %h: hash, %d: tags, %s: commit title, %ar: relative date
+        # Kudos for the escaping: https://stackoverflow.com/a/54839418/197789
+        lol = log --reverse --pretty=format:"%w(79,0,9)%C(auto)%h\\ %d\\ %s\\ %C(#777777)[%ar]"
+        list = log --pretty=oneline --decorate
+        # Kudos: https://www.durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
+        ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%C(#777777)\\ [%cn]" --decorate --numstat
+        # Rebase everything that hasn't been pushed
+        rb = "!f() { \\\n    git rebase -i $(git merge-base HEAD origin/master); \\\n}; f"
+        recommit = commit --amend
+        # Kudos: https://stackoverflow.com/a/957978/197789
+        root = rev-parse --show-toplevel
+        s = status --short --branch
+        show-deletes = log --diff-filter=D --summary
+        stash-all = stash save --include-untracked
+        stash-diff = stash show -p
+        stash-patch = stash save --patch
+        stash-interactive = stash save --patch
+        uncommit = reset --soft HEAD^
+        unstage = reset HEAD
+        unadd = reset HEAD
+        unadd-file = reset --
+        # Kudos: http://megakemp.com/2016/08/25/git-undo/
+        undo = "!f() { \\\n    git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; \\\n}; f"
+        wdiff = diff --color-words
+[branch]
+        # always setup 'git pull' to rebase instead of merge
+        autosetuprebase = always
+[branch "main"]
+        rebase = true
+[branch "master"]
+        rebase = true
+[branch "develop"]
+        remote = origin
+        merge = refs/heads/develop
+[core]
+        excludesfile = ~/.gitconf/gitignore
+        # Turn off termcap initialization in less since this clears the screen
+        # if we have less than one screen of output and due to the fact we have
+        # -F set in LESS.
+        # XXX Note this means I cannot control less with the mouse when
+        # invoked from git. The other option is to disable -F (-+F) here
+        # but then less doesn't exit with less than a full screen which I
+        # find more annoying.
+        pager = less -X
+[color]
+        # Default is for colors to terminal, not if to a pipe
+        ui = auto
+[color "branch"]
+        current = green bold
+        local = green
+        remote = red bold
+[color "diff"]
+        meta = yellow bold
+        frag = magenta bold
+        old = red bold
+        new = green bold
+[color "status"]
+        added = green bold
+        changed = yellow bold
+        untracked = red
+[color "sh"]
+        branch = yellow
+[commit]
+        # Show diff when editing commit message
+        verbose = true
+[diff]
+        # How to show differences between submodules (short, log, diff)
+        submodule = log
+[fetch]
+        # Don't do extra integrity checks as some cloning some repos will break
+        fsckobjects = false
+[init]
+        # Directory used for 'git init'
+        # See https://stackoverflow.com/a/50880622/197789
+        templatedir = ~/.gitconf/template
+[merge]
+        # Show original in addition to both sets of changes
+        conflictstyle = diff3
+        # Only allow fast forwards
+        ff = only
+[push]
+        # 'git push' should assume we're pushing back to our upstream master
+        default = simple
+        # Always push our tags
+        followTags = true
+[rerere]
+        # Remember how we resolve conflicts
+        # Kudos: http://git-scm.com/blog/2010/03/08/rerere.html
+        enabled = true
+[status]
+        submoduleSummary = true
+        # Show all files in new directories
+        showUntrackedFiles = all
+[user]
+        name = Von Welch
+        email = von@vwelch.com
+[credential]
+        # Set git to use the osxkeychain credential helper
+        helper = osxkeychain
+[url "git@github.com:"]
+        # Allow me to checkout github repositories with https or git when
+        # bootstrapping and I don't have SSH configured yet, and then
+        # later push over SSH
+        # Kudos: https://gist.github.com/grawity/4392747
+        pushInsteadOf = git://github.com/
+        pushInsteadOf = https://github.com/

@@ -1,0 +1,61 @@
+# Configuration for myrepos: http://myrepos.branchable.com/
+[DEFAULT]
+state = git state "$@"
+# Note include specifies a command to run (not a file path)
+include = cat ~/homestuff/mr/*.sh
+# Where to link Spoons
+lib= SPOONS_DIR=~/.hammerspoon/MySpoons/
+# Default 'link' command does nothing
+link = true
+
+[bib]
+checkout = git clone 'git@github.com:von/bib.git' 'bib'
+
+[develop/www.vonwelch.com]
+checkout =
+  git clone 'ssh://vwelch@git.vwelch.com/home/vwelch/GIT/www.vonwelch.com' 'www.vonwelch.com'
+  cd www.vonwelch.com
+  git submodule init
+  git submodule update
+
+[develop/www.vwelch.com]
+checkout =
+  git clone 'ssh://vwelch@git.vwelch.com/home/vwelch/GIT/www.vwelch.com' 'www.vwelch.com'
+  cd www.vwelch.com
+  git submodule init
+  git submodule update
+
+[develop/sandbox]
+checkout = git clone 'git@github.com:von/sandbox.git' 'sandbox'
+
+[develop/pyBib]
+checkout = git clone 'git@github.com:von/pyBib.git' 'pyBib'
+
+[develop/pyder]
+checkout = git clone 'git@github.com:von/pyder.git' 'pyder'
+
+[.password-store]
+checkout = git clone 'ssh://vwelch@git.vwelch.com/home/vwelch/GIT/password-store.git' '.password-store'
+skip = test `hostname` != "Vons-PL"
+
+[develop/dvd-rip]
+checkout = git clone 'ssh://vwelch@git.vwelch.com:/home/vwelch/GIT/dvd-rip' 'dvd-rip'
+skip = test `hostname` != "Vons-PL"
+
+[develop/pigshare]
+checkout = git clone 'git@github.com:von/pigshare.git' 'pigshare'
+
+[develop/notes-manager]
+checkout = git clone 'git@github.com:von/notes-manager.git' 'notes-manager'
+
+[develop/OSCP]
+checkout = git clone 'https://github.com/trustedci/OSCP.git' 'OSCP'
+skip = test `hostname` != "Vons-WL"
+
+[develop/OSCTP]
+checkout = git clone 'git@github.com:trustedci/OSCTP.git' 'OSCTP'
+skip = test `hostname` != "Vons-WL"
+
+[develop/cd-utils]
+checkout = git clone 'vwelch@vwelch.com:GIT/cd-utils' 'cd-utils'
+skip = test `hostname` != "Vons-PL"
