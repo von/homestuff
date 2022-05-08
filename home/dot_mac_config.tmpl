@@ -1,0 +1,10 @@
+# Configuration file for mac-config
+# https://github.com/von/mac-config
+
+{{- if eq .chezmoi.hostname "Vons-PL" }}
+workspace=personal
+{{- else }}
+workspace=work
+{{- end }}
+
+# vim:set et sw=2 ts=8 ft=sh:
