@@ -5,7 +5,7 @@ let &packpath = &runtimepath
 " Disable Python2
 let g:loaded_python_provider = 0
 
-source ~/.vimrc
+source ~/.vim/vimrc
 
 " Neovim-specific configuration
 
