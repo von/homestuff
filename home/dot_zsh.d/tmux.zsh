@@ -102,6 +102,6 @@ if (( $+commands[tmuxp] )) ; then
   # Meant to be called from iTerm profile.
   #
   function tmux-start() {
-    DISABLE_AUTO_TITLE=true command tmuxp load -y servers homestuff
+    DISABLE_AUTO_TITLE=true command tmuxp load -y servers chezmoi
   }
 fi
