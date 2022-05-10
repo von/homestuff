@@ -31,6 +31,9 @@ call plug#begin(g:pluginInstallDir)
 " Show git changes on left
 Plug 'airblade/vim-gitgutter'
 
+" Handle chezmoi templates correctly
+Plug 'alker0/chezmoi.vim'
+
 " Fancy statusline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
