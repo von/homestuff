@@ -18,7 +18,7 @@ case "$MENU" in
       Windows                           w "run-shell \"${SELF} WINDOWS\"" \
       Session                           s "run-shell \"${SELF} SESSION\"" \
       Server                            S "run-shell \"${SELF} SERVER\"" \
-      "tmuxp session"                   t "run-shell \"${SELF} TMUXP\"" \
+      "Choose session"                   t "run-shell \"${SELF} SESSIONS\"" \
       "" \
       "List key bindings"               k "list-keys"
     ;;
@@ -71,10 +71,16 @@ case "$MENU" in
       "Back"                            x "run-shell \"${SELF} DEFAULT\""
     ;;
 
-  TMUXP)  # Create dynamic list of tmuxp sessions
-    _sessions=$(cd ~/.tmuxp/ ; find . -name \*.yaml -print | cut -c 3- | sed -e 's/\(.*\)\.yaml/\1/')
-    _menu="tmux display-menu -T \"tmuxp menu\" $ARGS"
-    for s in ${_sessions} ; do
+  SESSIONS)  # Create dynamic list of active and tmuxp sessions
+    _tmuxp_sessions=$(cd ~/.tmuxp/ ; find . -name \*.yaml -print | cut -c 3- | sed -e 's/\(.*\)\.yaml/\1/')
+    _active_sessions=$(tmux list-sessions -F '#{session_name}')
+    _menu="tmux display-menu -T \"Choose session\" $ARGS "
+    for s in ${_active_sessions} ; do
+      _menu+="\"${s}\" \"\" \"switch-client -t ${s}\" "
+    done
+    _menu+="\"\" "
+    _menu+="\"-Start tmuxp session\" \"\" \"\" "
+    for s in ${_tmuxp_sessions} ; do
       _menu+="\"${s}\" \"\" \"run-shell \\\"tmuxp load -y ${s} > /dev/null\\\"\" "
     done
     _menu+="\"\" \"Back\" x \"run-shell \\\"${SELF} DEFAULT\\\"\""
