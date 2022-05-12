@@ -211,7 +211,7 @@ bind -n C-Up run-shell "tmuxp-popup -t popup"
 ######
 # Choose session (C-Down)
 #   Filter out "popup-" sessions.
-bind -n C-Down choose-tree -s -Z -f '#{?#{m:popup-*,#{session_name}},0,1}'
+bind -n C-Down run-shell "~/.tmux/scripts/tmux-menu.sh SESSIONS"
 
 ######
 # Zooming (Enter, C-1-9)
