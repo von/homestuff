@@ -396,7 +396,12 @@ bind "'" choose-session
 # Make keys in selection (entered with <prefix>-[) more vi-like (v,y,C-c)
 bind -T copy-mode-vi v send-keys -X begin-selection
 bind -T copy-mode-vi y send-keys -X copy-selection
+{{ if eq .chezmoi.os "darwin" }}
+# This allows for nested tmux (e.g. within tmux-popup) to work properly
+bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "pbcopy"
+{{ else }}
 bind -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel
+{{ end }}
 bind -T copy-mode-vi C-c send-keys -X clear-selection
 
 ######
