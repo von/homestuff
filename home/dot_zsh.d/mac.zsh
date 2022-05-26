@@ -34,4 +34,8 @@ if test $(uname) = "Darwin" ; then
   usb-list() {
     ioreg -p IOUSB -w0
   }
+
+  dns-flush() {
+    sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder
+  }
 fi
