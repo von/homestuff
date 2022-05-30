@@ -21,20 +21,27 @@ end
 module.screencapture = function()
   hs.alert.show("Capturing screen...")
   -- -P == opens capture in Preview
+  -- -x == no sounds
   -- hs.execute("screencapture -P ${TMPDIR}/hs-screencapture-$$.png")
   local task = hs.task.new("/usr/sbin/screencapture", nil,
-    { "-P", os.getenv("TMPDIR") .. "/hs-screencapture-" .. tostring(os.time()) .. ".png" })
+    { "-P", "-x",
+      os.getenv("TMPDIR") .. "/hs-screencapture-" .. tostring(os.time()) .. ".png"
+    })
   task:start()
 end
 
 -- Interactively capture selected window or screen area and open in Preview
 module.windowcapture = function()
   hs.alert.show("Capturing window or area...")
+  -- -i == Interactive
   -- -P == opens capture in Preview
+  -- -W == Start in window slection mode
+  -- -x == No sounds
   -- hs.execute("screencapture -i -W -P ${TMPDIR}/hs-screencapture-$$.png")
   local task = hs.task.new("/usr/sbin/screencapture", nil,
-    { "-i", "-W", "-P",
-    os.getenv("TMPDIR") .. "/hs-windowcapture-" .. tostring(os.time()) .. ".png" })
+    { "-i", "-W", "-P", "-x",
+      os.getenv("TMPDIR") .. "/hs-windowcapture-" .. tostring(os.time()) .. ".png"
+    })
   task:start()
 end
 
