@@ -417,13 +417,6 @@ bind -T copy-mode-vi n send-keys -X search-forward " "
 bind -T copy-mode-vi p send-keys -X search-backward " "
 
 #####################################################################
-# Load platform-specific configuration as linked by homestuff/install
-# Note that if-shell conditional source doesn't work here.
-# See: https://sourceforge.net/p/tmux/tickets/65/
-#
-#
-source ~/.tmux.sys.conf
-#####################################################################
 # Plugins
 
 # <Prefix>-<Tab> to select text on screen. <Tab> to insert. <Enter> to copy to pastebuffer.
