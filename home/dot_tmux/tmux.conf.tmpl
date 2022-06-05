@@ -8,9 +8,13 @@
 # Stop tmuxp from complaining
 set-environment -g DISABLE_AUTO_TITLE true
 
+# Store plugins in ~/.tmux-plugins
+set-environment -g TMUX_PLUGIN_MANAGER_PATH '~/.tmux-plugins/'
+
 #####################################################################
-# Reset key bindings to default
-source ~/.tmux/clean-keys.conf
+# Reset all options and key bindings to default
+# https://github.com/hallazzang/tmux-reset
+set -g @plugin 'hallazzang/tmux-reset'
 
 #####################################################################
 # Key bindings should be set up in iTerm2 as per ../iterm-configuration.txt
@@ -420,8 +424,6 @@ bind -T copy-mode-vi p send-keys -X search-backward " "
 source ~/.tmux.sys.conf
 #####################################################################
 # Plugins
-
-set-environment -g TMUX_PLUGIN_MANAGER_PATH '~/.tmux-plugins/'
 
 # <Prefix>-<Tab> to select text on screen. <Tab> to insert. <Enter> to copy to pastebuffer.
 set -g @plugin 'laktak/extrakto'
