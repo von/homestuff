@@ -179,9 +179,10 @@ bind -n DoubleClick1StatusRight resize-pane -Z
 ######
 # Mouse interations with pane border
 
-# Scrolling changes active pane
-bind -n WheelUpBorder select-pane -t {next}
-bind -n WheelDownBorder select-pane -t {previous}
+# Scrolling changes active pane (up->next pane, down->previous pane)
+# Note that {next}/{previous} don't see to work any more
+bind -n WheelUpBorder select-pane -t :.+
+bind -n WheelDownBorder select-pane -t :.-
 
 # Double click toggles synchronization
 bind -n DoubleClick1Border setw synchronize-panes \; display-message '#{?pane_synchronized, Synchronization on, Synchronization off}'
