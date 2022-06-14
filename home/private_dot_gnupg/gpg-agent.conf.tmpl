@@ -9,7 +9,7 @@
 # It is necessary for GUI applications (e.g. Thunderbird/Enigmail)
 # and as a workaround if cli/curse version throws the following error:
 # gpg: public key decryption failed: Inappropriate ioctl for device
-pinentry-program /opt/homebrew/bin/pinentry-mac
+pinentry-program {{ (env "HOMEBREW_PREFIX") }}/bin/pinentry-mac
 
 # Support SSH keys for yubikeys
 enable-ssh-support
