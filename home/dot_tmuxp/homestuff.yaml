@@ -1,5 +1,5 @@
 session_name: homestuff
-start_directory: ~/homestuff
+start_directory: ~/.local/share/chezmoi/
 windows:
   - window_name: shells
     layout: even-horizontal
