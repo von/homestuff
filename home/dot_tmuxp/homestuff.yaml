@@ -10,3 +10,15 @@ windows:
     panes:
       - shell_command:
         - vi
+  - window_name: private
+    start_directory: ~/private
+    layout: even-horizontal
+    panes:
+      -
+      -
+  - window_name: repos
+    start_directory: ~/repos
+    layout: even-horizontal
+    panes:
+      -
+      -
