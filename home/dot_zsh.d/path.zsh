@@ -7,9 +7,6 @@
 # In zsh, the path array and $PATH variables are linked.
 # Kudos: http://unix.stackexchange.com/a/62599/29832
 
-# Make PATH elements unique
-typeset -U path
-
 # Make sure I have some sort of PATH
 if [ -z "${PATH}" -o -n "${RELOAD_ZSHRC}" ]; then
   # path_help, on MacOSX, creates a path based on /etc/paths.d and
@@ -59,4 +56,5 @@ append PATH $HOME/.gitconf/bin
 # No current directory in PATH
 remove PATH .
 
-export PATH
+# -U: make PATH elements unique
+export -U PATH
