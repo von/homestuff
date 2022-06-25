@@ -53,6 +53,9 @@ append PATH /bin/athena
 append PATH /usr/texbin
 append PATH /usr/local/ssl/bin
 
+# Pick up added git commands
+append PATH $HOME/.gitconf/bin
+
 # No current directory in PATH
 remove PATH .
 
