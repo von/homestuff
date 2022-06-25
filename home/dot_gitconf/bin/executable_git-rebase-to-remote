@@ -1,0 +1,17 @@
+#!/bin/sh
+# Rebase everything not pushed to remote.
+
+set -o errexit  # Exit on error
+
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Kudos: https://stackoverflow.com/a/9753364/197789
+remote_branch=$(git rev-parse --abbrev-ref --symbolic-full-name @{u})
+
+# Get common ancestor of current and remote branchs
+# Kudos: https://stackoverflow.com/a/1549155/197789
+ancestor=$(git merge-base HEAD ${remote_branch})
+
+echo "Rebasing to $remote_branch (${ancestor})"
+git rebase -i ${ancestor}
+exit $?

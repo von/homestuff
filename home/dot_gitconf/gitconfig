@@ -21,7 +21,8 @@
         # Kudos: https://www.durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
         ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%C(#777777)\\ [%cn]" --decorate --numstat
         # Rebase everything that hasn't been pushed
-        rb = "!f() { \\\n    git rebase -i $(git merge-base HEAD origin/master); \\\n}; f"
+        # bin/git-rebase-to-remote
+        rb = rebase-to-remote
         recommit = commit --amend
         # Kudos: https://stackoverflow.com/a/957978/197789
         root = rev-parse --show-toplevel
