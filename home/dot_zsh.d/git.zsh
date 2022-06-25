@@ -85,26 +85,6 @@ git-add-tracking-branch() {
   git reset --hard ${remote_name}/${remote_branch} || return 1
 }
 
-# Stash local changes and run a command, then pop stash
-git-stash-exec() {
-  # TODO: Check if first stash is ours and if so, refuse to run.
-  # TODO: If there is nothing to stage, the following command will
-  #       still return 0, causing an error when we pop (or popping off
-  #       a previous stash).
-  git stash save "git-stash-exec save $(date +%F)" || return $?
-  # Execute arguments, quoting if needed
-  ${(q)@}
-  local save_status=$?
-  if test $save_status -eq 0 ; then
-    git stash pop || { echo "Failed to restore from stash" 1>&2 ; return 1 ; }
-    echo "Success."
-  else
-    echo "Command failed: Leaving stash unapplied."
-    git stash list -1
-  fi
-  return $save_status
-}
-
 # Given a URL, clone from von-fork account via SSH alias
 # TODO: Check for SSH key loaded into ssh-agent
 clone-von-fork() {
