@@ -14,8 +14,5 @@
 
 smartcd inform "Setting up chezmoi environment."
 
-# Used by von.zsh-theme
-autostash PROMPT_TAG="chezmoi"
-
 autostash VIM_SESSION=chezmoi
 autostash alias c=chezmoi
