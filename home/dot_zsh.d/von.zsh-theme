@@ -200,6 +200,7 @@ function von_theme_maint_job() {
 # }}} von_theme_maint_job #
 
 # von_theme_background_job {{{ #
+# TODO: If there are no background jobs, this causes an extra space between tags
 function von_theme_background_job() {
   # Display number of background jobs, if there are any
   echo -ne "%1(j.%{$VON_THEME_JOBS_COLOR%} [Jobs: %j]%{$reset_color%}.)"
