@@ -78,6 +78,10 @@ VON_THEME_VIMODE_COLOR=%F{green}
 # Color for VIFM mode indication
 VON_THEME_VIFMMODE_COLOR=%F{cyan}
 
+# Color for Chezmoi directory indication
+VON_THEME_CHEZMOI_COLOR=%F{green}
+VON_THEME_CHEZMOI_DIRTY_COLOR=%F{red}
+
 # Color of preexec output
 VON_THEME_PREEXEC_COLOR=%F{245}  # Grey54
 
@@ -167,6 +171,19 @@ function von_theme_check_cwd() {
   return 0
 }
 # }}} von_theme_check_cwd #
+
+# von_theme_chezmoi_job() {{{ #
+function von_theme_chezmoi_job() {
+  if [[ ${1}/ = ${HOME}/.local/share/chezmoi/* ]]; then
+    if chezmoi verify ; then
+      echo -ne "%{$VON_THEME_CHEZMOI_COLOR%}[chezmoi]%{$reset_color%}"
+    else
+      echo -ne "%{$VON_THEME_CHEZMOI_DIRTY_COLOR%}[chezmoi]%{$reset_color%}"
+    fi
+  fi
+  return 0
+}
+# }}} von_theme_chezmoi_job #
 
 # von_theme_virtualenv_job() {{{ #
 function von_theme_virtualenv_job() {
@@ -259,6 +276,7 @@ von_theme_async_jobs+=(von_theme_vcs_job)
 von_theme_async_jobs+=(von_theme_ssh_check_job)
 von_theme_async_jobs+=(von_theme_maint_job)
 von_theme_async_jobs+=(von_theme_background_job)
+von_theme_async_jobs+=(von_theme_chezmoi_job)
 # }}} von_theme_async_jobs #
 
 # von_theme_callback() {{{ #
