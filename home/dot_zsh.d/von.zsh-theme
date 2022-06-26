@@ -448,6 +448,14 @@ zle -N zle-keymap-select
 # The values are combined by von_theme_rebuild_rprompt to create RPROMPT
 declare -A rprompt_parts
 
-von_theme_init
+if test -n "${RELOAD_ZSHRC}" ; then
+  # We are being reloaded, kill and restart our worker so it picks up any changes
+  # in functions and environment.
+  async_flush_jobs von_theme_worker
+  async_stop_worker von_theme_worker
+  von_theme_init_worker
+else
+  von_theme_init
+fi
 
 # vim: foldmethod=marker: #
