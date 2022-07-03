@@ -147,6 +147,10 @@ local browserModalKeys = {
     func = function() PBExt:openURL() end,
     desc = "Open URL contained in Paste Buffer"
   },
+  P = {
+    func = chrome.wrapped.selectPersona("Personal"),
+    desc = "Chrome Personal Persona"
+  },
   R = {
     func = function() URLOpener.setWindow(nil) end,
     desc = "Reset browser window opening URLs"
@@ -159,6 +163,10 @@ local browserModalKeys = {
     func = chrome.wrapped.activateTab("TripIt",
         { url = "https://www.tripit.com/trips", persona = "Personal", newWindow=true }),
     desc = "Open TripIt"
+  },
+  V = {
+    func = chrome.wrapped.selectPersona("vonwelch.com"),
+    desc = "Chrome vonwelch.com Persona"
   },
   W = {
     func = chrome.wrapped.selectPersona("IU"),
