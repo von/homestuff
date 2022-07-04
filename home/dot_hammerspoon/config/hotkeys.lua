@@ -618,53 +618,53 @@ appkeys.init()
 local keypad_bindings = {}
 
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad0", "Window to next screen",
-	function() WinWin:moveToScreen("next") end))
+  hs.hotkey.bind(modifiers.none, "pad0", "Window to next screen",
+    function() WinWin:moveToScreen("next") end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad1", "Window to lower left quadrant",
-	function() WinWin:moveAndResize("cornerSW") end))
+  hs.hotkey.bind(modifiers.none, "pad1", "Window to lower left quadrant",
+    function() WinWin:moveAndResize("cornerSW") end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad2", "Window to lower half",
-	function() WinWin:moveAndResize("halfdown") end))
+  hs.hotkey.bind(modifiers.none, "pad2", "Window to lower half",
+    function() WinWin:moveAndResize("halfdown") end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad3", "Window to lower right quadrant",
-	function() WinWin:moveAndResize("cornerSE") end))
+  hs.hotkey.bind(modifiers.none, "pad3", "Window to lower right quadrant",
+    function() WinWin:moveAndResize("cornerSE") end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad4", "Window to left half",
-	function() WinWin:moveAndResize("halfleft") end))
+  hs.hotkey.bind(modifiers.none, "pad4", "Window to left half",
+    function() WinWin:moveAndResize("halfleft") end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad5", "Maximize window",
-	function() WinWin:moveAndResize("maximize") end))
+  hs.hotkey.bind(modifiers.none, "pad5", "Maximize window",
+    function() WinWin:moveAndResize("maximize") end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad6", "Window to right half",
-	function() WinWin:moveAndResize("halfright") end))
+  hs.hotkey.bind(modifiers.none, "pad6", "Window to right half",
+    function() WinWin:moveAndResize("halfright") end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad7", "Window to upper left quadrant",
-	function() WinWin:moveAndResize("cornerNW") end))
+  hs.hotkey.bind(modifiers.none, "pad7", "Window to upper left quadrant",
+    function() WinWin:moveAndResize("cornerNW") end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad8", "Window to upper half",
-	function() WinWin:moveAndResize("halfup") end))
+  hs.hotkey.bind(modifiers.none, "pad8", "Window to upper half",
+    function() WinWin:moveAndResize("halfup") end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad9", "Window to upper right quadrant",
-	function() WinWin:moveAndResize("cornerNE") end))
+  hs.hotkey.bind(modifiers.none, "pad9", "Window to upper right quadrant",
+    function() WinWin:moveAndResize("cornerNE") end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad-", "Shrink window",
-	function() WinWin:moveAndResize("shrink") end))
+  hs.hotkey.bind(modifiers.none, "pad-", "Shrink window",
+    function() WinWin:moveAndResize("shrink") end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad+", "Expand window",
-	function() WinWin:moveAndResize("expand") end))
+  hs.hotkey.bind(modifiers.none, "pad+", "Expand window",
+    function() WinWin:moveAndResize("expand") end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad/", "Undo last window move",
-	function() WinWin:undo() end))
+  hs.hotkey.bind(modifiers.none, "pad/", "Undo last window move",
+    function() WinWin:undo() end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad.", "TBD",
-	function() WinWin:undo() end))
+  hs.hotkey.bind(modifiers.none, "pad.", "TBD",
+    function() WinWin:undo() end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "pad*", "Minimize window",
-	function() WinWin:moveAndResize("minimize") end))
+  hs.hotkey.bind(modifiers.none, "pad*", "Minimize window",
+    function() WinWin:moveAndResize("minimize") end))
 table.insert(keypad_bindings,
-	hs.hotkey.bind(modifiers.none, "padenter", "Window to Next Screen",
-	function() WinWin:moveToScreen("next") end))
+  hs.hotkey.bind(modifiers.none, "padenter", "Window to Next Screen",
+    function() WinWin:moveToScreen("next") end))
 
 -- TODO: Would be nice to make this a toggle
 local keypad_enable = function() hs.fnutils.each(keypad_bindings, function(b) b:enable() end) end
