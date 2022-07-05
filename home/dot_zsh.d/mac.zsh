@@ -38,4 +38,11 @@ if test $(uname) = "Darwin" ; then
   dns-flush() {
     sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder
   }
+
+  wifi-connect() {
+    test $# -ne 2 && { echo "Usage: $0 SSID PASSWORD" ; return 1 ; }
+    SSID=$1; shift
+    PASSWORD=$1; shift
+    networksetup -setairportnetwork en0 "${SSID}" "${PASSWORD}"
+  }
 fi
