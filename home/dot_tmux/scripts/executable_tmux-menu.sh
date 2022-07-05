@@ -75,6 +75,7 @@ case "$MENU" in
     _tmuxp_sessions=$(cd ~/.tmuxp/ ; find . -name \*.yaml -print | cut -c 3- | sed -e 's/\(.*\)\.yaml/\1/' | sort)
     _active_sessions=$(tmux list-sessions -F '#{session_name}' | sort)
     _menu="tmux display-menu -T \"Choose session\" $ARGS "
+    _menu+="\"*previous*\" \"\" \"switch-client -l\" "
     for s in ${_active_sessions} ; do
       _menu+="\"${s}\" \"\" \"switch-client -t ${s}\" "
     done
