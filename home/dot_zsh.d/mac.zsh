@@ -45,4 +45,12 @@ if test $(uname) = "Darwin" ; then
     PASSWORD=$1; shift
     networksetup -setairportnetwork en0 "${SSID}" "${PASSWORD}"
   }
+
+  # Set my wifi password at the dimension mill, where it is changed every month
+  wifi-mill() {
+    test $# -ne 1 && { echo "Usage: $0 PASSWORD" ; return 1 ; }
+    SSID="The Mill-MEMBERS"
+    PASSWORD=$1; shift
+    networksetup -setairportnetwork en0 "${SSID}" "${PASSWORD}"
+  }
 fi
