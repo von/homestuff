@@ -58,7 +58,10 @@ Plug 'gcmt/taboo.vim'
 Plug 'JamshedVesuna/vim-markdown-preview'
 
 " FZF plugin
-set rtp+=/usr/local/opt/fzf
+" Basic fzf integration and ensure binary is found
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Rich set of fzf commands: Files, Ag, etc
+" See https://github.com/junegunn/fzf.vim or 'help fzf-vim-commands'
 Plug 'junegunn/fzf.vim'
 
 " Allows definiton of arbitrary objects (prereusite of following)
