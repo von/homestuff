@@ -84,8 +84,20 @@ let vim_markdown_preview_hotkey='<leader>mP'
 :map <leader>M :call quickmenu#toggle(0)<cr>
 
 if !has("gui_running")
-  " Open file explorer
-  :map <leader>o :EditVifm<CR>
+  " Open file finder
+  
+  " Run GFiles if we are in a git repo, otherview Files
+  function! FilesOrGFiles()
+    let discard = system("git status")
+    if v:shell_error == 0
+      :GFiles
+    else
+      :Files
+    endif
+  endfunction
+
+  :map <leader>o :call FilesOrGFiles()<CR>
+  :map <leader>O :Vifm<CR>
 endif
 
 " Close buffer without exiting (uses moll/vim-bbye)
