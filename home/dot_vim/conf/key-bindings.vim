@@ -38,10 +38,8 @@ let mapleader = "\<Space>"
 " Switch to previous buffer
 :map <leader>b :e #<cr>
 
-" Open buffer or project file
-" ProjectDir is the top-level version control directory
-" (e.g. where .git/ is)
-:map <leader>B :UniteWithProjectDir -start-insert buffer file_rec/async<cr>
+" Open buffer
+:map <leader>B :Buffers<cr>
 
 " Toggle fold open/close
 :map <leader>f za
