@@ -1,0 +1,25 @@
+{
+  "Profiles": [
+    {
+      "Name": "Small",
+      "Guid": "25B9A82E-88DF-4B30-9F86-23F106F77C3E",
+      "Dynamic Profile Parent Name": "Default",
+      "Rows": 24,
+      "Columns": 85,
+    },
+    {
+      "Name": "Medium",
+      "Guid": "25B0DB32-1990-4BE1-ABE3-68FADFC7B91A",
+      "Dynamic Profile Parent Name": "Default",
+      "Rows": 40,
+      "Columns": 160,
+    },
+    {
+      "Name": "Full",
+      "Guid": "699d3ea7-c967-448c-82df-aff634910638",
+      "Dynamic Profile Parent Name": "Default",
+      "Rows": 50,
+      "Columns": 201,
+    },
+  ]
+}
