@@ -1,0 +1,25 @@
+{
+  "Profiles": [
+    {
+      "Name": "Pass",
+      "Guid": "f9fe2ed0-a592-4653-9b76-599a87fbf179",
+      "Window Type" : 0,
+      "Dynamic Profile Parent Name": "Default",
+      "Has Hotkey" : true,
+      "HotKey Window AutoHides" : true,
+      "HotKey Modifier Activation" : 0,
+      "HotKey Activated By Modifier" : false,
+      "HotKey Characters" : "≈",
+      "HotKey Window Dock Click Action" : 0,
+      "HotKey Window AutoHides" : true,
+      "HotKey Modifier Flags" : 524288,
+      "HotKey Characters Ignoring Modifiers" : "x",
+      "HotKey Window Floats" : true,
+      "HotKey Window Reopens On Activation" : false,
+      "HotKey Key Code" : 7,
+      "Rows": 24,
+      "Columns": 85,
+      "Initial Text" : "ppass -c"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "Profiles": [
+    {
+      "Name": "Main",
+      "Guid": "b76c6361-829e-4657-ab21-0e5b8e39fdb7",
+      "Has Hotkey" : true,
+      "HotKey Characters" : "z",
+      "HotKey Key Code" : 6,
+      "HotKey Characters Ignoring Modifiers" : "z",
+      "HotKey Modifier Flags" : 524576,
+      "HotKey Window AutoHides" : false,
+      "HotKey Window Floats" : false,
+      "Initial Text" : "tmux-start",
+      "Scrollback With Status Bar" : false,
+      "Rows": 50,
+      "Columns": 201,
+      "Disable Window Resizing" : true,
+    },
+  ]
+}
