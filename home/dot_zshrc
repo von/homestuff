@@ -152,12 +152,25 @@ else
 fi
 
 #####################################################################
-# Initialize zsh-syntax-highlighting (installed by Homebrew)
-# https://github.com/zsh-users/zsh-syntax-highlighting
-# Note: Must be done after compinit is called by oh-my-zsh and
-#   before after/syntax-highlighting.zsh is sourced.
+#
+# Antigen (installed by Homebrew)
+# https://github.com/zsh-users/antigen
+# TODO: Use to install zsh-aync and oh-my-zsh
+_antigen_path=${HOMEBREW_PREFIX}/share/antigen/antigen.zsh
+if test -f "${_antigen_path}" ; then
+  source "${_antigen_path}"
 
-source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  # Note: Must be done after compinit is called by oh-my-zsh and
+  #   before after/syntax-highlighting.zsh is sourced.
+  antigen bundle zsh-users/zsh-syntax-highlighting
+
+  # Use right arrow to accept suggestions
+  antigen bundle zsh-users/zsh-autosuggestions
+
+  antigen apply
+else
+  echo "Warning: antigen not found."
+fi
 
 #####################################################################
 # Load $ZSH_CUSTOM/after/*.zsh
