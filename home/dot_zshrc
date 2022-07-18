@@ -160,12 +160,17 @@ _antigen_path=${HOMEBREW_PREFIX}/share/antigen/antigen.zsh
 if test -f "${_antigen_path}" ; then
   source "${_antigen_path}"
 
-  # Note: Must be done after compinit is called by oh-my-zsh and
-  #   before after/syntax-highlighting.zsh is sourced.
-  antigen bundle zsh-users/zsh-syntax-highlighting
+  # If we're reloading, we'll get warnings if we call all the bundle commands
+  # again and then apply. But if we skip everything, functionality seems to
+  # be missing from the bundles. Just calling 'apply' seems to do the trick.
+  if test -z "$RELOAD_ZSHRC" ; then
+    # Note: Must be done after compinit is called by oh-my-zsh and
+    #   before after/syntax-highlighting.zsh is sourced.
+    antigen bundle zsh-users/zsh-syntax-highlighting
 
-  # Use right arrow to accept suggestions
-  antigen bundle zsh-users/zsh-autosuggestions
+    # Use right arrow to accept suggestions
+    antigen bundle zsh-users/zsh-autosuggestions
+  fi
 
   antigen apply
 else
