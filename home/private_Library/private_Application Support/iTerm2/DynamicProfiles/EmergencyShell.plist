@@ -3,6 +3,7 @@
     {
       "Name": "EmergencyShell",
       "Guid" : "0729012A-D960-47FF-B08E-B580D1A83696",
+      "Custom Command" : "Custom Shell",
       "Command" : "\/bin\/sh",
       "Scrollback With Status Bar" : false,
       "Rows": 50,
