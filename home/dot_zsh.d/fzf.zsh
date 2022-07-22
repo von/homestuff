@@ -48,6 +48,6 @@ vg() {
 
   if [[ -n $file ]]
   then
-     vim $file +$line -c "zO"
+     vim $file +$line +foldopen\!
   fi
 }
