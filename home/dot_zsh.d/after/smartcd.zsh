@@ -8,7 +8,7 @@ SMART_CD_PATH="${HOME}/.smartcd/"
 if test -f "${SMART_CD_PATH}/lib/core/smartcd" ; then
   # Load and configure smartcd
   # Normally in ~/.smartcd_config
- 
+
   # Hack: If PWD ends in a '/' this causes bash_enter to be run twice
   # See https://github.com/cxreg/smartcd/issues/68
   PWD=${PWD%/}
