@@ -194,6 +194,14 @@ done
 autoload -U zmv
 
 #####################################################################
+# My custom 'words' file.
+# Simplifed vocabulary. Can't remember where I got it from.
+
+if test -f ${HOME}/lib/shared/words ; then
+  export WORDS_FILE="${HOME}/lib/shared/words"
+fi
+
+#####################################################################
 # Allow for easy resourcing of zshrc
 
 function zshrc()
