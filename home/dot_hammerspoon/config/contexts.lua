@@ -38,6 +38,26 @@ local function muteVox(win)
 end
 -- }}} Mute VOX when Zoom Meeting is focused on
 
+-- Run 'displayplacer' with given arguments {{{
+-- https://github.com/jakehilborn/displayplacer
+-- Installed via Homebrew
+local function displayplacer(...)
+  local args = hs.fnutils.ieach({...}, function(s) return "\"" .. s .. "\"" end)
+  table.insert(args, 1, "displayplacer")
+  local cmd = table.concat(args, " ")
+  logger.df("displayplacer command: %s", cmd)
+  local output, status, type, rc = hs.execute(cmd)
+  if not status then
+    logger.ef("Failed to execute displayplacer: type = %s rc =%d", type, rc)
+    logger.ef("Output: %s", output)
+  else
+    if rc ~= 0 then
+      logger.ef("displayplacer returned %d: type = %s Output: %s", rc, type, output)
+    end
+  end
+end
+-- }}} Run 'displayplacer' with given arguments
+
 -- }}} Supporting functions --
 
 -- baseContext {{{ --
@@ -201,6 +221,10 @@ local internalPrimaryContext = Contexts.new(internalPrimaryConfig)
 local smallExternalConfig = {
   title = "Small External Context",
   inherits = baseContext,
+  enterFunction = function() displayplacer(
+      "id:37D8832A-2D66-02CA-B9F7-8F30A301B230 res:1440x900 hz:60 color_depth:8 scaling:on origin:(0,0) degree:0",
+      "id:3A77959F-10AD-9A27-0857-D6964E3302DB res:1920x1080 hz:60 color_depth:8 scaling:off origin:(-1920,-180) degree:0"
+    ) end,
   apps = {
     {
       name = "iTerm2",
