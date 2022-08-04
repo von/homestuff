@@ -234,7 +234,7 @@ local smallExternalConfig = {
       name = "zoom.us",
       windowNames = "^Zoom Meeting$",
       apply = { externalDisplay, "maximize" },
-      create = { muteVox, externalDisplay }
+      create = { muteVox, externalDisplay, "maximize" }
     },
     {
       name = "Google Chrome",
