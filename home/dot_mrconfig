@@ -38,8 +38,8 @@ checkout = git clone 'git@github.com:von/pyder.git' 'pyder'
 checkout = git clone 'ssh://vwelch@git.vwelch.com/home/vwelch/GIT/password-store.git' '.password-store'
 skip = test `hostname` != "Vons-PL"
 
-[develop/dvd-rip]
-checkout = git clone 'ssh://vwelch@git.vwelch.com:/home/vwelch/GIT/dvd-rip' 'dvd-rip'
+[develop/dvd-util]
+checkout = git clone 'ssh://vwelch@git.vwelch.com:/home/vwelch/GIT/dvd-rip' 'dvd-util'
 skip = test `hostname` != "Vons-PL"
 
 [develop/pigshare]
