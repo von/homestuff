@@ -167,9 +167,6 @@ if test -f "${_antigen_path}" ; then
     # Note: Must be done after compinit is called by oh-my-zsh and
     #   before after/syntax-highlighting.zsh is sourced.
     antigen bundle zsh-users/zsh-syntax-highlighting
-
-    # Use right arrow to accept suggestions
-    antigen bundle zsh-users/zsh-autosuggestions
   fi
 
   antigen apply
