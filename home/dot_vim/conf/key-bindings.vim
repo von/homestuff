@@ -290,12 +290,26 @@ noremap  k gk
 noremap  j gj
 " }}} Remap Up/Down to work with soft wrap nicely
 
-" Tab binding for deoplete {{{
+" Popup keybindings {{{
+" See :help popupmenu-keys
 
 " <Tab> completes deoplete popup if Open, otherwise acts normally
 inoremap <expr> <Tab> pumvisible() ? "<CR>" : "<Tab>"
 
-" }}}
+"
+" Command mode completions
+
+" Up and Down work as expected
+cnoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
+cnoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
+
+" Right completes
+cnoremap <expr> <Right> pumvisible() ? "\<C-Y>" : "\<Right>"
+
+" Left cancels completion
+cnoremap <expr> <Left> pumvisible() ? "\<C-E>" : "\<Left>"
+
+" }}} Popup keybindings
 
 " Bindings for Ultisnips {{{
 " Uses <S-Tab> and <C-l>. See ultisnips.vim
