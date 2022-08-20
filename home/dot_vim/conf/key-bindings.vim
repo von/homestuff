@@ -296,6 +296,9 @@ noremap  j gj
 " <Tab> completes deoplete popup if Open, otherwise acts normally
 inoremap <expr> <Tab> pumvisible() ? "<CR>" : "<Tab>"
 
+" Left cancels completion
+inoremap <expr> <Left> pumvisible() ? "\<C-E>" : "\<Left>"
+
 "
 " Command mode completions
 
