@@ -38,6 +38,7 @@ call quickmenu#append("Hammerspoon source file", "call HammerspoonSourceCurrentF
 call quickmenu#append("Reload Hammerspoon config", "call HammerspoonReload()", "Reload Hammerspoon config", "lua")
 call quickmenu#append("Gundo", "GundoToggle", "Toggle Gundo menu")
 call quickmenu#append("Markdown preview", "call Vim_Markdown_Preview()", "Markdown preview", "markdown")
+call quickmenu#append("Run Lint", "PymodeLint", "Run PymodeLint", "python")
 
 " Options
 call quickmenu#append("# Options", '')
