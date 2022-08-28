@@ -10,6 +10,8 @@ waitfor() {
   # Printing of my pid here allows for easy chaining of waitfor's
   echo "[$$] Waiting for pid ${pid}"
   while true ; do
+    # Use this method instead of 'wait' as that only allows children
+    # of the current shell to be waited on.
     # Kudos https://stackoverflow.com/a/3044045/197789
     kill -0 ${pid} >& /dev/null
     if test $? -ne 0 ; then
