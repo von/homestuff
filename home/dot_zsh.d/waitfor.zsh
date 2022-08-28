@@ -16,8 +16,9 @@ waitfor() {
     kill -0 ${pid} >& /dev/null
     if test $? -ne 0 ; then
       # Process not running
-      echo "Process ${pid} finished."
-      ${(q)@}
+      echo "Process ${pid} finished. Executing: ${(q)@}"
+      # Don't need to use '(q)' here as zsh seems handles quoting.
+      ${@}
       return $?
     fi
     sleep ${sleeptime}
