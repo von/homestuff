@@ -5,6 +5,13 @@
 # Kudos: https://unix.stackexchange.com/a/171445/29832
 zstyle ':completion:*' completer _expand _complete
 
+# Show what is being completed
+# Kudos: https://thevaluable.dev/zsh-completion-guide-examples/
+zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
+
+# Group different types of results
+zstyle ':completion:*' group-name ''
+
 # Automatic menu completion for kill
 # Kudos: http://grml.org/zsh/zsh-lovers.html
 zstyle ':completion:*:*:kill:*' menu yes select
