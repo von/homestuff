@@ -107,7 +107,9 @@
 [status]
         submoduleSummary = true
         # Show all files in new directories
-        showUntrackedFiles = all
+        # Commented out due to:
+        # https://github.com/jonas/tig/issues/1219
+        # showUntrackedFiles = true
 [user]
         name = Von Welch
         email = von@vwelch.com
