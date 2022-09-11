@@ -19,9 +19,11 @@ highligh GitGutterChangeDelete ctermfg=136 ctermbg=236
 " Hack: update GitGutter whenever we enter a buffer until the autocmd
 " communication works between them as it should.
 " See: https://github.com/airblade/vim-gitgutter/issues/502#issuecomment-446389662
+" Requires 'fovus-events on' in tmux for FocusGained to work
+"   See https://vi.stackexchange.com/a/18529/2881
 augroup GitGutterFix
   autocmd!
-  autocmd BufEnter * silent! GitGutter
+  autocmd BufEnter,FocusGained * silent! GitGutter
 augroup END
 
 " If current file is untracked, stage the whole file.
