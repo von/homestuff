@@ -29,7 +29,7 @@ augroup END
 " If current file is untracked, stage the whole file.
 " Otherwise add stage the current hunk.
 " Kudos: https://stackoverflow.com/a/21152503/197789
-function GitAddHunkOrFile()
+function! GitAddHunkOrFile()
   let file = expand('%')
   let message = system('git ls-files -- ' . file)
   " Check for error. If none, a non-zero length string.
