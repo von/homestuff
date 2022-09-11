@@ -52,6 +52,12 @@ set -as terminal-overrides ',*:smxx=\E[9m'
 set -g xterm-keys on
 
 ######
+# Pass focus events through.
+# Allows neovim FocusGained Autocmd to work
+# Kudos: https://vi.stackexchange.com/a/18529/2881
+set -g focus-events on
+
+######
 # Turn off audio bell, use visual bell instead
 set -g bell-action current  # Only current window causes visual bell
 set -g visual-bell on
