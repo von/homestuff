@@ -400,6 +400,11 @@ local pastebufferMode = Modal:new(modifiers.opt, 'P', "Paste Buffer Mode", paste
 -- Mod-U: Modal hotkey for Utilities {{{ --
 
 local utilModalKeys = {
+  A = {
+    -- In case one gets left somehow
+    func = hs.alert.closeAll,
+    desc = "Close all alerts"
+  },
   C = {
     func = util.urlclean,
     desc = "Clean URL in clipboard"
