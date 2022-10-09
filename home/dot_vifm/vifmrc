@@ -278,11 +278,11 @@ nnoremap <left> <c-w>h
 nnoremap <right> <c-w>l
 " tmux.conf also configures Shift-left/right to change panes as well
 
-" Split pane vertically with "|"
-nnoremap | <c-w>v
+" Toggle split pane vertically with "|"
+nnoremap | :vsplit!<cr>
 
-" Split pane horizontally with "_" ("-" is previous directory)
-nnoremap _ <c-w>s
+" Toggle Split pane horizontally with "_" ("-" is previous directory)
+nnoremap _ :split!<cr>
 
 " Use space similar to vim <leader> {{{
 
