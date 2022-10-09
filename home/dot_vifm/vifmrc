@@ -82,7 +82,7 @@ set slowfs=curlftpfs
 set notitle
 
 " What should be saved automatically between vifm runs
-set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
+set vifminfo=dhistory,chistory,state,tui,shistory,
     \phistory,fhistory,dirstack,registers,bookmarks
 
 " Show number of items in directories
