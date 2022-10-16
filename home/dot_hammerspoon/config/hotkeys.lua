@@ -21,6 +21,7 @@ local MouseCircle = spoon.MouseCircle
 local outlook = hs.loadSpoon("Email").Outlook()
 local pastefile = require("pastefile")
 local PBExt = hs.loadSpoon("PasteBoardExt")
+local PasswordGenerator = hs.loadSpoon("PasswordGenerator")
 local PasteRegister = hs.loadSpoon("PasteRegister")
 local PasteStack = hs.loadSpoon("PasteStack")
 local RescueWindows = require("RescueWindows")
@@ -350,6 +351,10 @@ local pastebufferModalKeys = {
   F = {
     func = function() pastefile.pasteFileLoadChooser(pastesPath) end,
     desc = "Load Paste Buffer from file"
+  },
+  G = {
+    func = function() PasswordGenerator:copyPassword() end,
+    desc = "Generate password and place in clipboard"
   },
   L = {
     func = PasteRegister.queryAndLoadPasteBuffer,

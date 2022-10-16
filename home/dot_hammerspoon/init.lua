@@ -80,6 +80,7 @@ install:andUse("EjectMenu", {
     start = true
   })
 install:andUse("MouseCircle")
+install:andUse("PasswordGenerator")
 install:andUse("Seal")
 -- It's tempting to restore the default http/https handler when Hammerspoon
 -- quits, but OSX asks each time we change the handler, which gets annoying
