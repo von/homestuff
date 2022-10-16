@@ -429,6 +429,10 @@ local utilModalKeys = {
     func = util.checknetwork,
     desc = "Check Network"
   },
+  P = {
+    func = util.windowcapturepb,
+    desc = "Window or Area Capture to pasteboard"
+  },
   S = {
     func = util.screencapture,
     desc = "Screen Capture"

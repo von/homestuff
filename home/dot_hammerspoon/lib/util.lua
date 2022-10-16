@@ -45,6 +45,21 @@ module.windowcapture = function()
   task:start()
 end
 
+-- Interactively capture selected window or screen area in pasteboard
+module.windowcapturepb = function()
+  hs.alert.show("Capturing window or area to pastboard...")
+  -- -i == Interactive
+  -- -c == Captures to pastboard
+  -- -W == Start in window slection mode
+  -- -x == No sounds
+  -- hs.execute("screencapture -i -W -c ${TMPDIR}/hs-screencapture-$$.png")
+  local task = hs.task.new("/usr/sbin/screencapture", nil,
+    { "-i", "-W", "-c", "-x",
+      os.getenv("TMPDIR") .. "/hs-windowcapture-" .. tostring(os.time()) .. ".png"
+    })
+  task:start()
+end
+
 -- Clean up URL in clipboard
 module.urlclean = function()
   hs.alert.show("Cleaning URL in clipboard...")
