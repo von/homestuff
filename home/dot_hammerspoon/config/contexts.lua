@@ -42,7 +42,7 @@ end
 -- https://github.com/jakehilborn/displayplacer
 -- Installed via Homebrew
 local function displayplacer(...)
-  local args = hs.fnutils.ieach({...}, function(s) return "\"" .. s .. "\"" end)
+  local args = hs.fnutils.map({...}, function(s) return "\"" .. s .. "\"" end)
   table.insert(args, 1, "displayplacer")
   local cmd = table.concat(args, " ")
   logger.df("displayplacer command: %s", cmd)
