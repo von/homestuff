@@ -81,6 +81,7 @@ local dumpAudioDevice = function(d)
     inUse = d:inUse(),
     isInput = d:isInputDevice(),
     isOutput = d:isOutputDevice(),
+    watcherIsRunning = d:watcherIsRunning(),
     device = d
   }))
 end
