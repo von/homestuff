@@ -34,6 +34,7 @@ local util = require("util")
 local winlauncher = require("winlauncher")
 local WindowPool = require("WindowPool")
 local WinWin = spoon.WinWin
+local WW = require("WatcherWatcher")
 local Zoom = require("Zoom")
 
 -- }}} Load required modules --
@@ -451,6 +452,23 @@ local utilModalKeys = {
 local utilMode = Modal:new(modifiers.opt, 'U', "Utilities", utilModalKeys)
 
 -- }}} Mod-U: Modal hotkey for Utilities --
+----------------------------------------------------------------------
+-- Mod-W: Modal hotkey for WatcherWatcher {{{ --
+
+local wwModalKeys = {
+  M = {
+    func = hs.fnutils.partial(WW.muteIcon, WW),
+    desc = "Mute icon"
+  },
+  R = {
+    func = hs.fnutils.partial(WW.reset, WW),
+    desc = "Reset"
+  }
+}
+
+local wwMode = Modal:new(modifiers.opt, 'W', "WatcherWatcher", wwModalKeys)
+
+-- }}} Mod-W: Modal hotkey for WatcherWatcher --
 ----------------------------------------------------------------------
 -- Mod-X is used by iTerm
 -- Mod-Z is used by iTerm
