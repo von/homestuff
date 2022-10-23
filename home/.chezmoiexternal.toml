@@ -73,3 +73,6 @@
 [".hammerspoon/MySpoons/Email.spoon"]
   type = "git-repo"
   url = "https://github.com/von/Email.spoon.git"
+[".hammerspoon/MySpoons/WatcherWatcher.spoon"]
+  type = "git-repo"
+  url = "https://github.com/von/WatcherWatcher.spoon.git"
