@@ -9,8 +9,8 @@ local log = hs.logger.new("ChromeCLI", "info")
 module.log = log
 
 local myConfig = MyConfig["ChromeCLI"] or {}
-local path = myConfig["path"] or "/usr/local"
-module.executable = myConfig["executable"] or "/usr/local/bin/chrome-cli"
+local path = myConfig["path"] or homebrew_prefix  -- From ../init.lua
+module.executable = myConfig["executable"] or homebrew_prefix .."bin/chrome-cli"
 
 module.debug = function(enable)
   if enable then
