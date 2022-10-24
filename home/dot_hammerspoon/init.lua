@@ -90,6 +90,19 @@ install:andUse("WiFiTransitions")
 install:andUse("WinWin")
 
 ------------------------------------------------------------
+-- Determine HOMEBREW path
+if hs.fs.attributes("/opt/homebrew/") then
+  -- On Macs with Apple chips, homebrew is in /opt/homebrew
+  homebrew_prefix = "/opt/homebrew/"
+elseif hs.fs.attributes("/usr/local/") then
+  -- On older macs, it's in /usr/local.
+  homebrew_prefix = "/usr/local/"
+else
+  log.e("Could not determine Homebrew prefix")
+  homebrew_prefix = nil
+end
+
+------------------------------------------------------------
 -- Set up package.path
 -- This is what require searches and also where spoons are looked for
 
