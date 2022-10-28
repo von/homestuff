@@ -1,0 +1,8 @@
+session_name: sandbox
+start_directory: ~/develop/sandbox
+windows:
+  - window_name: shells
+    layout: even-horizontal
+    panes:
+      -
+      -
