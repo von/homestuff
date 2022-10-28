@@ -49,7 +49,7 @@ local function displayplacer(...)
   logger.df("displayplacer command: %s", cmd)
   local output, status, type, rc = hs.execute(cmd)
   if not status then
-    logger.ef("Failed to execute displayplacer: type = %s rc =%d", type, rc)
+    logger.ef("Failed to execute displayplacer (%s): type = %s rc =%d", cmd, type, rc)
     logger.ef("Output: %s", output)
   else
     if rc ~= 0 then
