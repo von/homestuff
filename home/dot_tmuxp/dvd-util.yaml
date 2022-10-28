@@ -1,0 +1,14 @@
+session_name: dvd-util
+windows:
+  - window_name: dvd-util
+    start_directory: ~/develop/dvd-util/
+    layout: even-horizontal
+    panes:
+      -
+      -
+  - window_name: Movies
+    layout: even-horizontal
+    start_directory: ~/Movies/
+    panes:
+      -
+      -
