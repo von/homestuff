@@ -102,6 +102,8 @@ if (( $+commands[tmuxp] )) ; then
   # Meant to be called from iTerm profile.
   #
   function tmux-start() {
-    DISABLE_AUTO_TITLE=true command tmuxp load -y servers homestuff
+    # XXX Loading multiple sessions doesn't seem to work
+    # See https://github.com/tmux-python/tmuxp/issues/837
+    DISABLE_AUTO_TITLE=true command tmuxp load -y servers
   }
 fi
