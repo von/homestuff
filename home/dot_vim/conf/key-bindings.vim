@@ -131,6 +131,10 @@ if !has("gui_running")
   :map <leader>v :silent !vifm<cr>:redraw!<cr>
 endif
 
+" Select the region we just pasted
+" Kudos: https://stackoverflow.com/a/4313335/197789
+:map <leader>V `[v`]
+
 " Save with <leader>w
 :map <leader>w :w<cr>
 " In visual mode, don't save partial file and restore visual selection.
