@@ -3,6 +3,7 @@
 # Timestamp is used in von-ml.zsh-theme
 
 MAINT_TIMESTAMP=${HOME}/.maint-timestamp
+MAINT_DIRECTORY=${HOME}/.maint.d
 SETUP_PATH=${HOME}/develop/mac-config/setup.sh
 
 maint() {
@@ -24,6 +25,13 @@ maint() {
     # Allow pip to install without virtualenv
     export PIP_REQUIRE_VIRTUALENV="false"
 
-    nice -n 15 ${SETUP_PATH} && touch ${MAINT_TIMESTAMP}
+    nice -n 15 ${SETUP_PATH} || return 0
+
+    for file in ${MAINT_DIRECTORY}/*.zsh(.N) ; do
+      echo "Executing ${file}..."
+      source ${file}
+    done
+
+    touch ${MAINT_TIMESTAMP}
   )
 }
