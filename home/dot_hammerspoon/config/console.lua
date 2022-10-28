@@ -123,7 +123,10 @@ dumpScreen = function(s)
         name = s:name() or "nil", -- Airplay screens have no name
         id = s:id(),
         position = s:position(),
-        frame = s:frame()
+        frame = s:frame(),
+        fullFrame = s:fullFrame(),
+        uuid = s:getUUID(),
+        position = s:position()
     }))
 end
 
