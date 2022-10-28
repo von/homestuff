@@ -43,7 +43,8 @@ end
 -- Installed via Homebrew
 local function displayplacer(...)
   local args = hs.fnutils.map({...}, function(s) return "\"" .. s .. "\"" end)
-  table.insert(args, 1, "displayplacer")
+  -- homebrew_prefix from ../init.lua
+  table.insert(args, 1, homebrew_prefix .. "bin/displayplacer")
   local cmd = table.concat(args, " ")
   logger.df("displayplacer command: %s", cmd)
   local output, status, type, rc = hs.execute(cmd)
