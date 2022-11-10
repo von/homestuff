@@ -72,8 +72,14 @@ case "$MENU" in
     ;;
 
   SESSIONS)  # Create dynamic list of active and tmuxp sessions
-    _tmuxp_sessions=$(cd ~/.tmuxp/ ; find . -name \*.yaml -print | cut -c 3- | sed -e 's/\(.*\)\.yaml/\1/' | sort)
-    _active_sessions=$(tmux list-sessions -F '#{session_name}' | sort)
+    # Create list of tmuxp sessions, filtering out my "popup" session
+    _tmuxp_sessions=$(cd ~/.tmuxp/ ; \
+      find . -name \*.yaml -print | \
+      cut -c 3- | sed -e 's/\(.*\)\.yaml/\1/' | \
+      sort | grep -v "popup" )
+    # Create list of active sessions, filtering out my "popup" session
+    _active_sessions=$(tmux list-sessions -F '#{session_name}' | sort | \
+      grep -v "popup" )
     _menu="tmux display-menu -T \"Choose session\" $ARGS "
     _menu+="\"*previous*\" \"\" \"switch-client -l\" "
     for s in ${_active_sessions} ; do
