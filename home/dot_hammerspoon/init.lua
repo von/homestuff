@@ -32,31 +32,6 @@ hs.hotkey.setLogLevel("warning")
 hs.window.filter.setLogLevel(1)
 
 ------------------------------------------------------------
--- My personal Zoom rooms
-workDefaultZoomId = "4027221152"
-personalDefaultZoomId = "2888787860"
-
-------------------------------------------------------------
--- Configuration options based on hostname
-
-local hostname = hs.host.localizedName()
-if hostname == "Vons-WL" then
-  defaultChromePersona="IU"
-  defaultZoomMeetingId = workDefaultZoomId
-  WorkLaptop = true
-else
-  WorkLaptop = false
-end
-
-if hostname == "Vons-PL" then
-  defaultChromePersona="Personal"
-  defaultZoomMeetingId = personalDefaultZoomId
-  PersonalLaptop = true
-else
-  PersonalLaptop = false
-end
-
-------------------------------------------------------------
 -- Install Spoons
 -- This should have been intalled into ~/.hammerspoon/Spoons/ by
 -- ~/homestuff/os/Darwin/init/92-hammerspoon-bootstrap.sh
@@ -142,7 +117,8 @@ function mergeConfigs(main, new)
   end
 end
 
-function loadConfigs(path)
+-- Load all JSON files in a directory tree
+function loadJSONFiles(path)
   -- As of 0.9.81 hs.fs.dir throws an error if path does not exist, so check first
   local attr, err = hs.fs.attributes(path)
   if not attr then
@@ -154,15 +130,6 @@ function loadConfigs(path)
     local fullpath = path .. file
     if file == "." or file == ".." then
       -- Ignore
-    elseif file:sub(-4) == ".lua" then
-      log.f("Reading configuration file %s", fullpath)
-      -- xpcall() kudos https://stackoverflow.com/a/45788987/197789
-      local result, errormsg = xpcall(dofile, debug.traceback, fullpath)
-      if not result then
-        log.ef("Error parsing %s: %s", fullpath, errormsg)
-        hs.alert.show("Error parsing " .. fullpath)
-        table.insert(errors, "Error parsing " .. fullpath)
-      end
     elseif file:sub(-5) == ".json" then
       log.f("Reading configuration file %s", fullpath)
       local c = hs.json.read(fullpath)
@@ -184,10 +151,73 @@ function loadConfigs(path)
   return true
 end
 
--- Load local configuration first so it takes precedent
-loadConfigs(localConfigPath)
-loadConfigs(extPath)
-loadConfigs(configPath)
+-- Load all LUA configuration files
+function loadLUAFiles(path)
+  -- As of 0.9.81 hs.fs.dir throws an error if path does not exist, so check first
+  local attr, err = hs.fs.attributes(path)
+  if not attr then
+    -- Only a warning as we may have optional paths
+    log.wf("Configuration path %s: %s", path, err)
+    return false
+  end
+  for file in hs.fs.dir(path) do
+    local fullpath = path .. file
+    if file == "." or file == ".." then
+      -- Ignore
+    elseif file:sub(-4) == ".lua" then
+      log.f("Reading configuration file %s", fullpath)
+      -- xpcall() kudos https://stackoverflow.com/a/45788987/197789
+      local result, errormsg = xpcall(dofile, debug.traceback, fullpath)
+      if not result then
+        log.ef("Error parsing %s: %s", fullpath, errormsg)
+        hs.alert.show("Error parsing " .. fullpath)
+        table.insert(errors, "Error parsing " .. fullpath)
+      end
+    else
+      -- Recurse into subdirectories
+      local attr = hs.fs.attributes(fullpath)
+      if attr.mode == "directory" then
+        log.f("Recursing into directory %s", fullpath)
+        loadConfigs(fullpath .. "/")
+      end
+    end
+  end
+  return true
+end
+
+-- First load our JSON files and then our lua configuration files
+-- This way the lua files have all the configuration form the JSON
+-- files available to them.
+loadJSONFiles(localConfigPath)
+loadJSONFiles(configPath)
+
+-- My personal Zoom rooms
+
+if MyConfig['Zoom'] then
+  -- May be nil
+  defaultZoomMeetingId = MyConfig['Zoom']['defaultZoomId']
+end
+
+-- Configuration options based on hostname
+
+local hostname = hs.host.localizedName()
+if hostname == "Vons-WL" then
+  defaultChromePersona="IU"
+  WorkLaptop = true
+else
+  WorkLaptop = false
+end
+
+if hostname == "Vons-PL" then
+  defaultChromePersona="Personal"
+  PersonalLaptop = true
+else
+  PersonalLaptop = false
+end
+
+loadLUAFiles(localConfigPath)
+loadLUAFiles(extPath)
+loadLUAFiles(configPath)
 
 ------------------------------------------------------------
 -- Turn on debuging for requested modules
