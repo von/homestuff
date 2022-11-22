@@ -193,7 +193,7 @@ if WorkLaptop then
     desc = "Open Exchange Calendar"
   }
 
-  local function mailFrontChromeTab()
+  local function mailFromChromeTab()
     if not defaultEmail:compose({
         subject = chrome.getActiveTabTitle(),
         content = chrome.getActiveTabURL()
@@ -202,7 +202,7 @@ if WorkLaptop then
     end
   end
   browserModalKeys["E"] = {
-    func = mailFrontChromeTab,
+    func = mailFromChromeTab,
     desc = "Create Mail from frontmost tab"
   }
   browserModalKeys["G"] = {
