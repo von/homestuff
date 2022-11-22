@@ -1,4 +1,20 @@
 {
+  "Chrome" : {
+    "defaultPersona" : "Personal"
+  },
+  "hotkeys" : {
+    "AppleMail" : false,
+    "Discord" : false,
+    "emailMoveMode" : false,
+    "HIARCSMinimize" : true,
+    "PersonalMounts" : true,
+    "MSOutlook" : false,
+    "MSTeams" : false,
+    "Slack" : true
+  },
+  "launchDefaultApps" : {
+    "apps" : [ "com.googlecode.iterm2", "com.google.Chrome" ]
+  },
   "URLDispatcher": {
     "debugLevel" : "debug",
     "defaultHandler" : "com.google.Chrome",

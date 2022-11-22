@@ -39,6 +39,8 @@ local Zoom = require("Zoom")
 
 -- }}} Load required modules --
 ------------------------------------------------------------
+local config = MyConfig['hotkeys'] or {}
+------------------------------------------------------------
 -- Set default email interface
 local defaultEmail = applemail
 defaultEmail:useHTMLforCompose(false)  -- Use 'true' for New Outlook
@@ -92,31 +94,41 @@ local openAppModalKeys = {
   },
 }
 
--- WorkLaptop {{{ --
-if WorkLaptop then
+if config["MSOutlook"] then
   openAppModalKeys["C"] = {
     func = function() outlook:focusOnCalendar() end,
     desc = "Calendar"
   }
+end
+
+if config["Discord"] then
   openAppModalKeys["D"] = {
     func = applauncher.new("Discord"),
     desc = "Discord"
   }
+end
+
+if config["AppleMail"] then
   -- TODO: Find way to focus on Mail window (name changes with mailbox)
   openAppModalKeys["M"] = {
     func = applauncher.new("Mail"),
     desc = "Apple Mail"
   }
+end
+
+if config["Slack"] then
   openAppModalKeys["S"] = {
     func = applauncher.new("Slack"),
     desc = "Chat (Slack)"
   }
+end
+
+if config["MSTeams"] then
   openAppModalKeys["T"] = {
     func = applauncher.new("Microsoft Teams"),
     desc = "Microsoft Teams"
   }
 end
--- }}} WorkLaptop --
 
 local openAppMode = Modal:new(modifiers.opt, 'A', "Open application", openAppModalKeys)
 
@@ -125,9 +137,21 @@ local openAppMode = Modal:new(modifiers.opt, 'A', "Open application", openAppMod
 -- Mod-B: Modal hotkey for Browser control {{{ --
 
 local browserModalKeys = {
+  A = {
+    func = chrome.wrapped.activateTab("My Tasks",
+      { url = "https://app.asana.com/",
+        persona = defaultChromePersona, newWindow = true }),
+    desc = "Open Asana"
+  },
   D = {
     func = chrome.wrapped.selectPersona("Dev"),
     desc = "Chrome Dev Persona"
+  },
+  G = {
+    func = chrome.wrapped.activateTab("My Drive",
+      { url = "https://drive.google.com/drive/",
+        persona = defaultChromePersona, newWindow = true }),
+    desc = "Open Google Drive"
   },
   M = {
     func = chrome.wrapped.activateTab("Google Play Music",
@@ -173,16 +197,31 @@ local browserModalKeys = {
   W = {
     func = chrome.wrapped.selectPersona("IU"),
     desc = "Chrome Work Persona"
+  },
+  Z = {
+    func = chrome.wrapped.openURL{
+      url = defaultZoomMeetingId,
+      persona = defaultChromePersona,
+      newWindow = true
+    },
+    desc = "Open Peronal Zoom Meeting"
   }
 }
 
--- WorkLaptop {{{ --
-if WorkLaptop then
-  browserModalKeys["A"] = {
-    func = chrome.wrapped.activateTab("My Tasks",
-      { url = "https://app.asana.com/", persona = "IU", newWindow = true }),
-    desc = "Open Asana"
-  }
+local function mailFromChromeTab()
+  if not defaultEmail:compose({
+      subject = chrome.getActiveTabTitle(),
+      content = chrome.getActiveTabURL()
+    }) then
+    hs.alert("Failed to create email from Chrome tab")
+  end
+end
+browserModalKeys["E"] = {
+  func = mailFromChromeTab,
+  desc = "Create Mail from frontmost tab"
+}
+
+if config["MSOutlook"] then
   browserModalKeys["C"] = {
     func = chrome.wrapped.activateTab("Welch, Von - Outlook",
       {
@@ -192,43 +231,8 @@ if WorkLaptop then
       }),
     desc = "Open Exchange Calendar"
   }
-
-  local function mailFromChromeTab()
-    if not defaultEmail:compose({
-        subject = chrome.getActiveTabTitle(),
-        content = chrome.getActiveTabURL()
-      }) then
-      hs.alert("Failed to create email from Chrome tab")
-    end
-  end
-  browserModalKeys["E"] = {
-    func = mailFromChromeTab,
-    desc = "Create Mail from frontmost tab"
-  }
-  browserModalKeys["G"] = {
-    func = chrome.wrapped.activateTab("My Drive",
-      { url = "https://drive.google.com/drive/", persona = "IU", newWindow = true }),
-    desc = "Open Google Drive"
-  }
-  browserModalKeys["Z"] = {
-    func = chrome.wrapped.openURL{
-      url = "https://iu.zoom.us/my/vwelch",
-      persona = "IU",
-      newWindow = true
-    },
-    desc = "Open Peronal Zoom Meeting"
-  }
 end
--- }}} WorkLaptop --
 
--- PersonalLaptop {{{ --
-if PersonalLaptop then
-  browserModalKeys["P"] = {
-    func = chrome.wrapped.selectPersona("Personal"),
-    desc = "Chrome Personal Persona"
-  }
-end
--- }}} PersonalLaptop --
 local broswerMode = Modal:new(modifiers.opt, 'B', "Browser control", browserModalKeys)
 
 -- }}} Mod-B: Modal hotkey for Browser control --
@@ -302,8 +306,7 @@ local helpMode = Modal:new(modifiers.opt, 'H', "Show Help", helpModalKeys,
 ------------------------------------------------------------
 -- Mod-M: Modal hotkey for Mounting {{{ --
 
--- PersonalLaptop {{{ --
-if PersonalLaptop then
+if config["PersonalMounts"] then
   local mountModalKeys = {
     M = {
       func = mounter.new("afp://von@EmmaCrate.local/music"),
@@ -317,7 +320,6 @@ if PersonalLaptop then
 
   local mountMode = Modal:new(modifiers.opt, 'M', "Mount Mode", mountModalKeys)
 end
--- }}} PersonalLaptop --
 
 -- }}} Mod-M: Modal hotkey for Mounting --
 ------------------------------------------------------------
@@ -563,7 +565,7 @@ appkeys.register("zoom.us",
     hs.hotkey.new(modifiers.shift, "Down", function() Zoom.stopVideo() end)
   })
 
-if PersonalLaptop then
+if config["HIARCSMinimize"] then
   -- Remap Meta-M for HIARCS to minimize
   appkeys.register("HIARCS Chess Explorer",
     {
@@ -575,7 +577,7 @@ if PersonalLaptop then
     })
 end
 
-if WorkLaptop then
+if config["emailMoveMode"] then
 
   local emailMoveKeys = {
     P = {
@@ -612,6 +614,9 @@ if WorkLaptop then
       hs.hotkey.new(modifiers.ctrl, "s", function() emailMoveMode:enter() end),
       hs.hotkey.new(modifiers.ctrl, "t", function() outlook:forward() end)
     })
+end
+
+if config["MSTeams"] then
   appkeys.register("Microsoft Teams",
     {
       -- I don't know a good way of telling a Teams Meeting window from non-Meeting window.

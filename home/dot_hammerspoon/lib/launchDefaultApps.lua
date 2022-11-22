@@ -1,6 +1,8 @@
 -- Launch my default applications
 local module = {}
 
+local config = MyConfig["launchDefaultApps"] or {}
+
 -- Set up logger for module
 local log = hs.logger.new("LaunchDefaultApps", "info")
 module.log = log
@@ -30,15 +32,8 @@ end
 
 local function launch()
   module.log.i("Launching default applications")
-  launchIfNotOpen("com.googlecode.iterm2")
-  launchIfNotOpen("com.google.Chrome")
-  -- TODO: Open Chrome personas
-  if PersonalLaptop then
-    -- TODO
-  elseif WorkLaptop then
-    launchIfNotOpen("com.apple.mail")
-    launchIfNotOpen("com.tinyspeck.slackmacgap")
-    launchIfNotOpen("com.hnc.Discord")
+  for _,app in ipairs(config["apps"]) do
+    launchIfNotOpen(app)
   end
 end
 

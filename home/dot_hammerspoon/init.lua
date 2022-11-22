@@ -196,23 +196,7 @@ loadJSONFiles(configPath)
 if MyConfig['Zoom'] then
   -- May be nil
   defaultZoomMeetingId = MyConfig['Zoom']['defaultZoomId']
-end
-
--- Configuration options based on hostname
-
-local hostname = hs.host.localizedName()
-if hostname == "Vons-WL" then
-  defaultChromePersona="IU"
-  WorkLaptop = true
-else
-  WorkLaptop = false
-end
-
-if hostname == "Vons-PL" then
-  defaultChromePersona="Personal"
-  PersonalLaptop = true
-else
-  PersonalLaptop = false
+  defaultChromePersona = MyConfig['Chrome']['defaultPersona']
 end
 
 loadLUAFiles(localConfigPath)
