@@ -223,8 +223,8 @@ local smallExternalConfig = {
   title = "Small External Context",
   inherits = baseContext,
   enterFunction = function() displayplacer(
-      "id:37D8832A-2D66-02CA-B9F7-8F30A301B230 res:1440x900 hz:60 color_depth:8 scaling:on origin:(0,0) degree:0",
-      "id:3A77959F-10AD-9A27-0857-D6964E3302DB res:1920x1080 hz:60 color_depth:8 scaling:off origin:(-1920,-180) degree:0"
+      "id:3A77959F-10AD-9A27-0857-D6964E3302DB res:1920x1080 hz:60 color_depth:8 scaling:off origin:(0,0) degree:0",
+      "id:37D8832A-2D66-02CA-B9F7-8F30A301B230 res:1440x900 hz:60 color_depth:8 scaling:on origin:(1920,180) degree:0"
     ) end,
   apps = {
     {
