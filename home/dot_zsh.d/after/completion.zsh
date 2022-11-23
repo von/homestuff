@@ -1,16 +1,45 @@
 # Configuration related to completion
 # See http://zsh.sourceforge.net/Doc/Release/Completion-System.html
 
+# In after/ so it runs after load of fzf-tab via antigen
+
 # Complete and expand
 # Kudos: https://unix.stackexchange.com/a/171445/29832
 zstyle ':completion:*' completer _expand _complete
 
-# Show what is being completed
-# Kudos: https://thevaluable.dev/zsh-completion-guide-examples/
-zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
+# fzf-tab loaded by antigen in ~/.zshrc
+if test -n "${FZF_TAB_HOME}" ; then
+  # Kudos: https://github.com/Aloxaf/fzf-tab
+  # https://github.com/Aloxaf/fzf-tab/wiki/Configuration
+  
+  # disable sort when completing `git checkout`
+  zstyle ':completion:*:git-checkout:*' sort false
 
-# Group different types of results
-zstyle ':completion:*' group-name ''
+  # set descriptions format to enable group support
+  zstyle ':completion:*:descriptions' format '[%d]'
+
+  # set list-colors to enable filename colorizing
+  # Note this requires LS_COLORS from ../ls.zsh
+  # Kudos: https://superuser.com/a/314459/128341
+  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+  # switch group using left and right arrow keys
+  zstyle ':fzf-tab:*' switch-group LEFT RIGHT
+
+  if test -n "$TMUX" ; then
+    # Use tmux for completion
+    zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+  fi
+else
+  # Configuration when not using fzf-tab
+
+  # Show what is being completed
+  # Kudos: https://thevaluable.dev/zsh-completion-guide-examples/
+  zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
+
+  # Group different types of results
+  zstyle ':completion:*' group-name ''
+fi
 
 # Automatic menu completion for kill
 # Kudos: http://grml.org/zsh/zsh-lovers.html
