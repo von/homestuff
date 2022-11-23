@@ -74,3 +74,9 @@ latest() {
 #  * Executables are green instead of red
 #  * World-writable directories are bold blue
 export LSCOLORS=gxfxbxdxcxegedabagExEx
+
+# Linux LS_COLORS version
+# I used this to configure fzf-tab in after/completions.zsh
+# Generated from LSCOLORS by https://geoff.greer.fm/lscolors/
+# Kudos: https://superuser.com/a/314459/128341
+export LS_COLORS="di=36:ln=35:so=31:pi=33:ex=32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=1;34:ow=1;34"
