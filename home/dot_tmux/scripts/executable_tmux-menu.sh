@@ -11,6 +11,9 @@ SELF="$0"
 MENU="${1:-DEFAULT}"
 ARGS=""
 
+# Session name of popup session
+POPUP_SESSION="popup"
+
 case "$MENU" in
   DEFAULT)
     tmux display-menu -T "#[align=centre] TMUX Menu" $ARGS \
@@ -72,24 +75,30 @@ case "$MENU" in
     ;;
 
   SESSIONS)  # Create dynamic list of active and tmuxp sessions
-    # Create list of tmuxp sessions, filtering out my "popup" session
-    _tmuxp_sessions=$(cd ~/.tmuxp/ ; \
-      find . -name \*.yaml -print | \
-      cut -c 3- | sed -e 's/\(.*\)\.yaml/\1/' | \
-      sort | grep -v "popup" )
-    # Create list of active sessions, filtering out my "popup" session
-    _active_sessions=$(tmux list-sessions -F '#{session_name}' | sort | \
-      grep -v "popup" )
-    _menu="tmux display-menu -T \"Choose session\" $ARGS "
-    _menu+="\"*previous*\" \"\" \"switch-client -l\" "
-    for s in ${_active_sessions} ; do
-      _menu+="\"${s}\" \"\" \"switch-client -t ${s}\" "
-    done
-    _menu+="\"\" "
-    _menu+="\"-Start tmuxp session\" \"\" \"\" "
-    for s in ${_tmuxp_sessions} ; do
-      _menu+="\"${s}\" \"\" \"run-shell \\\"tmuxp load -y ${s} > /dev/null\\\"\" "
-    done
+    _current_session=$(tmux display-message -p '#S')
+      _menu="tmux display-menu -T \"Choose session\" $ARGS "
+    if test "${_current_session}" = "${POPUP_SESSION}" ; then
+      _menu+="\"*Close popup*\" \"\" \"run-shell \\\"tmuxp-popup -t ${POPUP_SESSION}\\\"\" "
+    else
+      # Create list of tmuxp sessions, filtering out popup session
+      _tmuxp_sessions=$(cd ~/.tmuxp/ ; \
+        find . -name \*.yaml -print | \
+        cut -c 3- | sed -e 's/\(.*\)\.yaml/\1/' | \
+        sort | grep -v "${POPUP_SESSION}" )
+      # Create list of active sessions, filtering out popup session
+      _active_sessions=$(tmux list-sessions -F '#{session_name}' | sort | \
+        grep -v "${POPUP_SESSION}" )
+      _menu+="\"*previous*\" \"\" \"switch-client -l\" "
+      _menu+="\"*popup*\" \"\" \"run-shell \\\"tmuxp-popup -t ${POPUP_SESSION}\\\"\" "
+      for s in ${_active_sessions} ; do
+        _menu+="\"${s}\" \"\" \"switch-client -t ${s}\" "
+      done
+      _menu+="\"\" "
+      _menu+="\"-Start tmuxp session\" \"\" \"\" "
+      for s in ${_tmuxp_sessions} ; do
+        _menu+="\"${s}\" \"\" \"run-shell \\\"tmuxp load -y ${s} > /dev/null\\\"\" "
+      done
+    fi
     _menu+="\"\" \"Back\" x \"run-shell \\\"${SELF} DEFAULT\\\"\""
     eval "${_menu}"
     ;;
