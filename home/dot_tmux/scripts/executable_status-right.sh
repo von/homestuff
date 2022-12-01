@@ -34,9 +34,13 @@ fi
 status="[$(hostname)"
 
 if=$(echo 'show State:/Network/Global/IPv4' | scutil |  awk '/PrimaryInterface/ {print $3}')
-debug "Interface is ${if}"
-ipaddr=$(ifconfig ${if} | awk '/inet / {print $2}')
-status+="/${ipaddr}"
+if test -n "${if}"; then
+  debug "Interface is ${if}"
+  ipaddr=$(ifconfig ${if} | awk '/inet / {print $2}')
+  status+="/${ipaddr}"
+else
+  status+="/No interface"
+fi
 
 ssid=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | awk '/ SSID/ {print substr($0, index($0, $2))}')
 if test -n "${ssid}"; then
