@@ -59,7 +59,7 @@ vis() {
 
 # zsh completion code for vis()
 function _completevis {
-  reply=($(ls $VI_SESSION_PATH))
+  reply=($(\ls $VI_SESSION_PATH))
 }
 
 compctl -K _completevis vis

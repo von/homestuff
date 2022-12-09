@@ -35,8 +35,8 @@ alias wtf="uptime; ps axwww -r -o pid,%cpu,%mem,comm | cut -c 1-${COLUMNS} | hea
 alias alert='echo \#\#\#ALERT: $*'
 
 alias te='to-env'  # From to-env.sh
-alias downloads='to-env -p d "ls -1t ~/Downloads/* | head -10"'
-alias dl='to-env -p d "ls -1t ~/Downloads/* | head -10"'
+alias downloads='to-env -p d "\ls -1t ~/Downloads/* | head -10"'
+alias dl='to-env -p d "\ls -1t ~/Downloads/* | head -10"'
 
 alias wg='wget --no-check-certificate'
 

@@ -5,7 +5,7 @@ _last_download() {
   local path filename
   # XXX Tilde not supported here
   path="${HOME}/Downloads/"
-  filename=$(/bin/ls -t "${path:a}" | /usr/bin/head -1)
+  filename=$(\ls -t "${path:a}" | /usr/bin/head -1)
   # XXX Check for non-existant file
   path=${path}/${filename}
   # Add space to end of current commandline if needed

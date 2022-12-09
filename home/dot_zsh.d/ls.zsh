@@ -7,45 +7,57 @@
 (( ${+aliases[ls]} )) && unalias ls
 (( ${+aliases[ll]} )) && unalias ll
 
-# List char after name showing type (-F)
-ls_options="-F"
-ll_options=""
+# Use 'exa' if available
+# https://the.exa.website/
 
-case $OSTYPE in
-  darwin*)
-    # Mac-specific arguments
-    # Colorized outpit (-G)
-    # Non-printables as \xxx (-B)
-    ls_options+=" -GB"
+if (( $+commands[exa] )) ; then
+  ls="exa"
+  ls_options="-F --git"
+  ll_options=""
+else
+  ls="ls"
+  # List char after name showing type (-F)
+  ls_options="-F"
+  # Multi-column (-C)
+  ls_options+=" -C"
 
-    # unit suffixes (-h)
+  ll_options=""
+
+  case $OSTYPE in
+    darwin*)
+      # Mac-specific arguments
+      # Colorized outpit (-G)
+      # Non-printables as \xxx (-B)
+      ls_options+=" -GB"
+
+      # unit suffixes (-h)
+      ls_options+=" -h"
+      ;;
+
+    *)
+      ;;
+  esac
+
+  # Is this GNU ls?
+  ls --version > /dev/null 2>&1
+
+  if test $? -eq 0; then
+    # Turn on color
+    ls_options+=" --color=auto"
+
+    # Dont display backup files (ending in ~)
+    ls_options+=" -B"
+
+    # Show human-readable sizes
     ls_options+=" -h"
-    ;;
-
-  *)
-    ;;
-esac
-
-# Is this GNU ls?
-ls --version > /dev/null 2>&1
-
-if test $? -eq 0; then
-  # Turn on color
-  ls_options+=" --color=auto"
-
-  # Dont display backup files (ending in ~)
-  ls_options+=" -B"
-
-  # Show human-readable sizes
-  ls_options+=" -h"
+  fi
 fi
 
-# Multi-column (-C)
-alias ls="ls -C ${ls_options}"
-alias l="ls"
+alias ls="\${ls} ${ls_options}"
+alias l="\${ls}"
 
 # List long (-l)
-alias ll="\ls -l ${ls_options} ${ll_options}"
+alias ll="\${ls} -l ${ls_options} ${ll_options}"
 
 # List all (-A)
 alias la="ls -A ${ls_options}"
@@ -62,7 +74,7 @@ latest() {
   # to terminal.
   local CLICOLOR_FORCE=X
   export CLICOLOR_FORCE
-  ll -ltH ${_path} | head -10
+  \ls -ltH ${_path} | head -10
 }
 
 # Colors for colorized output
@@ -80,3 +92,10 @@ export LSCOLORS=gxfxbxdxcxegedabagExEx
 # Generated from LSCOLORS by https://geoff.greer.fm/lscolors/
 # Kudos: https://superuser.com/a/314459/128341
 export LS_COLORS="di=36:ln=35:so=31:pi=33:ex=32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=1;34:ow=1;34"
+
+# Manual modifications for exa
+#  * Make dates white instead of dark blue
+#  * Git modified is bright blue instead of blue
+#  * User-write permission bit is yellow instead of red
+#  * User-write execution bit for non-regular files is yellow instead of green
+export EXA_COLORS="${LS_COLORS}:da=37:gm=1;34:uw=33:ue=33"

@@ -17,7 +17,7 @@ alias pb=paste
 # zsh completion code
 function _completepastes {
   if test -d "$PASTESPATH"; then
-    reply=($(ls $PASTESPATH))
+    reply=($(\ls $PASTESPATH))
   else
     reply=""
   fi

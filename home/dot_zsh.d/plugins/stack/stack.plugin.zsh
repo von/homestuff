@@ -12,7 +12,7 @@
 pop() {
   _path=~/.stacks/default/
   test -d $_path || return 1
-  _latest=$( cd $_path; ls -1 | tail -1)
+  _latest=$( cd $_path; \ls -1 | tail -1)
   test -n "$_latest" || return 1
   (cd $_path && cat $_latest && rm -f $_latest) || return 1
   return 0
@@ -26,7 +26,7 @@ pop() {
 push() {
   _path=~/.stacks/default/
   test -d $_path || mkdir -p ${_path}
-  _latest=$(cd $_path; ls -1 | tail -1)
+  _latest=$(cd $_path; \ls -1 | tail -1)
   test -n "$_latest" || _lastest=0
   test "$_lastest" = "99999" && { echo "Overflow" 1>&2 ; return 1 }
   _latest=$(printf "%05d" $(($_latest+1)))
