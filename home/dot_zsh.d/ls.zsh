@@ -14,6 +14,7 @@ if (( $+commands[exa] )) ; then
   ls="exa"
   ls_options="-F --git"
   ll_options=""
+  la_optoons="-a"
 else
   ls="ls"
   # List char after name showing type (-F)
@@ -22,6 +23,7 @@ else
   ls_options+=" -C"
 
   ll_options=""
+  la_optoons="-A"
 
   case $OSTYPE in
     darwin*)
