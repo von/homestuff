@@ -60,8 +60,8 @@ alias l="\${ls}"
 alias ll="\${ls} -l ${ls_options} ${ll_options}"
 
 # List all (-A)
-alias la="ls -A ${ls_options}"
-alias lal="ll -A ${ls_options} ${ll_optons}"
+alias la="ls ${la_options} ${ls_options}"
+alias lal="ll ${la_options} ${ls_options} ${ll_optons}"
 
 # Follow symbolic links (-H)
 alias L="ls -H"
