@@ -90,6 +90,7 @@ case "$MENU" in
         grep -v "${POPUP_SESSION}" )
       _menu+="\"*previous*\" \"\" \"switch-client -l\" "
       _menu+="\"*popup*\" \"\" \"run-shell \\\"tmuxp-popup -t ${POPUP_SESSION}\\\"\" "
+
       for s in ${_active_sessions} ; do
         _menu+="\"${s}\" \"\" \"switch-client -t ${s}\" "
       done
@@ -98,6 +99,7 @@ case "$MENU" in
       for s in ${_tmuxp_sessions} ; do
         _menu+="\"${s}\" \"\" \"run-shell \\\"tmuxp load -y ${s} > /dev/null\\\"\" "
       done
+      _menu+="\"*New from scratch*\" \"\" \"command-prompt -p \\\"Name of new session: \\\" \\\"new-session -c ~ -n '%1' -s '%1'\\\"\" "
     fi
     _menu+="\"\" \"Back\" x \"run-shell \\\"${SELF} DEFAULT\\\"\""
     eval "${_menu}"
