@@ -9,12 +9,7 @@ SETUP_PATH=${HOME}/develop/mac-config/setup.sh
 maint() {
   (  # Run in subshell to avoid tainting caller environment
     if test -n "${VIRTUAL_ENV}" ; then
-      if test -f ~/bin/virtualenv-deactivate.sh ; then
-        source ~/bin/virtualenv-deactivate.sh
-      else
-        echo "virtualenv-deactivate.sh not found."
-        exit 1
-      fi
+      deactivate || { echo "Failed to deactivate virtual." ; exit 1 ; }
     fi
 
     if test ! -x "${SETUP_PATH}" ; then
