@@ -26,12 +26,6 @@
 
 ######################################################################
 # Personal systems
-#
-Host casey
-  Hostname 192.168.2.10
-  User von
-  ForwardX11 yes
-  ForwardAgent yes
 
 # Synology NAS
 # For directions on setting up SSH access see:
