@@ -83,48 +83,11 @@ Host github.com
   PasswordAuthentication No
 
 ######################################################################
-# Virtual machines
-#
-# Kudos: http://muffinresearch.co.uk/archives/2010/02/08/howto-ssh-into-virtualbox-3-linux-guests/
-
-# Work laptop
-Host osg-pki-vm
-  Hostname 192.168.56.10
-  User von
-
-######################################################################
-# IU systems
-#
-
-Host gocbox
-  Hostname gocbox.grid.iu.edu
-  User vwelch
-
-######################################################################
-# FNAL
-#
-
-Host *.fnal.gov
-  User vwelch
-  # Enable use of Kerberos credentials
-  GssapiDelegateCredentials yes
-  GSSAPIAuthentication yes
-
-######################################################################
 # UUCB (Dreamhost)
 #
 
 Host uubloomington.org
   User uucb
-
-######################################################################
-# SWAMP
-#
-# Use 'passwd' to change password.
-# SSH pubkey must be registered with SWAMP LDAP
-
-Host swamp
-  Hostname swa-node1.cosalab.org
 
 ######################################################################
 # Default
