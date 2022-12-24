@@ -3,7 +3,8 @@
 # Given a list of paths in the JUMP_TARGETS array, use completion to let me
 # cd to them quickly.
 
-typeset -a JUMP_TARGETS
+# Make global, otherwise changes in .jump_targets aren't incorporated on reload
+typeset -a -g JUMP_TARGETS
 # https://zsh.sourceforge.io/Doc/Release/Zsh-Modules.html#The-zsh_002fmapfile-Module
 zmodload zsh/mapfile
 
