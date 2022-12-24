@@ -4,7 +4,7 @@
 -- Load required modules {{{ --
 local appkeys = require("appkeys")
 local applauncher = require("applauncher")
-local applemail = hs.loadSpoon("Email").AppleMail()
+local gmail = hs.loadSpoon("Email").GMail()
 local chrome = require("chrome")
 local cchooser = require("CommandChooser")
 -- Don't use loadSpoon() here to preserve state from ../config/contexts.lua
@@ -42,7 +42,7 @@ local Zoom = require("Zoom")
 local config = MyConfig['hotkeys'] or {}
 ------------------------------------------------------------
 -- Set default email interface
-local defaultEmail = applemail
+local defaultEmail = gmail
 defaultEmail:useHTMLforCompose(false)  -- Use 'true' for New Outlook
 ------------------------------------------------------------
 -- Configure Modal Spoon
