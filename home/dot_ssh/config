@@ -40,6 +40,11 @@ Host emmacrate
   User von
   Hostname 192.168.1.23
 
+# Home assistant
+Host ha
+  User von
+  Hostname 192.168.1.24
+
 # Dreamhost
 Host git.vwelch.com
   User vwelch
