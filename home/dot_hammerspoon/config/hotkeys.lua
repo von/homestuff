@@ -433,6 +433,10 @@ local utilModalKeys = {
     func = hs.caffeinate.lockScreen,
     desc = "Lock Screen"
   },
+  M = {
+    func = function() WW:mute() end,
+    desc = "Mute WatcherWatcher flashers"
+  },
   N = {
     func = util.checknetwork,
     desc = "Check Network"
