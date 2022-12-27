@@ -20,4 +20,11 @@ autostash VIM_SESSION=cd-utils
 autostash ABCDE_CONF=__PATH__/abcde.conf
 autostash PATH="__PATH__:${PATH}"
 
+# Beets configuration: https://beets.io/
+autostash BEETSDIR=__PATH__/beets/
+# Show all albums imported as is
+# https://beets.readthedocs.io/en/stable/faq.html#find-all-the-albums-i-imported-as-is
+# autostash beets_as_is
+# beets_as_is() { beet ls -a mb_albumid::^$ }
+
 smartcd_virtualenv_activate ${WORKON_HOME}/cd-utils
