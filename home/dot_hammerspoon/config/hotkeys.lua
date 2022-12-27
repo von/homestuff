@@ -285,7 +285,7 @@ local emailModalKeys = {
   },
   U = {
     func = util.getmailurl,
-    desc = "Copy Mail message URL to clipboard"
+    desc = "Copy Apple Mail message URL to clipboard"
   },
 }
 
