@@ -85,7 +85,7 @@ let vim_markdown_preview_hotkey='<leader>mP'
 
 if !has("gui_running")
   " Open file finder
-  
+
   " Run GFiles if we are in a git repo, otherview Files
   function! FilesOrGFiles()
     let discard = system("git status")
