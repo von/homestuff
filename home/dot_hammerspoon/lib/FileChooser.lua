@@ -35,10 +35,11 @@ function FileChooser.go(self, callback, errorcallback)
   if not errorcallback then
     errorcallback = hs.alert
   end
-  local iter, data = hs.fs.dir(path)
-  if iter == nil then
-    errorcallback("Path " .. path .. " does not exist.")
-    return
+  local status, err = pcall(function() hs.fs.dir(path) end)
+  if not status then
+    self.log.ef("Cannot read path: %s", err)
+    hs.alert("Cannot read " .. path)
+    return nil
   end
   local choices = {}
   for file in hs.fs.dir(path) do
