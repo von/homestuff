@@ -77,9 +77,9 @@ Plug 'kana/vim-textobj-line'
 " to be after this plugin, namely securemodelines
 Plug 'klen/python-mode'
 
-" Following requires ctags-exuberant from ctags.sourceforge.net
-"   (On mac: brew install ctags-exuberant)
-Plug 'majutsushi/tagbar'
+" https://github.com/preservim/tagbar
+" Formerly 'majutsushi/tagbar'
+Plug 'preservim/tagbar'
 
 " For BDelete
 Plug 'moll/vim-bbye'
