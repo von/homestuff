@@ -4,7 +4,9 @@
 _fzf_download_widget() {
   local selected
   # Combination of '-d' and '--with-nth=-1' prunes path from displayed files
-  selected=$(\ls -1t ~/Downloads/* | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS" fzf -d / --with-nth=-1)
+  selected=$(\ls -1t ~/Downloads/* | \
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS" \
+    fzf -d / --with-nth=-1 --preview="ls -l {}" --preview-window=top:2 )
   if test -n "${selected}" ; then
     # Quote and clean up path
     LBUFFER=${LBUFFER}${(q)selected:a}
