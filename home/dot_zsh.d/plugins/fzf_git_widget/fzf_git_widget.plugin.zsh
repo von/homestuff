@@ -2,7 +2,6 @@
 #
 # Widget to use fzf to select a git commit
 # Kudos: https://gist.github.com/junegunn/f4fca918e937e6bf5bad
-# TODO: Key bindigs to scroll preview
 _fzf_git_commit_widget() {
   # Make sure we're in a git repo
   [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1
@@ -11,6 +10,7 @@ _fzf_git_commit_widget() {
   local selected=$( \
     git log --pretty=oneline --abbrev-commit --color=always --decorate=full  | \
     fzf --no-sort --ansi \
+      --bind=right:preview-page-down,left:preview-page-up \
       --preview="git show --color=always \$(echo {} | cut -d ' ' -f 1)" \
       --preview-window=top:50% |\
     cut -d ' ' -f 1  )
