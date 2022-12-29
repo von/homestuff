@@ -124,8 +124,8 @@ endif
 "      and drops us to shell. See https://github.com/jonas/tig/issues/906
 :map <leader>t :call Tig()<cr>
 
-" Toggle ctags
-:map <leader>T :TagbarToggle<cr>
+" Open tagbar, jump to it, and close when done
+:map <leader>T :TagbarOpenAutoClose<cr>
 
 if !has("gui_running")
   :map <leader>v :silent !vifm<cr>:redraw!<cr>
@@ -241,6 +241,11 @@ nnoremap <silent> <Leader>> 83<C-W><Bar>
 " Note this requires terminal to ignore C-s
 " http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files
 :map <C-s> <C-B>
+
+" Kudos: https://stackoverflow.com/a/563992/197789
+" C-] jumps to function under cursor via ctags
+" Ctrl+T - Jump back from the definition.
+" Ctrl+W Ctrl+] - Open the definition in a horizontal split
 
 " Control characters }}}
 
