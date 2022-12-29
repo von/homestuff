@@ -77,6 +77,10 @@ Plug 'kana/vim-textobj-line'
 " to be after this plugin, namely securemodelines
 Plug 'klen/python-mode'
 
+" Automatically create tags files
+" https://github.com/ludovicchabant/vim-gutentags
+Plug 'ludovicchabant/vim-gutentags'
+
 " https://github.com/preservim/tagbar
 " Formerly 'majutsushi/tagbar'
 Plug 'preservim/tagbar'
