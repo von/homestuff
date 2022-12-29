@@ -8,8 +8,9 @@ _fzf_git_commit_widget() {
   [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1
   test $? -ne 0 && return
 
-  local selected=$( git log --pretty=oneline --abbrev-commit | \
-    fzf --no-sort \
+  local selected=$( \
+    git log --pretty=oneline --abbrev-commit --color=always --decorate=full  | \
+    fzf --no-sort --ansi \
       --preview="git show --color=always \$(echo {} | cut -d ' ' -f 1)" \
       --preview-window=top:50% |\
     cut -d ' ' -f 1  )
