@@ -14,6 +14,11 @@ ARGS=""
 # Session name of popup session
 POPUP_SESSION="popup"
 
+# If true, use fzf for sessions menu
+USE_FZF="true"
+# Path to tmux-tree.sh, used for fzf preview
+TMUX_PREVIEW=$(dirname "${SELF}")/tmux-preview.sh
+
 case "$MENU" in
   DEFAULT)
     tmux display-menu -T "#[align=centre] TMUX Menu" $ARGS \
@@ -80,6 +85,10 @@ case "$MENU" in
     if test "${_current_session}" = "${POPUP_SESSION}" ; then
       _menu+="\"*Close popup*\" \"\" \"run-shell \\\"tmuxp-popup -t ${POPUP_SESSION}\\\"\" "
     else
+      if test "${USE_FZF}" = "true" ; then
+        tmux display-popup -E "${SELF} SESSIONS-FZF"
+        exit $?
+      fi
       # Create list of tmuxp sessions, filtering out popup session
       _tmuxp_sessions=$(cd ~/.tmuxp/ ; \
         find . -name \*.yaml -print | \
@@ -103,6 +112,27 @@ case "$MENU" in
     fi
     _menu+="\"\" \"Back\" x \"run-shell \\\"${SELF} DEFAULT\\\"\""
     eval "${_menu}"
+    ;;
+
+  SESSIONS-FZF)
+    # Called by SESSIONS and runs a fzf-based sessions menu inside of a
+    # tmux pop-up.
+
+    # Create list of tmuxp sessions, filtering out popup session
+    _tmuxp_sessions=$(cd ~/.tmuxp/ ; \
+      find . -name \*.yaml -print | \
+      cut -c 3- | sed -e 's/\(.*\)\.yaml/\1/' | \
+      grep -v "${POPUP_SESSION}" )
+    # Create list of active sessions, filtering out popup session
+    _active_sessions=$(tmux list-sessions -F '#{session_name}' | \
+      grep -v "${POPUP_SESSION}" )
+    echo -e "${_tmuxp_sessions}\n${_active_sessions}\n*Last*" | \
+      sort | uniq | \
+      fzf --preview="${TMUX_PREVIEW} -p {}" --preview-window=up | { \
+        read SELECTION ; \
+        test "${SELECTION}" = "*Last*" && tmux switch-client -l ; \
+        test -n "${SELECTION}" && tmux switch-client -t ${SELECTION} ; \
+      }
     ;;
 
   WINDOWS)
