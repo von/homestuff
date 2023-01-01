@@ -446,6 +446,12 @@ nnoremap <silent> gx :!open <cWORD><CR>:redraw!<CR>
 
 " }}} Fix broken gx
 
+" 'yf' to copy file/url {{{ "
+" Kudos: https://vi.stackexchange.com/a/27572/2881
+" Kudos: https://vi.stackexchange.com/a/24840/2881
+nnoremap <silent> yf :let @* = expand('<cfile>') \| :echom 'Copied'<CR>
+" }}} 'yf' to copy file/url "
+
 " Shift-arrows for when not in tmux {{{ "
 " This includes running in MacVim
 if empty($TMUX)
