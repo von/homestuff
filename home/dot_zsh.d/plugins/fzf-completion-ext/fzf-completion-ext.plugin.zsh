@@ -137,9 +137,15 @@ END
   _fzf_feed_fifo "$fifo"
 
   [[ -n "${FZF_COMPLETION_EXT_OPTS}" ]] && fzf_opts="$FZF_COMPLETION_EXT_OPTS ${fzf_opts}"
+  eval "fzf_opts_array=(${fzf_opts})"
+
+  # __fzfcomprun usage: <cmd> <tmux options...>
+  #   Will then run fzf or fzf-tmux as appropriate
+  #   <cmd> seems to be ignored based on my examining the source code
+  #   https://github.com/junegunn/fzf/blob/master/shell/completion.zsh
 
   matches=$(cat "$fifo" | \
-    __fzf_comprun ${=fzf_opts} -q "${(Q)query}" | \
+    __fzf_comprun "ignored cmd" ${query:+-q ${query}} ${fzf_opts_array} | \
     eval ${post} | \
     tr '\n' ' ' | \
     sed "s/ \$//" )
