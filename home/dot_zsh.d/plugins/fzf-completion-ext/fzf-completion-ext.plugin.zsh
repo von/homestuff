@@ -123,7 +123,9 @@ END
       o) fzf_opts="${OPTARG}" ;;
       p) post="${OPTARG}" ;;
       P) prepend="${OPTARG}" ;;
-      q) query="${OPTARG}" ;;
+      q) # Trim leading and trailing whitespace.
+         # Kudos: https://stackoverflow.com/a/3232433/197789
+        query="$(echo -e "${OPTARG}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')" ;;
       \?) echo "Invalid option: -$OPTARG" >&2 ;;
     esac
   done
@@ -142,7 +144,8 @@ END
     tr '\n' ' ' | \
     sed "s/ \$//" )
   if [ -n "$matches" ]; then
-    LBUFFER="${lbuf}${prepend}${(j. .)${(q)matches}}${append}"
+    # Remove query string from end of LBUFFER then append match
+    LBUFFER="${lbuf%${query}}${prepend}${(j. .)${(q)matches}}${append}"
   fi
   zle reset-prompt
   command rm -f "$fifo"
