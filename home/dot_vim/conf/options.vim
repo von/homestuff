@@ -52,3 +52,7 @@ set autoread
 "let g:netrw_list_hide= '.*\.swp$,.*\.swo$'
 set wildignore+=*.swp
 set wildignore+=*.swo
+
+" Include dashes in keywords for matching, completion, etc.
+" Default is @,48-57,_,192-255
+set iskeyword=@,48-57,_,-,192-255
