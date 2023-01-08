@@ -30,7 +30,7 @@ FZF_COMPLETION_DIR_COMMANDS=""
 # Fuzzy-cd
 fd() {
   local dir
-  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+  dir=$(find ${1:-.} -type d 2 -name .git -prune -o print > /dev/null | fzf +m) && cd "$dir"
 }
 
 # Fuzzy word look up
