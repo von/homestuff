@@ -126,6 +126,7 @@ case "$MENU" in
     # Create list of active sessions, filtering out popup session
     _active_sessions=$(tmux list-sessions -F '#{session_name}' | \
       grep -v "${POPUP_SESSION}" )
+    # FYI: 'tmux switch-client -l' is a no-op if no last session
     echo -e "${_tmuxp_sessions}\n${_active_sessions}\n*Last*" | \
       sort | uniq | \
       fzf --preview="${TMUX_PREVIEW} -p {}" --preview-window=up | { \

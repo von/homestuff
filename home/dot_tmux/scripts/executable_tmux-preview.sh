@@ -106,6 +106,10 @@ SESSION="$1"
 
 if test "${SESSION}" == '*Last*' ; then
   SESSION=$(tmux display-message -p "#{client_last_session}")
+  if test -z "${SESSION}" ; then
+    echo "No last session."
+    exit 0
+  fi
 fi
 
 case "${mode}" in
