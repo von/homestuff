@@ -109,8 +109,8 @@ if test "${SESSION}" == '*Last*' ; then
 fi
 
 case "${mode}" in
-  single) single_mode "${SESSION}" ;; 
-  tree) tree_mode "${SESSION}" ;; 
+  single) single_mode "${SESSION}" ;;
+  tree) tree_mode "${SESSION}" ;;
   *) echo "Unknown mode \"${mode}\"" ;;
 esac
 
