@@ -132,7 +132,10 @@ case "$MENU" in
       fzf --preview="${TMUX_PREVIEW} -p {}" --preview-window=up | { \
         read SELECTION ; \
         test "${SELECTION}" = "*Last*" && tmux switch-client -l ; \
-        test -n "${SELECTION}" && tmux switch-client -t ${SELECTION} ; \
+        if test -n "${SELECTION}" ; then \
+          tmux has-session -t ${SELECTION} || tmuxp load -y -d ${SELECTION} ; \
+          tmux switch-client -t ${SELECTION} ; \
+        fi ;\
       }
     ;;
 
