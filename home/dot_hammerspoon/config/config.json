@@ -16,7 +16,7 @@
     "apps" : [ "com.googlecode.iterm2", "com.google.Chrome" ]
   },
   "URLDispatcher": {
-    "debugLevel" : "debug",
+    "debugLevel" : "info",
     "defaultHandler" : "com.google.Chrome",
     "redirectTeams" : false,
     "useURLOpener" : false
