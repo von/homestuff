@@ -51,14 +51,6 @@
         merge = refs/heads/develop
 [core]
         excludesfile = ~/.gitconf/gitignore
-        # Turn off termcap initialization in less since this clears the screen
-        # if we have less than one screen of output and due to the fact we have
-        # -F set in LESS.
-        # XXX Note this means I cannot control less with the mouse when
-        # invoked from git. The other option is to disable -F (-+F) here
-        # but then less doesn't exit with less than a full screen which I
-        # find more annoying.
-        pager = less -X
 [color]
         # Default is for colors to terminal, not if to a pipe
         ui = auto
