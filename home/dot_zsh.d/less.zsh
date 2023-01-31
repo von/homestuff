@@ -7,7 +7,7 @@ export PAGER=less
 export LESSCHARSET='utf-8'
 
 # Options passed to less:
-#  -i  Ignore case on searchers
+#  -i  Ignore case on searches
 #  -j  Set lines above search results
 #  -w  Highlight first "new" line after forward move
 #  -z  Set default scroll (z-4 = windowsize - 4 lines)
