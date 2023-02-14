@@ -5,6 +5,6 @@ function date() {
     # Specify format to date (add GMT offset)
     command date +"%a %h %e %T %Z (%z) %Y"
   else
-    command date "$*"
+    command date ${(q)@}
   fi
 }
