@@ -53,4 +53,10 @@ if test $(uname) = "Darwin" ; then
     PASSWORD=$1; shift
     networksetup -setairportnetwork en0 "${SSID}" "${PASSWORD}"
   }
+  wifi-mill-guest() {
+    test $# -ne 1 && { echo "Usage: $0 PASSWORD" ; return 1 ; }
+    SSID="The Mill-GUESTS"
+    PASSWORD=$1; shift
+    networksetup -setairportnetwork en0 "${SSID}" "${PASSWORD}"
+  }
 fi
