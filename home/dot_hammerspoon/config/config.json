@@ -2,6 +2,9 @@
   "Chrome" : {
     "defaultPersona" : "Personal"
   },
+  "Contexts" : {
+    "debugLevel" : "info"
+  },
   "hotkeys" : {
     "AppleMail" : false,
     "Discord" : false,

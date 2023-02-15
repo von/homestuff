@@ -2,7 +2,6 @@
 
 Contexts = hs.loadSpoon("Contexts")
 Contexts:start()
-Contexts:debug(true)
 
 local logger = hs.logger.new("contexts")
 
