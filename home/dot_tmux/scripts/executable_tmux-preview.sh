@@ -32,16 +32,9 @@ display_session()
     echo "Unknown session: ${session_name}"
     return 1
   fi
-  # Display session name and information
-  tmux ls -f "#{==:#{session_id},${session_id}}" \
-    -F "#{session_name}: #{T:tree_mode_format}"
-  # Display all windows
-  tmux lsw -t "${session_id}" -F '#{window_id}' | while read -r w; do
-    W=$(tmux lsw -t "${session_id}" -F '#{window_id}#{T:tree_mode_format}' \
-      | grep ^"$w")
-    echo "  ﬌ ${W##$w}"
-  done
-
+  # Display contents of session's active pane. Kudos: tmux-fzf
+  # https://github.com/sainnhe/tmux-fzf/blob/master/scripts/.preview
+  tmux capture-pane -ep -t ${session_id}
 }
 
 # Display a full tree, with selected session highlighted.
