@@ -29,6 +29,17 @@ if test $(uname) = "Darwin" ; then
     fi
   }
 
+  # Get a file's Uniform Type Identifier (uti)
+  # For a list of uti:
+  # https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html
+  get-app-uti() {
+    if test $# -ne 1 ; then
+      echo "Usage: $0 <path>"
+      return 1
+    fi
+    mdls -name kMDItemContentType ${(q)1}
+  }
+
   # List all USB devices
   # Kudos: https://apple.stackexchange.com/a/170118/104604
   usb-list() {
