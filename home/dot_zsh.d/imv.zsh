@@ -8,7 +8,11 @@ imv() {
     [[ -e $src ]] || { print -u2 "$src does not exist"; continue }
     dst=$src
     vared dst
-    [[ $src != $dst ]] && mkdir -p $dst:h && mv -i $src $dst
+    if [[ $src != $dst ]] ; then
+      mkdir -p $dst:h && mv -i $src $dst
+    else
+      echo "File unchanged."
+    fi
   done
 }
 
@@ -19,6 +23,10 @@ icp() {
     [[ -e $src ]] || { print -u2 "$src does not exist"; continue }
     dst=$src
     vared dst
-    [[ $src != $dst ]] && mkdir -p $dst:h && cp -i $src $dst
+    if [[ $src != $dst ]] ; then
+      mkdir -p $dst:h && cp -i $src $dst
+    else
+      echo "File uncopied."
+    fi
   done
 }
