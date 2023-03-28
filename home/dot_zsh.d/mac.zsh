@@ -20,6 +20,12 @@ if test $(uname) = "Darwin" ; then
 
   # Given Application name, return identifier (e.g. com.apple.mail)
   # Kudos: https://robservatory.com/easily-see-any-apps-bundle-identifier/
+  #
+  # For a list of Apple applications identifiers:
+  # https://support.apple.com/guide/deployment/bundle-ids-for-native-ios-and-ipados-apps-depece748c41/web
+  #
+  # Can also use mdls, e.g.:
+  # mdls -name kMDItemCFBundleIdentifier -r <path to application>
   get-app-id() {
     if test $# -eq 1 ; then
       osascript -e "id of app \"${1}\""
