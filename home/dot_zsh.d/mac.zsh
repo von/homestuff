@@ -40,6 +40,25 @@ if test $(uname) = "Darwin" ; then
     mdls -name kMDItemContentType ${(q)1}
   }
 
+  # Given an extension, get the default app
+  # Uses 'duti' installed via Homebrew
+  # Kudos: https://superuser.com/a/1092184/128341
+  get-default-app() {
+    if test $# -ne 1 ; then
+      echo "Usage: $0 <suffix or uti>"
+      return 1
+    fi
+    duti -x ${1}
+  }
+
+  set-default-app() {
+    if test $# -ne 2 ; then
+      echo "Usage: $0 <app-id> <suffix or uti>"
+      return 1
+    fi
+    duti -s ${1} ${2} all
+  }
+
   # List all USB devices
   # Kudos: https://apple.stackexchange.com/a/170118/104604
   usb-list() {
