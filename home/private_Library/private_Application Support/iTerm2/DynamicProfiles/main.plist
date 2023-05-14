@@ -15,6 +15,7 @@
       "Rows": 50,
       "Columns": 201,
       "Disable Window Resizing" : true,
+      "Show Mark Indicators" : false,
     },
   ]
 }
