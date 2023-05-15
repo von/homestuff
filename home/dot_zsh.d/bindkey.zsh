@@ -87,15 +87,10 @@ bindkey -M viins '\ef'   forward-word      # Alt-f
 bindkey -M viins '\eb'   backward-word     # Alt-b
 bindkey -M viins '\ed'   kill-word         # Alt-d
 
-# Up/Down arrow: show history that matches current commandline
-# Kudos: https://dmerej.info/blog/post/fzf-for-the-win/
-# '-end' variant puts cursor at end of line
-# Kudos: https://unix.stackexchange.com/a/97844/29832
-autoload -U history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey -M viins '^[[A' history-beginning-search-backward-end
-bindkey -M viins '^[[B' history-beginning-search-forward-end
+# Up/Down arrow: scroll through history (default configuration)
+# (I don't care for the behavior of history-search-end)
+bindkey -M viins '^[[A' up-line-or-history
+bindkey -M viins '^[[B' down-line-or-history
 
 # }}} VI Mode Keybindings (ins)
 
