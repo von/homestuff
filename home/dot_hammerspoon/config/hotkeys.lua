@@ -84,10 +84,6 @@ local openAppModalKeys = {
     func = function() launchDefaultApps.launch() end,
     desc = "Launch default applications"
   },
-  V = {
-    func = applauncher.new("VOX"),
-    desc = "VOX"
-  },
   Z = {
     func = applauncher.new("zoom.us"),
     desc = "Zoom"
