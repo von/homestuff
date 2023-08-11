@@ -200,6 +200,10 @@ nnoremap <silent> <Leader>> 83<C-W><Bar>
 " Paste from system pastebuffer
 :map ,p "+p
 
+" Randomize text
+" Kudos: https://stackoverflow.com/a/25354351/197789
+:vnoremap ,R :'<,'>!sort -R<cr>
+
 " Clean up whitespace
 :map ,S :clean<cr>
 
