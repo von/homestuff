@@ -2,7 +2,7 @@
 
 augroup TerminalOptions
   autocmd!
-  " Disable line numbers as hey clutter normal mode
+  " Disable line numbers as they clutter normal mode
   if has("nvim")
     autocmd TermOpen * if &buftype == 'terminal' | setlocal nonumber | endif
   else
