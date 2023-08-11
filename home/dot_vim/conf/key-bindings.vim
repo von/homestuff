@@ -206,7 +206,7 @@ nnoremap <silent> <Leader>> 83<C-W><Bar>
 :map ,u :GundoToggle<cr>
 
 " Yank line to system pastebuffer
-" Note yy yanks line including carraige return which will screw up
+" Note yy yanks line including carriage return which will screw up
 " passwords! 'g_' is like '$' but without newline.
 " Kudos: http://stackoverflow.com/a/20165747/197789
 :map ,y ^vg_"+y
