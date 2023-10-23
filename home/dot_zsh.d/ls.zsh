@@ -13,8 +13,12 @@
 if (( $+commands[exa] )) ; then
   ls="exa"
   ls_options="-F --git"
-  ll_options=""
-  la_optoons="-a"
+
+  # Options for aliases
+  l_options="${ls_options}"
+  ll_options="${ls_options} -l"
+  la_optoons="-a ${ls_options}"
+  lal_optoons="${la_options}"
 else
   ls="ls"
   # List char after name showing type (-F)
@@ -22,8 +26,11 @@ else
   # Multi-column (-C)
   ls_options+=" -C"
 
-  ll_options=""
+  # Options for aliases
+  l_options="${ls_options}"
+  ll_options="${ls_options} -l"
   la_optoons="-A"
+  lal_optoons="${la_options}"
 
   case $OSTYPE in
     darwin*)
@@ -56,14 +63,14 @@ else
 fi
 
 alias ls="\${ls} ${ls_options}"
-alias l="\${ls}"
+alias l="\${ls} ${l_options}"
 
 # List long (-l)
-alias ll="\${ls} -l ${ls_options} ${ll_options}"
+alias ll="\${ls} ${ll_options}"
 
 # List all (-A)
-alias la="ls ${la_options} ${ls_options}"
-alias lal="ll ${la_options} ${ls_options} ${ll_optons}"
+alias la="ls ${la_options}"
+alias lal="ll ${lal_options}"
 
 # Follow symbolic links (-H)
 alias L="ls -H"
