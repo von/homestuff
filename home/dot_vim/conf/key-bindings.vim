@@ -157,8 +157,8 @@ map <Leader>tz :call VimuxZoomRunner()<CR>
 
 " }}}
 
-" Open tagbar, jump to it, and close when done
-:map <leader>T :TagbarOpenAutoClose<cr>
+" Use fzf to search tags
+:map <leader>T :Tags<cr>
 
 if !has("gui_running")
   :map <leader>v :silent !vifm<cr>:redraw!<cr>
