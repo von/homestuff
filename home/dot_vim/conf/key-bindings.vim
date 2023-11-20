@@ -115,14 +115,47 @@ endif
 " Toggle session menu
 :map <leader>S :call SessionMenu()<CR>
 
-" Run tig to do my git stuff
-"   silent turns off request for enter when tig is done, that requires
-"   refresh supplied by redraw.
-"   Call to GitGutter refreshes its symbols.
-" XXX: The GitGutter call here doesn't seem to be working
-" XXX: As of tig 2.4.1, if we are not in a git repo, this suspends vim
-"      and drops us to shell. See https://github.com/jonas/tig/issues/906
-:map <leader>t :call Tig()<cr>
+" {{{ vimux <leader>t key bindings to manipulate Tmux window
+
+" Use panes not windows (default)
+let g:VimuxRunnerType = "pane"
+
+" Open runner pane and focus on it.
+function! VimuxFocusRunner()
+  if exists("g:VimuxRunnerIndex")
+    call VimuxOpenRunner()
+    call VimuxTmux('select-'.VimuxOption('VimuxRunnerType').
+          \' -t '.g:VimuxRunnerIndex)
+  endif
+endfunction
+command! -bar VimuxFocusRunner :call VimuxFocusRunner()
+
+" Clear the terminal screen of the runner pane.
+map <Leader>tc :VimuxClearTerminalScreen<CR>
+
+ " Inspect runner pane
+ " Move into the tmux runner pane and enter copy pmode (scroll mode).
+ map <Leader>ti :VimuxInspectRunner<CR>
+
+ " Run last command executed by VimuxRunCommand
+ map <Leader>tl :VimuxRunLastCommand<CR>
+
+" Open tmux pane
+map <Leader>to :VimuxFocusRunner<CR>
+
+" Prompt for a command to run
+map <Leader>tp :VimuxPromptCommand<CR>
+
+" Close vim tmux runner opened by VimuxRunCommand
+map <Leader>tq :VimuxCloseRunner<CR>
+
+" Interrupt any command running in the runner pane
+map <Leader>tx :VimuxInterruptRunner<CR>
+
+" Zoom the runner pane
+map <Leader>tz :call VimuxZoomRunner()<CR>
+
+" }}}
 
 " Open tagbar, jump to it, and close when done
 :map <leader>T :TagbarOpenAutoClose<cr>
