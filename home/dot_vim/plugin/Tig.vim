@@ -7,7 +7,7 @@ function! Tig()
   if has ('nvim')
     :term tig status
   elseif has('terminal')
-    " Use Vim8 terminal with full-width splut at bottom
+    " Use Vim8 terminal with full-width split at bottom
     " XXX The colors aren't right
     :bot split
     :term ++close ++curwin tig status"
