@@ -115,47 +115,10 @@ endif
 " Toggle session menu
 :map <leader>S :call SessionMenu()<CR>
 
-" {{{ vimux <leader>t key bindings to manipulate Tmux window
-
-" Use panes not windows (default)
-let g:VimuxRunnerType = "pane"
-
-" Open runner pane and focus on it.
-function! VimuxFocusRunner()
-  if exists("g:VimuxRunnerIndex")
-    call VimuxOpenRunner()
-    call VimuxTmux('select-'.VimuxOption('VimuxRunnerType').
-          \' -t '.g:VimuxRunnerIndex)
-  endif
-endfunction
-command! -bar VimuxFocusRunner :call VimuxFocusRunner()
-
-" Clear the terminal screen of the runner pane.
-map <Leader>tc :VimuxClearTerminalScreen<CR>
-
- " Inspect runner pane
- " Move into the tmux runner pane and enter copy pmode (scroll mode).
- map <Leader>ti :VimuxInspectRunner<CR>
-
- " Run last command executed by VimuxRunCommand
- map <Leader>tl :VimuxRunLastCommand<CR>
-
-" Open tmux pane
-map <Leader>to :VimuxFocusRunner<CR>
-
-" Prompt for a command to run
-map <Leader>tp :VimuxPromptCommand<CR>
-
-" Close vim tmux runner opened by VimuxRunCommand
-map <Leader>tq :VimuxCloseRunner<CR>
-
-" Interrupt any command running in the runner pane
-map <Leader>tx :VimuxInterruptRunner<CR>
-
-" Zoom the runner pane
-map <Leader>tz :call VimuxZoomRunner()<CR>
-
-" }}}
+" Open a tmux popup with a given session name and starting with
+" root of current git repository as current directory.
+" Uses TmuxPopupGitroot() from ../conf/tmux.vim
+:map <leader>t :call TmuxPopupGitroot()<CR>
 
 " Use fzf to search tags
 :map <leader>T :Tags<cr>
