@@ -334,14 +334,11 @@ local pastebufferModalKeys = {
   },
   C = {
     func = function() util.pbwordcount() end,
-    desc = "Count words in Paste Buffer",
-    mods = {
-      {
-        mod = optionShift,
-        func = function() util.pbcharcount() end,
-        desc = "Count characters in Paste Buffer"
-      }
-    }
+    desc = "Count words in Paste Buffer"
+  },
+  ["alt-C"] = {
+    func = function() util.pbcharcount() end,
+    desc = "Count characters in Paste Buffer"
   },
   D = {
     func = PasteRegister.queryAndClearRegister,
@@ -382,14 +379,11 @@ local pastebufferModalKeys = {
   },
   W = {
     func = function() pastefile.pastebufferWriteDialog(pastesPath) end,
-    desc = "Save Paste Buffer to file",
-    mods = {
-      {
-        mod = optionShift,
-        func = function() pastefile.pastebufferOverwriteChooser(pastesPath) end,
-        desc = "Save Paste Buffer to existing file",
-      }
-    }
+    desc = "Save Paste Buffer to file"
+  },
+  ["shift-W"] = {
+    func = function() pastefile.pastebufferOverwriteChooser(pastesPath) end,
+    desc = "Save Paste Buffer to existing file",
   },
   X = {
     func = function() PasteStack:pop() end,
