@@ -49,6 +49,9 @@
 [".hammerspoon/MySpoons/PasteStack.spoon"]
   type = "git-repo"
   url = "https://github.com/von/PasteStack.spoon.git"
+[".hammerspoon/MySpoons/PasteTransform.spoon"]
+  type = "git-repo"
+  url = "https://github.com/von/PasteTransform.spoon.git"
 [".hammerspoon/MySpoons/PasteBoardExt.spoon"]
   type = "git-repo"
   url = "https://github.com/von/PasteBoardExt.spoon.git"

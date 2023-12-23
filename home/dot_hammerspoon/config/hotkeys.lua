@@ -24,6 +24,7 @@ local PBExt = hs.loadSpoon("PasteBoardExt")
 local PasswordGenerator = hs.loadSpoon("PasswordGenerator")
 local PasteRegister = hs.loadSpoon("PasteRegister")
 local PasteStack = hs.loadSpoon("PasteStack")
+local PasteTransform = hs.loadSpoon("PasteTransform")
 local RescueWindows = require("RescueWindows")
 local seal = hs.loadSpoon("Seal")
 local screensaver = hs.loadSpoon("ScreenSaver")
@@ -345,7 +346,7 @@ local pastebufferModalKeys = {
     desc = "Delete register"
   },
   E = {
-    func = function() PBExt:edit() end,
+    func = function() PasteTransform:edit() end,
     desc = "Edit Paste Buffer"
   },
   F = {
@@ -371,6 +372,14 @@ local pastebufferModalKeys = {
   S = {
     func = PasteRegister.queryAndSavePasteBuffer,
     desc = "Save Paste Buffer to register"
+  },
+  T = {
+    func = function() PasteTransform:transformChooser() end,
+    desc = "Transform pastebuffer"
+  },
+  ["shift-T"] = {
+    func = function() PasteTransform:transformRepeat() end,
+    desc = "Repeat last pastebuffer transformation"
   },
   -- Kudos: http://www.hammerspoon.org/go/#pasteblock
   V = {
