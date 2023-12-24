@@ -85,10 +85,6 @@ Plug 'ludovicchabant/vim-gutentags'
 " Formerly 'majutsushi/tagbar'
 Plug 'preservim/tagbar'
 
-" Allow be to run commands in a tmux popup
-" https://github.com/preservim/vimu,
-Plug 'preservim/vimux'
-
 " For BDelete
 Plug 'moll/vim-bbye'
 
