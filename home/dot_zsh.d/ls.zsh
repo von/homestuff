@@ -17,7 +17,7 @@ if (( $+commands[exa] )) ; then
   # Options for aliases
   l_options="${ls_options}"
   ll_options="${ls_options} -l"
-  la_optoons="-a ${ls_options}"
+  la_options="-a ${ls_options}"
   lal_optoons="${la_options}"
 else
   ls="ls"
