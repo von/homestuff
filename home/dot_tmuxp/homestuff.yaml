@@ -22,3 +22,9 @@ windows:
     panes:
       -
       -
+  - window_name: MySpoons
+    start_directory: ~/.hammerspoon/MySpoons
+    layout: even-horizontal
+    panes:
+      -
+      -
