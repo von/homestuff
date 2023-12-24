@@ -74,7 +74,7 @@ alias lal="ll ${lal_options}"
 
 # Follow symbolic links (-H)
 alias L="ls -H"
-alias LL="\ls -lH ${ls_options} ${ll_options}"
+alias LL="\ls -lH ${ll_options}"
 
 # Show me the most recently modified files
 latest() {
