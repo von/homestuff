@@ -1,7 +1,7 @@
 session_name: wordle
+start_directory: ~/develop/wordle/
 windows:
   - window_name: wordle
-    start_directory: ~/develop/wordle/
     layout: even-horizontal
     panes:
       -
