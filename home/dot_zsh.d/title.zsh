@@ -40,4 +40,10 @@ if test -n "${TMUX}" ; then
   }
 
   preexec_functions+=(tmux_set_pane_title_preexec)
+
+  # Fix window name if not set by tmux
+  tmux_window_name=$(tmux display -p "#{window_name}")
+  if test ${tmux_window_name} = "reattach-to-user-namespace" ; then
+    tmux rename-window "$(basename ${SHELL})"
+  fi
 fi
