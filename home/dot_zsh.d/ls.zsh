@@ -26,12 +26,6 @@ else
   # Multi-column (-C)
   ls_options+=" -C"
 
-  # Options for aliases
-  l_options="${ls_options}"
-  ll_options="${ls_options} -l"
-  la_optoons="-A"
-  lal_optoons="${la_options}"
-
   case $OSTYPE in
     darwin*)
       # Mac-specific arguments
@@ -60,6 +54,12 @@ else
     # Show human-readable sizes
     ls_options+=" -h"
   fi
+
+  # Options for aliases
+  l_options="${ls_options}"
+  ll_options="${ls_options} -l"
+  la_optoons="-A"
+  lal_optoons="${la_options}"
 fi
 
 alias ls="\${ls} ${ls_options}"
