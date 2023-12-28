@@ -123,6 +123,13 @@ if config["MSTeams"] then
   }
 end
 
+if config["Wesnoth"] then
+  openAppModalKeys["W"] = {
+    func = applauncher.new("The Battle for Wesnoth"),
+    desc = "Battle for Wesnoth"
+  }
+end
+
 local openAppMode = Modal:new(modifiers.opt, 'A', "Open application", openAppModalKeys)
 
 -- }}} Mod-A: Modal hotkey for Opening Applications --
