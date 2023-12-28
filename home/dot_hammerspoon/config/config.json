@@ -13,7 +13,7 @@
     "PersonalMounts" : true,
     "MSOutlook" : false,
     "MSTeams" : false,
-    "Slack" : true
+    "Slack" : false
   },
   "launchDefaultApps" : {
     "apps" : [ "com.googlecode.iterm2", "com.google.Chrome" ]
