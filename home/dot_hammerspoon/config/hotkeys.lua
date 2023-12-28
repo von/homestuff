@@ -56,10 +56,6 @@ local openAppModalKeys = {
     func = applauncher.new("Google Chrome"),
     desc = "Google Chrome"
   },
-  E = {
-    func = applauncher.new("Evernote"),
-    desc = "Evernote"
-  },
   F = {
     func = applauncher.new("Finder"),
     desc = "Finder"
