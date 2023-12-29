@@ -384,6 +384,12 @@ local pastebufferModalKeys = {
     func = function() PasteTransform:transformRepeat() end,
     desc = "Repeat last pastebuffer transformation"
   },
+  U = {
+    func = function()
+      PasteTransform:transform(os.getenv("HOME") .. "/bin/urlclean")
+    end,
+    desc = "Clean URL in pastebuffer"
+  },
   -- Kudos: http://www.hammerspoon.org/go/#pasteblock
   V = {
     func = function() PBExt:keyStrokes() end,
