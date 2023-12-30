@@ -53,7 +53,7 @@ let mapleader = "\<Space>"
 " Use ':tab <cmd>' to open some commands in new tab
 " kudos: https://github.com/tpope/vim-fugitive/issues/727
 nnoremap <leader>ga :tab Git commit --amend<cr>
-nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>gc :tab Git commit<cr>
 nnoremap <leader>gd :GitGutterPreviewHunk<cr>
 nnoremap <leader>gD :Git diff<cr>

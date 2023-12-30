@@ -16,10 +16,10 @@ let g:quickmenu_options = "HL"
 
 " Git
 call quickmenu#append("# Git", '')
-call quickmenu#append("git blame", 'Gblame', 'Toggle git blame mode')
-call quickmenu#append("git status", 'Gstatus', 'git status')
-call quickmenu#append("git diff", 'Git diff', 'Show git diff')
-call quickmenu#append("git log", 'Git log', 'Show git log')
+call quickmenu#append("git blame", 'Git blame', 'Toggle git blame mode')
+call quickmenu#append("git status", 'Git', 'git status')
+call quickmenu#append("git diff", 'Gdiffsplit', 'Show git diff')
+call quickmenu#append("git log", 'Gclog', 'Show git log')
 call quickmenu#append("git preview hunk", 'GitGutterPreviewHunk', 'Show preview of hunk')
 call quickmenu#append("git undo hunk", 'GitGutterUndoHunk', 'Undo changes in hunk')
 call quickmenu#append("git stage hunk", 'GitGutterStageHunk', 'Stage changes in hunk')
