@@ -414,7 +414,7 @@ nnoremap <silent> Tc :tabclose<cr>
 " List of tabs
 nnoremap <silent> Tl :Unite tab<cr>
 
-" Close tab
+" New tab
 nnoremap <silent> Tn :tabnew<cr>
 
 " Last tab
