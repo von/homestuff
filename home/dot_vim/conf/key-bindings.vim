@@ -62,7 +62,7 @@ nnoremap <leader>gl :BCommits<cr>
 nnoremap <leader>gp :Git pull<cr>
 nnoremap <leader>gP :Git push<cr>
 nnoremap <leader>gs :call GitAddHunkOrFile()<cr>
-nnoremap <leader>gS :tab G<cr>
+nnoremap <leader>gS :tab Git<cr>
 nnoremap <leader>gz :GitGutterFold<cr>
 nnoremap <leader>g! :GitGutterUndoHunk<cr>
 
