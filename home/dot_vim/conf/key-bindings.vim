@@ -44,6 +44,9 @@ let mapleader = "\<Space>"
 " Toggle fold open/close
 :map <leader>f za
 
+" Use current buffer as an email template
+:map <leader>E :silent w !mail-handler --input -<cr>
+
 " Open all folds with search results
 " Kudos: https://stackoverflow.com/a/18805662/197789
 :map <leader>F :g//foldopen<CR>
