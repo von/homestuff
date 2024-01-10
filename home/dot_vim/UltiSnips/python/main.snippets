@@ -43,3 +43,76 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         sys.exit(1)
 endsnippet
+
+snippet main-with-subcommands "Add main() function with argparse and subcommands" b
+import argparse
+import sys
+
+# Subcommands
+def foo(args):
+    """Do a foo thing"""
+    print("Foo!" + ",".join(args.args))
+    return 0
+
+
+def bar(args):
+    """Do a bar thing"""
+    print("Bar!" + ",".join(args.args))
+    return 0
+
+
+
+def make_argparser():
+    """Return arparse.ArgumentParser instance"""
+    parser = argparse.ArgumentParser(
+        description=__doc__,  # printed with -h/--help
+        # Don't mess with format of description
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        # To have --help print defaults with trade-off it changes
+        # formatting, use: ArgumentDefaultsHelpFormatter
+    )
+    # Add subcommands via subparsers
+    subparsers = parser.add_subparsers(help='sub-command help')
+
+    # create the parser for the "foo" command
+    parser_foo = subparsers.add_parser('foo', help=foo.__doc__)
+    parser_foo.set_defaults(func=foo)
+
+    # create the parser for the "bar" command
+    parser_bar = subparsers.add_parser('bar', help=bar.__doc__)
+    parser_bar.set_defaults(func=bar)
+
+    # Only allow one of debug/quiet mode
+    verbosity_group = parser.add_mutually_exclusive_group()
+    verbosity_group.add_argument("-d", "--debug",
+                                 action='store_true', default=False,
+                                 help="Turn on debugging")
+    verbosity_group.add_argument("-q", "--quiet",
+                                 action="store_true", default=False,
+                                 help="run quietly")
+    parser.add_argument("--version", action="version", version="%(prog)s 1.0")
+    parser.add_argument("args", metavar="args", type=str, nargs="+",
+                        help="some extra arguments")
+
+    # withoput subcommand, print help
+    parser.set_defaults(func=lambda args: parser.print_help())
+
+    return parser
+
+
+def main(argv=None):
+    parser = make_argparser()
+    args = parser.parse_args(argv if argv else sys.argv[1:])
+
+    # Do something with args using subcommand
+    args.func(args)
+    # Rest of main() here
+    return(0)
+
+
+if __name__ == "__main__":
+    try:
+        sys.exit(main())
+    except KeyboardInterrupt:
+        sys.exit(1)
+endsnippet
