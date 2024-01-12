@@ -480,7 +480,7 @@ hs.hotkey.bind(modifiers.opt, "Tab", "Previous Chrome Tab", chrome.wrapped.previ
 
 -- }}} Mod-Tab: Browser window switcher --
 ----------------------------------------------------------------------
--- CapsLock/f19 keybindings {{{ --
+-- CapsLock/f19 modal {{{ --
 -- Karabiner-Elements remaps CapsLock to F19 when pressed and released
 -- Kudos: http://evantravers.com/articles/2020/06/08/hammerspoon-a-better-better-hyper-key/
 
@@ -521,7 +521,7 @@ local hyperModalKeys = {
 
 local hyperMode = Modal:new(modifiers.none, 'f19', "Hyper Mode", hyperModalKeys)
 
--- }}} CapsLock/f19 keybindings --
+-- }}} CapsLock/f19 modal --
 ----------------------------------------------------------------------
 -- Caps lock/hyper {{{ --
 -- Karabiner-Elements remaps CapsLock to Control-Alt-Shift-Command (aka "hyper"
