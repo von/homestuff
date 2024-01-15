@@ -17,6 +17,18 @@ export VIRTUAL_ENV_DISABLE_PROMPT=true
 # See https://groups.google.com/forum/#!topic/python-virtualenv/rJ9M5ZE1mZg
 export PIP_RESPECT_VIRTUALENV=true
 
+
+# Create a virtualenv
+# https://docs.python.org/3/library/venv.html
+#
+# Meant for creating temporary virtualenvs for testing.
+# To create a persistent virtualenv, add it to ~/.virtualenvs.conf
+# and run make-virtualenvs
+function make-virtualenv()
+{
+  python3 -m venv "${1}"
+}
+
 # Run a command after disabling any virtualenv
 function novenv() {
   ( if typeset -f deactivate > /dev/null ; then deactivate ; fi

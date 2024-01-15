@@ -13,10 +13,3 @@ function pip-dev-install()
 {
   pip install --editable .
 }
-
-# Create a virtualenv
-# https://docs.python.org/3/library/venv.html
-function make-virtualenv()
-{
-  python3 -m venv "${1}"
-}
