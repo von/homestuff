@@ -59,7 +59,7 @@ nnoremap <leader>ga :tab Git commit --amend<cr>
 nnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>gc :tab Git commit<cr>
 nnoremap <leader>gd :GitGutterPreviewHunk<cr>
-nnoremap <leader>gD :Git diff<cr>
+nnoremap <leader>gD :Git difftool<cr>
 nnoremap <leader>gf :GitGutterFold<cr>
 nnoremap <leader>gl :BCommits<cr>
 nnoremap <leader>gp :Git pull<cr>
