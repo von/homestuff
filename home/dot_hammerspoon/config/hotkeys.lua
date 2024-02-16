@@ -49,6 +49,26 @@ defaultEmail:useHTMLforCompose(false)  -- Use 'true' for New Outlook
 -- Configure Modal Spoon
 Modal.defaults.cheatsheetDelay = 2
 ------------------------------------------------------------
+-- Configure music interface
+if config["Vox"] then
+  musicPrevious = function() hs.vox.previous() end
+  musicRewind = function() hs.vox.backward() end
+  musicPlayPause = function() hs.vox.playpause() end
+  musicPause = function() hs.vox.pause() end
+  musicNext = function() hs.vox.next() end
+  musicForward = function() hs.vox.forward() end
+else
+  musicPrevious = function() end
+  musicRewind = function() end
+  musicPlayPause = function() end
+  musicPause = function() end
+  musicNext = function() end
+  musicForward = function() end
+end
+
+musicMute = function() hs.audiodevice.defaultOutputDevice():setMuted(true) end
+
+------------------------------------------------------------
 -- Mod-A: Modal hotkey for Opening Applications {{{ --
 
 local openAppModalKeys = {
@@ -560,16 +580,15 @@ hs.hotkey.bind(modifiers.all, "TAB", "Rotate window",
 -- Function Keys {{{ --
 -- Control my Music
 -- Avoids Mac wanting to launch iTunes
-hs.hotkey.bind(modifiers.none, "f7", "Previous Track", nil, function() hs.vox.previous() end)
-hs.hotkey.bind(modifiers.opt, "f7", "Rewind", nil, function() hs.vox.backward() end)
-hs.hotkey.bind(modifiers.none, "f8", "Play/Pause", nil, function() hs.vox.playpause() end)
-hs.hotkey.bind(modifiers.opt, "f8", "Pause", nil, function() hs.vox.pause() end)
-hs.hotkey.bind(modifiers.none, "f9", "Next Track", nil, function() hs.vox.next() end)
-hs.hotkey.bind(modifiers.opt, "f9", "Fast Forward", nil, function() hs.vox.forward() end)
+hs.hotkey.bind(modifiers.none, "f7", "Previous Track", nil, musicPrevious)
+hs.hotkey.bind(modifiers.opt, "f7", "Rewind", nil, musicRewind)
+hs.hotkey.bind(modifiers.none, "f8", "Play/Pause", nil, musicPlayPause)
+hs.hotkey.bind(modifiers.opt, "f8", "Pause", nil, musicPause)
+hs.hotkey.bind(modifiers.none, "f9", "Next Track", nil, musicNext)
+hs.hotkey.bind(modifiers.opt, "f9", "Fast Forward", nil, musicForward)
 
 -- F15 is mute on my USB keyboard
-hs.hotkey.bind(modifiers.none, "f15", "Mute", nil,
-  function() hs.audiodevice.defaultOutputDevice():setMuted(true) end)
+hs.hotkey.bind(modifiers.none, "f15", "Mute", nil, musicMute)
 
 -- Karabeaner-Elements maps fn to F20
 hs.hotkey.bind(modifiers.none, "f20", "Open Seal", nil, function() seal:show() end)
