@@ -1,0 +1,8 @@
+session_name: pypdftool
+start_directory: ~/develop/pypdftool/
+windows:
+  - window_name: pypdftool
+    layout: even-horizontal
+    panes:
+      -
+      -
