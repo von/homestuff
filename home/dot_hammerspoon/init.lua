@@ -235,10 +235,15 @@ end
 hs.alert.show("HammerSpoon configuration loaded.")
 log.i("Hammerspoon configuration loaded.")
 
-if #errors > 0 then
+if #errors == 0 then
+  -- Clear badge
+  hs.dockicon.setBadge("")
+else
   hs.alert.show("Encountered " .. #errors .. " errors during setup.")
   for i,err in ipairs(errors) do
     log.ef("Error %d: %s", i, err)
   end
+  hs.dockicon.setBadge(string.format("%d", #errors))
+  hs.dockicon.bounce(false)  -- false == bounce briefly
 end
 ------------------------------------------------------------
