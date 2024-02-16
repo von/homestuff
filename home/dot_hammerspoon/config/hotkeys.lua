@@ -547,6 +547,10 @@ local hyperModalKeys = {
     func = function() Contexts:reapply() end,
     desc = "Reapply current Context"
   },
+  V = {
+    func = function() PasteStack:pasteAndPop() end,
+    desc = "Paste and pop from PasteStack"
+  },
   Z = {
     func = Zoom.wrapped.focusOrJoin(defaultZoomMeetingId),
     desc = "Launch or focus Zoom"
