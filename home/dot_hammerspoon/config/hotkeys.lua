@@ -434,6 +434,14 @@ local pastebufferModalKeys = {
   ["shift-Z"] = {
     func = function() PasteStack:pushByLine() end,
     desc = "Push paste buffer onto stack line-by-line"
+  },
+  ["UP"] = {
+    func = function() PasteStack:pop() end,
+    desc = "Pop paste buffer off of stack"
+  },
+  ["DOWN"] = {
+    func = function() PasteStack:push() end,
+    desc = "Push paste buffer onto stack"
   }
 }
 
