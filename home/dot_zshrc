@@ -32,6 +32,7 @@ zmodload zsh/zprof
 #
 
 # My custom ZSH configuration files
+# This is an oh-my-zsh configuration variable we are piggbybacking on
 export ZSH_CUSTOM=$HOME/.zsh.d/
 
 # Where my REPOS are
@@ -148,6 +149,7 @@ DISABLE_MAGIC_FUNCTIONS=true
 DISABLE_FZF_KEY_BINDINGS="true"
 
 if test -f "${ZSH}/oh-my-zsh.sh" ; then
+  # Note that this will load files under $ZSH_CUSTOM
   source "${ZSH}/oh-my-zsh.sh"
 else
   echo "Warning: oh-my-zsh not found."
