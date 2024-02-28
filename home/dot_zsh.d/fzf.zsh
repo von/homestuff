@@ -16,14 +16,6 @@ FZF_DEFAULT_OPTS+=" --bind=ctrl-k:kill-line,ctrl-u:cancel"
 FZF_DEFAULT_OPTS+=" --bind=alt-shift-up:preview-up,alt-shift-down:preview-down"
 FZF_DEFAULT_OPTS+=" --bind=alt-shift-left:preview-page-up,alt-shift-right:preview-page-down"
 
-# Extra options for _fzf_complete_ext()
-# These are the options _fzf_complete() adds by default
-FZF_COMPLETION_EXT_OPTS="--reverse"
-if test -z "${TMUX}" ; then
-  # Within TMUX fzf-tmux is called, which uses FZF_TMUX_HEIGHT instead of --height
-  FZF_COMPLETION_EXT_OPTS+=" --height ${FZF_TMUX_HEIGHT:-40%}"
-fi
-
 # Don't use fzf by default with cd, pushd, and rmdir
 FZF_COMPLETION_DIR_COMMANDS=""
 

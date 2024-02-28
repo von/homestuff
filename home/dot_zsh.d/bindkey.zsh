@@ -33,16 +33,15 @@ bindkey -M viins "^c"    vi-cmd-mode
 bindkey -M viins '^e'    end-of-line
 bindkey -M viins '^f'    forward-word
 bindkey -M viins '^h'    backward-delete-char
-# Use fzf-completion-ext from plugin/fzf-completion-ext
-bindkey -M viins '^i'    fzf-completion-ext
+# Tab (^i) bound by Aloxaf/fzf-tab - see zshrc
 bindkey -M viins '^k'    kill-line
 # ^l clear-screen
 # ^m carriage return
 bindkey -M viins '^n'    down-line-or-history
 bindkey -M viins '^p'    up-line-or-history
-# ^r set by /usr/local/opt/fzf/shell/key-bindings.zsh to fzf-history-widget
+# From plugins/fzf_history_widget
+bindkey -M viins '^r'    my-fzf-history-widget
 bindkey -M viins '^s'    history-incremental-pattern-search-forward
-bindkey -M viins '^t'    fzf-path-widget  # ../zsh.d/plugins/fzf_path_widget
 bindkey -M viins '^u'    backward-kill-line
 bindkey -M viins '^w'    backward-kill-word
 bindkey -M viins '^y'    yank
@@ -101,7 +100,7 @@ bindkey -M vicmd '^a'    beginning-of-line
 bindkey -M vicmd '^b'    backward-word
 bindkey -M vicmd '^e'    end-of-line
 bindkey -M vicmd '^f'    forward-word
-# For ^I see fzf.zsh
+# Tab bound by Aloxaf/fzf-tab - see zshrc
 bindkey -M vicmd '^k'    kill-line
 bindkey -M vicmd '^n'    down-line-or-history
 bindkey -M vicmd '^p'    up-line-or-history

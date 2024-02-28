@@ -1,0 +1,10 @@
+#compdef workon
+# Completion for workon() from ../virtualenv.zsh
+#
+# Kudos: https://unix.stackexchange.com/a/65071/29832
+# See https://zsh.sourceforge.io/Doc/Release/Completion-System.html#index-_005fpath_005ffiles
+#
+# -W: Search for files in given directory but don't include with completion
+# -/: Only search for directories
+#
+_files -W ${HOME}/.virtualenvs -/

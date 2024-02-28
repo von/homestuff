@@ -1,0 +1,6 @@
+#compdef tmuxp
+# Completion for tmuxp
+#
+# List all *.yaml files in ~/.tmuxp without suffixes
+cd ${HOME}/.tmuxp || exit
+compadd $(\ls -1 \*.yaml(N) | sed -e 's/\(.*\)\.yaml/\1/')

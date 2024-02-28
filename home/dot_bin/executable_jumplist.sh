@@ -24,6 +24,7 @@ cmd-list()
     -path ${HOME}/.oh-my-zsh -o \
     -path ${HOME}/.password-store -o \
     -path ${HOME}/.tmux-plugins -o \
+    -path ${HOME}/.Trash -o \
     -path ${HOME}/Applications -o \
     -path ${HOME}/Google\ Drive/.shortcut-targets-by-id -o \
     -path ${HOME}/Library -o \
@@ -33,7 +34,7 @@ cmd-list()
 
 cmd-fzf()
 {
-  cmd-list | ${FZF_CMD} "${@}"
+  cmd-list | ${FZF_CMD} ${fzf_opts_array-}
 }
 
 
@@ -45,13 +46,13 @@ Usage: $0 [<options>] -- [<fzf options>]
 Options:
   -f              Select path with fzf and print [DEFAULT].
   -h              Print help and exit.
-  -l              Print jump list and exist.
+  -l              Print jump list and exit.
   -T              Force 'fzf' instead of 'fzf-tmux'
 
 <fzf options>     Options passed to fzf (or fzf-tmux)
 
 Environment variables:
-  \$JUMP_HOME      Root of paths print [DEFAULT: \$HOME]
+  \$JUMP_ROOT      Root of paths print [DEFAULT: \$HOME]
 END
 # Note 'END' above most be fully left justified.
 }
@@ -67,9 +68,6 @@ else
   FZF_CMD="fzf"
 fi
 
-# fzf_options, stored as an array
-fzf_opts_array=()
-
 while getopts ":fhlT" opt; do
   case $opt in
     f) CMD="cmd-fzf" ;;
@@ -82,6 +80,9 @@ done
 
 shift $(($OPTIND - 1))
 
-${CMD} "$@"
+# fzf_options, stored as an array
+fzf_opts_array=( $@ )
+
+${CMD}
 
 exit $status

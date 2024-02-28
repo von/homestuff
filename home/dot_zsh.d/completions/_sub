@@ -1,0 +1,4 @@
+#compdef sub
+# Completion for sub() function from ../git.zsh
+#
+compadd $(git submodule foreach --quiet pwd)

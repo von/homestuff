@@ -30,22 +30,12 @@ function make-virtualenv()
 }
 
 # Work in a virtualenv
+# See completions/_workon
 function workon()
 {
   source ${WORKON_HOME}/${1}/bin/activate
 }
 
-# Autocompletion for workon()
-# This is automatically picked up by fzf-completion() or fzf-completion-ext()
-_fzf_complete_workon()
-{
-  _fzf_complete_ext -l "$@" -o '+m' -q "${prefix}" < <(
-    # Avoid problems with current directory by cd'ing
-    cd "${WORKON_HOME}" || exit 1
-    # 'cut' gets rid of './'
-    find . -type d -depth 1 | cut -c 3-
-  )
-}
 
 # Run a command after disabling any virtualenv
 function novenv() {

@@ -80,18 +80,6 @@ function tm() {
 }
 
 if (( $+commands[tmuxp] )) ; then
-  # Set up completion using fzf
-  _fzf_complete_tmuxp() {
-    _fzf_complete_ext -l "$@" -o '+m' -q "${prefix}" < <(
-      # Avoid problems with current directory by cd'ing
-      cd ~/.tmuxp/ || exit 1
-      # 'cut' gets rid of './' then 'sed' gets rid of extension
-      find . -name "*.yaml" -print |
-          cut -c 3- |
-          sed -e 's/\(.*\)\.yaml/\1/'
-    )
-  }
-
   # Disable auto title to turn off tmuxp warning
   function tmuxp() {
     DISABLE_AUTO_TITLE=true command tmuxp ${(q)@}

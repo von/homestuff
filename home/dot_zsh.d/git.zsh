@@ -96,6 +96,7 @@ clone-von-fork() {
 
 # CD to directory if given. If no argument is given, assume we are in a submodule
 # and cd to root of parent git directory.
+# Completion code in completions/_sub
 sub() {
   if test $# -eq 0; then
     cd $(git rev-parse --show-toplevel)
@@ -104,8 +105,4 @@ sub() {
   else
     cd "${1}"
   fi
-}
-
-_fzf_complete_sub() {
-  git submodule foreach --quiet pwd | _fzf_complete_ext -l "$@" -o "+m" -q "${prefix}"
 }

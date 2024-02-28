@@ -106,10 +106,9 @@ plugins+=(vi-mode)  # from oh-my-zsh
 plugins+=(colonlist)
 plugins+=(colors256)
 plugins+=(fzf)  # from oh-my-zsh
-plugins+=(fzf-completion-ext)
 plugins+=(fzf_downloads_widget)
 plugins+=(fzf_git_widget)
-plugins+=(fzf_path_widget)
+plugins+=(fzf_history_widget)
 plugins+=(fzf_task_spooler_widget)
 plugins+=(git)  # from oh-my-zsh
 plugins+=(git-prompt)  # from oh-my-zsh
@@ -145,6 +144,9 @@ IGNOREEOF=1
 # breaks zsh-syntax-highlighting
 DISABLE_MAGIC_FUNCTIONS=true
 
+# Don't bind C-T, C-R, and Alt-C
+DISABLE_FZF_KEY_BINDINGS="true"
+
 if test -f "${ZSH}/oh-my-zsh.sh" ; then
   source "${ZSH}/oh-my-zsh.sh"
 else
@@ -168,6 +170,7 @@ if test -f "${_antigen_path}" ; then
     #   before after/syntax-highlighting.zsh is sourced.
     antigen bundle zsh-users/zsh-syntax-highlighting
 
+    # Replace zsh's default completion selection menu with fzf
     # https://github.com/Aloxaf/fzf-tab
     antigen bundle Aloxaf/fzf-tab
 
