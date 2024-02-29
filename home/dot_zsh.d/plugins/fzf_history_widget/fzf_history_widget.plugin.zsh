@@ -13,8 +13,9 @@ _fzf_history_widget() {
   # fzf command to use
   if test -n "$TMUX" ; then
     fzfcmd="fzf-tmux"
-    # popup window with 20% width and 40% heigh
-    fzfopts="-w 20% -h 40%"
+    # popup window at bottom of pane and fill pane
+    fzfopts="-x P -y P -w $(tmux display -p '#{pane_width}') -h $(tmux display -p '#{pane_height}')"
+
   else
     fzfcmd="fzf"
   fi
