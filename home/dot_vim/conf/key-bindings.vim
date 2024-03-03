@@ -70,7 +70,7 @@ nnoremap <leader>gz :GitGutterFold<cr>
 nnoremap <leader>g! :GitGutterUndoHunk<cr>
 
 " <leader>G is grep via unite
-nnoremap <silent> <leader>G :UniteWithProjectDir grep:.<cr>
+nnoremap <silent> <leader>G :UniteWithProjectDir grep<cr>
 
 " <leader>h is used by git-gutter
 
