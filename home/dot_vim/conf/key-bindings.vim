@@ -70,6 +70,7 @@ nnoremap <leader>gz :GitGutterFold<cr>
 nnoremap <leader>g! :GitGutterUndoHunk<cr>
 
 " <leader>G is grep via unite
+" Use <leader>U / :UniteResume to re-open the results
 nnoremap <silent> <leader>G :UniteWithProjectDir grep<cr>
 
 " <leader>h is used by git-gutter
@@ -125,6 +126,9 @@ endif
 
 " Use fzf to search tags
 :map <leader>T :Tags<cr>
+
+" Return to open united buffer (probably from <leader>G -> Grep)
+:map <leader>U :UniteResume<cr>
 
 if !has("gui_running")
   :map <leader>v :silent !vifm<cr>:redraw!<cr>
