@@ -1,11 +1,15 @@
 #!/bin/zsh
 #
-# Set up our ls-related aliases
+# Set up our ls-related aliases: l, ls, la, ll, lal, L, LL
 
 # Remove aliases from oh-my-zsh
 # Kudos for check: https://unix.stackexchange.com/a/408068/29832
 (( ${+aliases[ls]} )) && unalias ls
 (( ${+aliases[ll]} )) && unalias ll
+(( ${+aliases[la]} )) && unalias la
+(( ${+aliases[lal]} )) && unalias lal
+(( ${+aliases[L]} )) && unalias L
+(( ${+aliases[LL]} )) && unalias LL
 
 # Use 'exa' if available
 # https://the.exa.website/
@@ -43,8 +47,9 @@ else
 
   # Is this GNU ls?
   ls --version > /dev/null 2>&1
-
   if test $? -eq 0; then
+    # GNU ls options
+
     # Turn on color
     ls_options+=" --color=auto"
 
@@ -58,8 +63,8 @@ else
   # Options for aliases
   l_options="${ls_options}"
   ll_options="${ls_options} -l"
-  la_optoons="-A"
-  lal_optoons="${la_options}"
+  la_options="${ls_options} -A"
+  lal_options="${la_options}"
 fi
 
 alias ls="\${ls} ${ls_options}"
@@ -69,12 +74,12 @@ alias l="\${ls} ${l_options}"
 alias ll="\${ls} ${ll_options}"
 
 # List all (-A)
-alias la="ls ${la_options}"
-alias lal="ll ${lal_options}"
+alias la="\${ls} ${la_options}"
+alias lal="\${ls} ${lal_options}"
 
 # Follow symbolic links (-H)
-alias L="ls -H"
-alias LL="\ls -lH ${ll_options}"
+alias L="\${ls} ${ls_options} ls -H"
+alias LL="\${ls} ${ll_options} -H"
 
 # Show me the most recently modified files
 latest() {
