@@ -132,4 +132,11 @@ module.rotateLogLevel = function()
   hs.logger.setGlobalLogLevel(currentLogLevel)
 end
 
+-- Toggle display mirroring
+-- Uses  https://github.com/fcanas/mirror-displays
+module.toggleDisplayMirroring = function()
+  hs.alert("Toggling display mirroring")
+  local task = hs.task.new("/opt/homebrew/bin/mirror", nil, { "-t" })
+  task:start()
+end
 return module

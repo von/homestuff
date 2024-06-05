@@ -276,6 +276,10 @@ local displayModalKeys = {
     func = function() hs.alert(string.format("Timeout: %d", screensaver:getTimeout())) end,
     desc = "Get Screensaver Timeout"
   },
+  M = {
+    func = function() util.toggleDisplayMirroring() end,
+    desc = "Toggle display mirroring"
+  },
   P = {
     func = function() hs.screen.primaryScreen():next():setPrimary() end,
     desc = "Rotate Primary screen"
