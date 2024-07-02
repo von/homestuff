@@ -32,6 +32,7 @@ local Teams = require("Teams")
 local Tiler = hs.loadSpoon("Tiler")
 local URLOpener = require("URLOpener")
 local util = require("util")
+local WebNotes = require("WebNotes")
 local winlauncher = require("winlauncher")
 local WindowPool = require("WindowPool")
 local WinWin = spoon.WinWin
@@ -215,8 +216,8 @@ local browserModalKeys = {
     desc = "Chrome vonwelch.com Persona"
   },
   W = {
-    func = chrome.wrapped.selectPersona("IU"),
-    desc = "Chrome Work Persona"
+    func = function() WebNotes:open() end,
+    desc = "Launch WebNotes"
   },
   Z = {
     func = chrome.wrapped.openURL{
