@@ -347,6 +347,9 @@ nnoremap < <c-o>
 " Note this requires cpotions not to have 't' flag
 nnoremap > <c-i>
 
+" Toggle showing dotfiles
+nnoremap a za
+
 " Open bookmarks
 if executable('fzf')
   nnoremap b :fzfbookmarks<cr>
