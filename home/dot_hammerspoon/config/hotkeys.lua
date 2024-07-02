@@ -447,6 +447,10 @@ local pastebufferModalKeys = {
   ["DOWN"] = {
     func = function() PasteStack:push() end,
     desc = "Push paste buffer onto stack"
+  },
+  ["RIGHT"] = {
+    func = function() PasteStack:chooser() end,
+    desc = "Open paste stack chooser"
   }
 }
 
