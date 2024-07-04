@@ -523,6 +523,8 @@ hs.hotkey.bind(modifiers.opt, "Tab", "Previous Chrome Tab", chrome.wrapped.previ
 
 -- }}} Mod-Tab: Browser window switcher --
 ----------------------------------------------------------------------
+-- Mod-arrows are used by iTerm
+----------------------------------------------------------------------
 -- CapsLock/f19 modal {{{ --
 -- Karabiner-Elements remaps CapsLock to F19 when pressed and released
 -- Kudos: http://evantravers.com/articles/2020/06/08/hammerspoon-a-better-better-hyper-key/
