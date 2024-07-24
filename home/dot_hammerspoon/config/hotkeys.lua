@@ -534,6 +534,18 @@ local hyperModalKeys = {
     func = function() WindowPool:toggleFocusedWindow() end,
     desc = "Toggle focused window from pool"
   },
+  ["UP"] = {
+    func = function() PasteStack:pop() end,
+    desc = "Pop paste buffer off of stack"
+  },
+  ["DOWN"] = {
+    func = function() PasteStack:push() end,
+    desc = "Push paste buffer onto stack"
+  },
+  ["RIGHT"] = {
+    func = function() PasteStack:swap() end,
+    desc = "Swap paste buffer and top of stack"
+  },
   space = {
     func = function() seal:show() end,
     desc = "Open Seal"
