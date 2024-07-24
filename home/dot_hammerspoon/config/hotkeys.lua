@@ -563,8 +563,8 @@ local hyperModalKeys = {
     desc = "Show date"
   },
   P = {
-    func = function() PasteRegister:chooser() end,
-    desc = "PasteRegister chooser"
+    func = function() PasteStack:chooser() end,
+    desc = "PasteStack chooser"
   },
   R = {
     func = function() Contexts:reapply() end,
