@@ -28,6 +28,7 @@ maint() {
       source ${file}
     done
 
+    echo "Success. Updating ${MAINT_TIMESTAMP}"
     touch ${MAINT_TIMESTAMP}
   )
 }
