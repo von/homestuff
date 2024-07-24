@@ -1,5 +1,6 @@
 {
   "debug.modules": {
-    "appkeys" : false
+    "appkeys" : false,
+    "WebNotes" : true
   }
 }
