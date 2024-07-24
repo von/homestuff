@@ -4,3 +4,9 @@
 #
 echo "Updating antigen bundles..."
 antigen update
+if test $? -ne 0 ; then
+  echo "Error running 'antigen update'"
+  return $?  # Script is sourced - return not exit
+fi
+echo "Success."
+return 0  # Script is sourced - return not exit
