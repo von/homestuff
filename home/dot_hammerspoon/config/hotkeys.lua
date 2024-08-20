@@ -17,7 +17,6 @@ local launchDefaultApps = require("launchDefaultApps")
 local Modal = hs.loadSpoon("ModalExt")
 local modifiers = Modal.modifiers
 local mounter = require("mounter")
-local MouseCircle = spoon.MouseCircle
 local outlook = hs.loadSpoon("Email").Outlook()
 local pastefile = require("pastefile")
 local PBExt = hs.loadSpoon("PasteBoardExt")
