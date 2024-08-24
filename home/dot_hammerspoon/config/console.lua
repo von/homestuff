@@ -157,6 +157,21 @@ debugKeystrokes = function(duration)
   hs.printf("Debugging keystrokes for %d seconds", duration)
 end
 
+dumpCaffienateSessionProperties = function()
+  hs.printf(hs.inspect(hs.caffeinate.sessionProperties()))
+end
+
+dumpCaffienateAssertions = function()
+  hs.printf(hs.inspect(hs.caffeinate.currentAssertions()))
+end
+
+dumpCaffienateSleepPreventionSettings = function()
+  keys = { "displayIdle", "systemIdle", "system" }
+  for i,type in ipairs(keys) do
+    hs.printf("%s: %s", type, hs.caffeinate.get(type))
+  end
+end
+
 -- For more easy to understand debugging
 local applicationEventName = {
   [hs.application.watcher.activated]="Activated",
