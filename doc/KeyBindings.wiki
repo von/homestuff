@@ -6,6 +6,7 @@
 spaces, saving, etc.)
   * System Prefernces / Keyboard / Shortcuts / Mission Control /
     Mission Control enabled and using Command-Up
+    Next/prev Space using Command-Left and Command-Right
 
 *Option (Alt)* is used for HammerSpoon (hammerspoon/init.lua) and other
 Application hotkeys such as iTerm
