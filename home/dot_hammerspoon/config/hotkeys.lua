@@ -14,6 +14,7 @@ local EjectMenu = hs.loadSpoon("EjectMenu")
 local execfunction = require("execfunction")
 local LastWindow = require("LastWindow")
 local launchDefaultApps = require("launchDefaultApps")
+local MirrorDisplay = require("MirrorDisplay")
 local Modal = hs.loadSpoon("ModalExt")
 local modifiers = Modal.modifiers
 local mounter = require("mounter")
@@ -277,7 +278,7 @@ local displayModalKeys = {
     desc = "Get Screensaver Timeout"
   },
   M = {
-    func = function() util.toggleDisplayMirroring() end,
+    func = function() MirrorDisplay:toggle() end,
     desc = "Toggle display mirroring"
   },
   P = {
