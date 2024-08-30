@@ -172,6 +172,12 @@ dumpCaffienateSleepPreventionSettings = function()
   end
 end
 
+dumpSpaces = function()
+  -- table of screenUUIDs as keys and table of spaceIDs as value
+  local spaces = hs.spaces.allSpaces()
+  hs.printf("%s", spaces)
+end
+
 -- For more easy to understand debugging
 local applicationEventName = {
   [hs.application.watcher.activated]="Activated",
