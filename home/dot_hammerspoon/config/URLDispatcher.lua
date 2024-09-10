@@ -12,14 +12,15 @@ local noApp = nil  -- for readability
 
 spoon.URLDispatcher.url_patterns = {
   -- j == join, s == start
-  -- Don't rediret Zoom webinar URLs ('w') as Zoom.handleURL() doesn't handle them.
+  -- Don't redirect Zoom webinar URLs ('w') as Zoom.handleURL() doesn't
+  -- handle them.
   { "https://.*.zoom.us/[js]/", noApp, Zoom.handleURL },
   { "https://.*.zoomgov.com/[js]/", noApp, Zoom.handleURL },
   { "msteams:", "com.microsoft.teams" }
 }
 
 if myConfig["useURLOpener"] then
-  -- Don't use url.urlevent.Open() for function as they will result in an
+  -- Don't use hs.urlevent.open() as that will result in an
   -- infinite loop calling URLDispatcher
   local URLOpener = require("URLOpener")
   URLOpener.setDefaultPersona(defaultChromePersona)
