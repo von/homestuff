@@ -30,6 +30,8 @@ cmd-list()
     -path ${HOME}/Library -o \
     -path ${HOME}/Pictures/Photos\ Library.photoslibrary \) -prune \
     -o -type d -print 2> /dev/null
+  # Above command seems to return non-zero for reasons not obvious to me
+  return 0
 }
 
 cmd-fzf()
