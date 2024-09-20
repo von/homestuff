@@ -1,36 +1,34 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # Handle my "jumplist" - a list of paths that I want to cd to.
-# Currently that list is all paths under $HOME with some exceptions
-# (usually lengthy lists of internal paths that add lots of bulk).
+#
 # The script can either print the list for other programs to process
 # (e.g. ../dot_zsh.d/jump.zsh) or run fzf to select and print a path.
+#
+# The list comes from ~/.jump_targets and ~/.jump_targets_local
 
 cmd-list()
 {
-  # -L == follow links
-  find -L ${JUMP_ROOT:-${HOME}} -mindepth 1 \
-    \( -fstype sysfs -o \
-    -fstype devfs -o \
-    -fstype devtmpfs -o \
-    -fstype proc -o \
-    -name .git -o \
-    -name .vim-bundle -o \
-    -name .virtualenvs -o \
-    -path ${HOME}/.antigen -o \
-    -path ${HOME}/.cache -o \
-    -path ${HOME}/.cpan -o \
-    -path ${HOME}/.dropbox -o \
-    -path ${HOME}/.dvdcss -o \
-    -path ${HOME}/.oh-my-zsh -o \
-    -path ${HOME}/.password-store -o \
-    -path ${HOME}/.tmux-plugins -o \
-    -path ${HOME}/.Trash -o \
-    -path ${HOME}/Applications -o \
-    -path ${HOME}/Google\ Drive/.shortcut-targets-by-id -o \
-    -path ${HOME}/Library -o \
-    -path ${HOME}/Pictures/Photos\ Library.photoslibrary \) -prune \
-    -o -type d -print 2> /dev/null
-  # Above command seems to return non-zero for reasons not obvious to me
+  local tpath=${JUMP_TARGETS_PATH:-${HOME}/.jump_targets}
+  local ltpath=${JUMP_TARGETS_LOCAL_PATH:-${HOME}/.jump_targets_local}
+
+  typeset -a JUMP_TARGETS
+  # https://zsh.sourceforge.io/Doc/Release/Zsh-Modules.html#The-zsh_002fmapfile-Module
+  zmodload zsh/mapfile
+
+  # Read jump_targets into JUMP_TARGETS, removing comments
+  # Kudos: https://stackoverflow.com/a/12652267/197789
+  JUMP_TARGETS=( "${(f)mapfile[$tpath]}" )
+
+  if test -f "${ltpath}" ; then
+    JUMP_TARGETS+=( "${(f)mapfile[$ltpath]}" )
+  fi
+
+  # Remove comments
+  # Kudos: https://stackoverflow.com/a/41876600/197789
+  JUMP_TARGETS=( ${JUMP_TARGETS:#\#*} )
+
+  printf '%s\n' "${JUMP_TARGETS[@]}"
+
   return 0
 }
 
