@@ -174,14 +174,6 @@ local browserModalKeys = {
         persona = defaultChromePersona, newWindow = true }),
     desc = "Open Google Drive"
   },
-  M = {
-    func = chrome.wrapped.activateTab("Google Play Music",
-        { url = "https://play.google.com/music/",
-          persona = "Personal",
-          newWindow = true
-        }),
-    desc = "Google Play Music"
-  },
   N = {
     func = chrome.wrapped.openURL(
       { url = "",
