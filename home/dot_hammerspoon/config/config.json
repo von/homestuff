@@ -13,7 +13,7 @@
     "PersonalMounts" : true,
     "MSOutlook" : false,
     "MSTeams" : false,
-    "Slack" : false,
+    "Slack" : true,
     "Wesnoth" : true
   },
   "launchDefaultApps" : {
