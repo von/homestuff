@@ -25,6 +25,7 @@ function! HashFoldExpr()
     return "s1"
   else
     return "="
+  endif
 endfunction
 
 function! HashFoldText()
