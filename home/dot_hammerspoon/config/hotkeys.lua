@@ -460,6 +460,8 @@ local pastebufferMode = Modal:new(modifiers.opt, 'P', "Paste Buffer Mode", paste
 ------------------------------------------------------------
 -- Mod-S: Used by Chrome/Workona for search
 ------------------------------------------------------------
+-- Mod-T: Used by Chrome/Workona for Tasks
+------------------------------------------------------------
 -- Mod-U: Modal hotkey for Utilities {{{ --
 
 local utilModalKeys = {

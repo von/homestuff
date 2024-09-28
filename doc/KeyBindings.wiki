@@ -9,7 +9,10 @@ spaces, saving, etc.)
     Next/prev Space using Command-Left and Command-Right
 
 *Option (Alt)* is used for HammerSpoon (hammerspoon/init.lua) and other
-Application hotkeys such as iTerm
+applications as follows:
+  * Opt-Z is used to toggle iTerm
+  * Opt-S is used in Chrome to activate Workona search
+  * Opt-T is used in Chrome to activate Workona Task extensions
 
 *Control* is used for tmux (tmux/tmux.conf), in particular C-Space is my prefix.
   * Hammerspoon installs application-specific hotkeys for Mail (Control-T and
