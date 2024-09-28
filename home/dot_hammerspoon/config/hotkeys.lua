@@ -188,7 +188,7 @@ local browserModalKeys = {
         persona = defaultChromePersona,
         newWindow = true
       }),
-    desc = "New Chrmoe Window"
+    desc = "New Chrome Window"
   },
   O = {
     func = function() PBExt:openURL() end,
