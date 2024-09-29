@@ -164,6 +164,15 @@ local browserModalKeys = {
         persona = defaultChromePersona, newWindow = true }),
     desc = "Open Asana"
   },
+  C = {
+    func = function()
+      local url = chrome.getActiveTabURL()
+      local urlparts = hs.http.urlParts(url)
+      local searchURL = "https://contacts.google.com/search/" .. urlparts.host
+      hs.urlevent.openURL(searchURL)
+    end,
+    desc = "Open Google Contact for site"
+  },
   D = {
     func = chrome.wrapped.selectPersona("Dev"),
     desc = "Chrome Dev Persona"
