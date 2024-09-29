@@ -25,6 +25,7 @@ local PasswordGenerator = hs.loadSpoon("PasswordGenerator")
 local PasteRegister = hs.loadSpoon("PasteRegister")
 local PasteStack = hs.loadSpoon("PasteStack")
 local PasteTransform = hs.loadSpoon("PasteTransform")
+local presmode = require("PresentationMode")
 local RescueWindows = require("RescueWindows")
 local seal = hs.loadSpoon("Seal")
 local screensaver = hs.loadSpoon("ScreenSaver")
@@ -267,12 +268,16 @@ hs.hotkey.bind(modifiers.opt, 'C', "Clean Paste Buffer", function() PBExt:clean(
 
 local displayModalKeys = {
   D = {
-    func = function() screensaver:disable() end,
-    desc = "Disable Screensaver"
+    func = function()
+      presmode:disable()
+    end,
+    desc = "Disable Presentation Mode"
   },
   E = {
-    func = function() screensaver:enable() end,
-    desc = "Enable Screensaver"
+    func = function()
+      presmode:enable()
+    end,
+    desc = "Enable Presentation Mode"
   },
   G = {
     func = function() hs.alert(string.format("Timeout: %d", screensaver:getTimeout())) end,
