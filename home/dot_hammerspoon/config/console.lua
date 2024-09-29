@@ -119,6 +119,8 @@ dumpCameras = function()
 end
 
 dumpScreen = function(s)
+  -- hs.screen:getInfo() always seems to return nil
+  -- https://github.com/Hammerspoon/hammerspoon/issues/3696
   print(hs.inspect({
         name = s:name() or "nil", -- Airplay screens have no name
         id = s:id(),
