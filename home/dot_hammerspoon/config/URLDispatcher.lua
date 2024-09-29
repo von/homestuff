@@ -1,4 +1,5 @@
 -- Configuration for URLDispatcher spoon
+-- See https://www.hammerspoon.org/Spoons/URLDispatcher.html
 -- Kudos: https://github.com/zzamboni/dot-hammerspoon
 
 local Zoom = require("Zoom")
