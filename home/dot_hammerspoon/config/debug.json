@@ -1,6 +1,7 @@
 {
   "debug.modules": {
     "appkeys" : false,
+    "MirrorDisplay" : true,
     "WebNotes" : true
   }
 }
