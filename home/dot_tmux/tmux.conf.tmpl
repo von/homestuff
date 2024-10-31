@@ -436,3 +436,9 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'sainnhe/tmux-fzf'
 
 run '~/.tmux-plugins/tpm/tpm'
+
+# XXX run-shell is now setting $SHELL so that tmux-sensible does not set
+#     default-command correctly with the right shell. Hence we now
+#     overwrite the value.
+#     See: https://github.com/tmux-plugins/tpm/issues/295
+set -g default-command "reattach-to-user-namespace $SHELL"
