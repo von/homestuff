@@ -184,6 +184,20 @@ local browserModalKeys = {
         persona = defaultChromePersona, newWindow = true }),
     desc = "Open Google Drive"
   },
+  L = {
+    func = function()
+      local title = chrome.getActiveTabTitle()
+      local url = chrome.getActiveTabURL()
+      local stext = util.createStyledTextWithURL(title, url)
+      if stext then
+        hs.alert("Pasteboard set: " .. title)
+        hs.pasteboard.writeObjects(stext)
+      else
+        hs.alert("Failed to put browser tab into clipboard.")
+      end
+    end,
+    desc = "Copy tab title and URL as hypertext"
+  },
   N = {
     func = chrome.wrapped.openURL(
       { url = "",

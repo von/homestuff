@@ -139,4 +139,20 @@ module.toggleDisplayMirroring = function()
   local task = hs.task.new("/opt/homebrew/bin/mirror", nil, { "-t" })
   task:start()
 end
+
+-- Create styledText with hyperlink given plain text and URL
+module.createStyledTextWithURL = function(text, url)
+  local html_text = string.format("<a href='%s'>%s</a>", url, text)
+
+-- hs.styledtext.new() does not support hyperlinked text.
+-- See https://github.com/Hammerspoon/hammerspoon/issues/3708
+  local stext = hs.styledtext.getStyledTextFromData(html_text, "html")
+
+  if not stext then
+    return nil
+  end
+
+  return stext
+end
+
 return module
