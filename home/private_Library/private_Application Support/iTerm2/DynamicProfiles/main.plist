@@ -16,6 +16,36 @@
       "Columns": 201,
       "Disable Window Resizing" : true,
       "Show Mark Indicators" : false,
+      "Keyboard Map" : {
+        "0xf701-0x240000-0x7d" : {
+          "Version" : 2,
+          "Apply Mode" : 0,
+          "Action" : 10,
+          "Text" : "[1;5B",
+          "Escaping" : 2
+        },
+        "0xf700-0x240000-0x7e" : {
+          "Version" : 2,
+          "Apply Mode" : 0,
+          "Action" : 10,
+          "Text" : "[1;5A",
+          "Escaping" : 2
+        },
+        "0xf702-0x240000-0x7b" : {
+          "Version" : 2,
+          "Apply Mode" : 0,
+          "Action" : 10,
+          "Text" : "[1;5D",
+          "Escaping" : 2
+        },
+        "0xf703-0x240000-0x7c" : {
+          "Version" : 2,
+          "Apply Mode" : 0,
+          "Action" : 10,
+          "Text" : "[1;5C",
+          "Escaping" : 2
+        }
+      },
     },
   ]
 }
