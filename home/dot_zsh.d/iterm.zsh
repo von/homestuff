@@ -3,7 +3,7 @@
 # Configuration for iTerm
 
 # Determine if we are running within iTerm...
-if test -n "${TERM_PROGRAM}" -a "${TERM_PROGRAM}" = "iTerm.app" ; then
+if test -n "${ITERM_PROFILE}" ; then
 
   # Open new tab in iTerm with given command
   # Kudos: https://gist.github.com/bobthecow/757788
