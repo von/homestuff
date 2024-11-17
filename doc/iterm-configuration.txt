@@ -17,9 +17,10 @@ For Tmux (see tmux/tmux.conf):
     Change under System Preferences / Keyboard / Shortcuts / Input Sources
   * These cause C-Left and C-Right to send the sequence tmux expects
     Under Preferences / Keys / Key Bindings:
+    * C-Up Send Escape Sequence [1;5A
+    * C-Down Send Escape Sequence [1;5B
     * C-Right Send Escape Sequence [1;5C
     * C-Left Send Escape Sequence [1;5D
-    * 2021-12 don't seem to be needed
   * Rebind C-<num> per http://unix.stackexchange.com/a/96936/29832
     * C-1: Send Escape Sequence [27;5;49~
     * C-2: Send Escape Sequence [27;5;50~
