@@ -35,10 +35,10 @@ EOF
 
   # Proprietary iTerm escape codes
   # https://www.iterm2.com/documentation-escape-codes.html
-  ITERM_CURSOR_BLOCK="\e]50;CursorShape=0\007"
-  ITERM_CURSOR_VERTICAL_BAR="\e]50;CursorShape=1\007"
-  ITERM_CURSOR_UNDERLINE="\e]50;CursorShape=2\007"
-  ITERM_CLEAR_SCROLLBACK="\e]50;ClearScrollback\007"
+  ITERM_CURSOR_BLOCK="\e]1337;CursorShape=0\a"
+  ITERM_CURSOR_VERTICAL_BAR="\e]1337;CursorShape=1\a"
+  ITERM_CURSOR_UNDERLINE="\e]1337;CursorShape=2\x7"
+  ITERM_CLEAR_SCROLLBACK="\e]1337;ClearScrollback\a"
 
   reset() {
     # Also reset cursor shape
