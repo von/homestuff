@@ -52,5 +52,22 @@ EOF
   set_iterm_badge() {
     printesc "\e]1337;SetBadgeFormat=%s\a" $(echo -n "$*" | base64)
   }
+
+  # Kudos: https://stackoverflow.com/questions/16768750/iterm2-get-current-session-profile
+  # The first time this is run, iTerm will ask for confirmation
+  set_iterm_profile() {
+    printesc "\e]50;SetProfile=%s\a" "$1"
+  }
+
+  # Kudos: https://stackoverflow.com/a/34452331/197789
+  # XXX This seems to always return the profile the window
+  #     was created with rather than the active profile.
+  get_iterm_profile() {
+    osascript <<-EOF
+    tell application "iTerm2"
+      get profile name of current session of current window
+    end tell
+EOF
+  }
 fi
 
