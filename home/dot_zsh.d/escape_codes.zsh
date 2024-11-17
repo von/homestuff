@@ -7,6 +7,7 @@ if test -n "$TMUX" ; then
 
   # To pass escape codes through tmux, prepend \ePtmux;\e and append \e\\
   # http://blog.yjl.im/2014/12/passing-escape-codes-for-changing-font.html
+  # Note this requires the allow-passthrough tmux option to be on or all.
   printesc() {
     fmt=$1; shift
     printf "\ePtmux;\e"$fmt"\e\\" ${(q)@}
