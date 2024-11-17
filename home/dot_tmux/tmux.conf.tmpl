@@ -141,6 +141,12 @@ set-option -gw window-status-current-format '#I:#W#F#{?pane_synchronized,^,}'
 # Don't exit if we have no clients attached
 set-option -g exit-unattached off
 
+######
+# Allow escape codes to be passed through tmux from all panes,
+# visible or not
+set-option -g allow-passthrough all
+
+
 #####################################################################
 # Mouse interactions
 
