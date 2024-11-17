@@ -1,6 +1,9 @@
 #!/bin/zsh
 #
 # Configuration for iTerm
+#
+# For escape codes see:
+# https://iterm2.com/documentation-escape-codes.html
 
 # Determine if we are running within iTerm...
 if test -n "${ITERM_PROFILE}" ; then
