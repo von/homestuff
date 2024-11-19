@@ -113,9 +113,8 @@ ZSH_DETACHED_HEAD="%F{red}[Detached]%{$reset_color%}"
 # Clear RPROMPT after user enters command
 setopt transientrprompt
 
-# Use non-breaking space so tmux can find prompt.
-# See https://unix.stackexchange.com/a/353415/29832
-nbsp=" "
+# Escape sequence to tmux next-prompt / previous-prompt can find prompt
+TMUX_PROMPT_MARK=$'\e]133;A]\e\\'
 
 # }}} Configuration #
 
@@ -397,10 +396,10 @@ function von_theme_init() {
     # We are running in tmux.
     # title.zsh will be setting the window title with hostname and path which
     # is picked up by tmux and displayed.
-    PROMPT=$'%{${VON_THEME_PROMPT_COLOR}%}${VON_THEME_PROMPT}%{$reset_color%}${nbsp}'
+    PROMPT=$'%{${VON_THEME_PROMPT_COLOR}%}${VON_THEME_PROMPT}%{$reset_color%}%{${TMUX_PROMPT_MARK}%} '
   else
     # We are not running in tmux. Need to display stuff ourselves.
-    PROMPT=$'%{${VON_THEME_WORKINGDIR_COLOR}%}%~%{$reset_color%} %{${VON_THEME_PROMPT_COLOR}%}${VON_THEME_PROMPT}%{$reset_color%}${nbsp}'
+    PROMPT=$'%{${VON_THEME_WORKINGDIR_COLOR}%}%~%{$reset_color%} %{${VON_THEME_PROMPT_COLOR}%}${VON_THEME_PROMPT}%{$reset_color%} '
   fi
 
   RPROMPT=""

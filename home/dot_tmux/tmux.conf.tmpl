@@ -355,11 +355,10 @@ bind N command-prompt -p "Session name:" "rename-session '%1'"
 
 ######
 # Jump to last prompt (p)
-# Kudos: https://unix.stackexchange.com/a/353415/29832
-# Note the search is for a non-breaking space and this requires a nbsp in my prompt.
-bind-key p copy-mode\;\
-           send-keys -X start-of-line\;\
-           send-keys -X search-backward " "
+# Note the search requires the escape sequence in my prompt as described
+# in the tmux man page.
+bind-key p copy-mode\; send-keys -X previous-prompt
+
 ######
 # Split window and open iPython (P)
 bind P split-window -v 'ipython'
@@ -426,10 +425,10 @@ bind -T copy-mode-vi C-c send-keys -X clear-selection
 
 ######
 # Forward and backword prompt in selection mode with n,p
-# Kudos: https://unix.stackexchange.com/a/353415/29832
-# Note the search is for a non-breaking space and this requires a nbsp in my prompt.
-bind -T copy-mode-vi n send-keys -X search-forward " "
-bind -T copy-mode-vi p send-keys -X search-backward " "
+# Note the search requires the escape sequence in my prompt as described
+# in the tmux man page.
+bind -T copy-mode-vi n send-keys -X next-prompt
+bind -T copy-mode-vi p send-keys -X previous-prompt
 
 #####################################################################
 # Plugins
