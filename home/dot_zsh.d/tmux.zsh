@@ -39,6 +39,16 @@ if test -n "${TMUX}" ; then
         local cmd="${TMUX_CMD_WRAPPER} ${PAGER:-less} -+F ${tmp} && rm -f ${tmp}"
         tmux split-window -v ${cmd}
     }
+
+    # Mark the start of command output
+    # tmux uses "\e]133;C\e\\" as a marker though this is undocumented.
+    # See: https://github.com/tmux/tmux/issues/4259
+    # Kudos: https://github.com/tmux/tmux/issues/3734
+    tmux-mark-command-start() {
+      echo -ne $'\e]133;C\e\\\\'
+    }
+
+    add-zsh-hook preexec tmux-mark-command-start
 fi
 
 # Do a git commit in tmux by splitting a pane with the git index and

@@ -424,11 +424,17 @@ bind -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel
 bind -T copy-mode-vi C-c send-keys -X clear-selection
 
 ######
-# Forward and backword prompt in selection mode with n,p
+# Forward and backword prompt in selection mode with n,p,[,]
 # Note the search requires the escape sequence in my prompt as described
 # in the tmux man page.
 bind -T copy-mode-vi n send-keys -X next-prompt
 bind -T copy-mode-vi p send-keys -X previous-prompt
+
+# Jump to start of command output
+# Note this requires a different escape sequence as output
+# in zsh.d/tmux.zsh
+bind -T copy-mode-vi [ send-keys -X previous-prompt -o
+bind -T copy-mode-vi ] send-keys -X next-prompt -o
 
 #####################################################################
 # Plugins
