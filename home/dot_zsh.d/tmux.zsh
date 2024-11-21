@@ -49,6 +49,33 @@ if test -n "${TMUX}" ; then
     }
 
     add-zsh-hook preexec tmux-mark-command-start
+
+    # Reproduce the output from the last run command on stdout
+    # Uses the command start marks as produced my tmux-mark-command-start()
+    # Kudos: https://ianthehenry.com/posts/tmux-copy-last-command/
+    # XXX Piping from this into 'less' seems to have a race condition
+    #     causing it to fail (no output) about half the time.
+    tmux-last-command-output() {
+      # There doesn't seem to be any way to output the tux selection directly
+      # to stdout, so we use a named pipe.
+      local pipedir=$(mktemp -d -t tmux-lco)
+      local pipefile="${pipedir}/fifo"
+      mkfifo -m 600 ${pipefile}
+      tmux copy-mode \; \
+        send-keys -X previous-prompt -o \; \
+        send-keys -X begin-selection \; \
+        send-keys -X next-prompt \; \
+        send-keys -X cursor-up \; \
+        send-keys -X end-of-line \; \
+        send-keys -X stop-selection \; \
+        send-keys -X copy-pipe-and-cancel "cat > ${pipefile}"
+      cat ${pipefile}
+      # Clean up
+      rm -f ${pipefile}
+      rmdir ${pipedir}
+    }
+
+    alias lco='tmux-last-command-output'
 fi
 
 # Do a git commit in tmux by splitting a pane with the git index and
