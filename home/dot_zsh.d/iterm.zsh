@@ -53,8 +53,27 @@ EOF
     printesc $ITERM_CURSOR_BLOCK
   }
 
+  # Set tab background color. Will only be visible if more than
+  # one tab is open.
+  iterm_set_chrome_background() {
+    if test $# -eq 0 ; then
+      # Reset to default
+      printesc "\e]6;1;bg;*;default\a"
+    else
+      # Arguments are Red, Green, Blue
+      # Carriage returns needed here to separate sequences
+      printesc "\e]6;1;bg;red;brightness;${1}\a\n"
+      printesc "\e]6;1;bg;green;brightness;${2}\a\n"
+      printesc "\e]6;1;bg;blue;brightness;${3}\a\n"
+    fi
+  }
   set_iterm_badge() {
     printesc "\e]1337;SetBadgeFormat=%s\a" $(echo -n "$*" | base64)
+  }
+
+  # XXX Seems to results in backslashes before whitepsace
+  iterm_notification() {
+    printesc "\e]9;%s\a" "${(j. .)${*}}"
   }
 
   # Kudos: https://stackoverflow.com/questions/16768750/iterm2-get-current-session-profile
