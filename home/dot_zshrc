@@ -116,6 +116,11 @@ plugins+=(git-prompt)  # from oh-my-zsh
 plugins+=(ignoreeof)
 plugins+=(ignoreinterrupt)
 plugins+=(increase-number)
+if test -n "$ITERM_PROFILE" -a -z "$TMUX" ; then
+  # Only enable if not in tmux as that confuses things
+  export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
+  plugins+=(iterm_shell_integration) # see iterm.zsh
+fi
 plugins+=(pass)  # from oh-my-zsh
 plugins+=(stack)
 plugins+=(theme)

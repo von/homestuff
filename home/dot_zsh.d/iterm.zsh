@@ -5,6 +5,10 @@
 # For escape codes see:
 # https://iterm2.com/documentation-escape-codes.html
 
+# iterm_shell_integration loaded in ../zshrc if we are in
+# iTerm but not in tmux
+# https://iterm2.com/documentation-shell-integration.html
+
 # Determine if we are running within iTerm...
 if test -n "${ITERM_PROFILE}" ; then
 
