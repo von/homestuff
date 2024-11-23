@@ -40,12 +40,17 @@ if test -n "${TMUX}" ; then
         tmux split-window -v ${cmd}
     }
 
-    # Mark the start of command output
+    # OSC Escape sequences for prompt and output start used by
+    # 'next-prompt' and 'previous-prompt'
+    TMUX_PROMPT_MARK=$'\e]133;A\e\\'
     # tmux uses "\e]133;C\e\\" as a marker though this is undocumented.
     # See: https://github.com/tmux/tmux/issues/4259
     # Kudos: https://github.com/tmux/tmux/issues/3734
+    TMUX_COMMAND_OUTPUT_MARK=$'\e]133;C\e\\'
+
+    # Mark the start of command output
     tmux-mark-command-start() {
-      echo -ne $'\e]133;C\e\\\\'
+      echo -ne ${TMUX_COMMAND_OUTPUT_MARK}
     }
 
     add-zsh-hook preexec tmux-mark-command-start

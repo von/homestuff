@@ -113,9 +113,6 @@ ZSH_DETACHED_HEAD="%F{red}[Detached]%{$reset_color%}"
 # Clear RPROMPT after user enters command
 setopt transientrprompt
 
-# Escape sequence to tmux next-prompt / previous-prompt can find prompt
-TMUX_PROMPT_MARK=$'\e]133;A]\e\\'
-
 # }}} Configuration #
 
 # von_theme_error {{{ #
@@ -396,10 +393,21 @@ function von_theme_init() {
     # We are running in tmux.
     # title.zsh will be setting the window title with hostname and path which
     # is picked up by tmux and displayed.
+    # $TMUX_PROMPT_MARK from tmux.zsh
     PROMPT=$'%{${VON_THEME_PROMPT_COLOR}%}${VON_THEME_PROMPT}%{$reset_color%}%{${TMUX_PROMPT_MARK}%} '
   else
     # We are not running in tmux. Need to display stuff ourselves.
     PROMPT=$'%{${VON_THEME_WORKINGDIR_COLOR}%}%~%{$reset_color%} %{${VON_THEME_PROMPT_COLOR}%}${VON_THEME_PROMPT}%{$reset_color%} '
+
+    if [ -n "$ITERM_PROFILE" ] ; then
+      # We are running in iTerm, mark our prompts
+      # This doesn't work well in tmux as the mark is always at the far
+      # left so is confusing with multiple columns.
+      # For iTerm to display it's blue triangle, enable "Terminal/
+      # Show mark indicators" under Profile Settings
+      # See: https://iterm2.com/documentation-shell-integration.html
+      PROMPT='%{$(iterm2_prompt_mark)%}'"${PROMPT}"
+    fi
   fi
 
   RPROMPT=""
