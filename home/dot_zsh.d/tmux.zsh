@@ -50,6 +50,11 @@ if test -n "${TMUX}" ; then
 
     add-zsh-hook preexec tmux-mark-command-start
 
+    # XXX I've also tried adding the tmux prompt mark using
+    #     the precmd hook, but that fails unless I put the mark
+    #     on a separate line. I believe this is because my prompt
+    #     does a 'zle reset-prompt' which clears the mark.
+
     # Reproduce the output from the last run command on stdout
     # Uses the command start marks as produced my tmux-mark-command-start()
     # Kudos: https://ianthehenry.com/posts/tmux-copy-last-command/
