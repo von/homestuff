@@ -408,6 +408,25 @@ bind w choose-tree "link-window -d -s '%%'"
 bind W choose-window
 
 ######
+# Yank output from last command into pastebuffer (y)
+# This assumes the command has completed and the subsequent prompt
+# has been displayed and next-prompt/previous-prompt work, otherwise
+# the behavior is undefined.
+# Kudos: https://ianthehenry.com/posts/tmux-copy-last-command/
+bind y copy-mode \; \
+        send-keys -X previous-prompt -o \; \
+        send-keys -X begin-selection \; \
+        send-keys -X next-prompt \; \
+        send-keys -X cursor-up \; \
+        send-keys -X end-of-line \; \
+        send-keys -X stop-selection \; \
+{{- if eq .chezmoi.os "darwin" }}
+        send-keys -X copy-pipe-and-cancel "pbcopy"
+{{- else }}
+        send-keys -X copy-selection-and-cancel
+{{ end }}
+
+######
 # switch between sessions (')
 bind "'" choose-session
 
