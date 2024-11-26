@@ -27,7 +27,7 @@ if test -n "${TMUX}" ; then
     tmux_set_pane_title_for_prompt "[${ZSH_THEME_TERM_TAB_TITLE_IDLE}]"
   }
 
-  precmd_functions+=(tmux_set_pane_title_precmd)
+  add-zsh-hook precmd tmux_set_pane_title_precmd
 
   # Set pane title before executing command
   # Note $1 is the whole commandline
@@ -39,7 +39,7 @@ if test -n "${TMUX}" ; then
     tmux_set_pane_title_for_prompt "<${LINE}>"
   }
 
-  preexec_functions+=(tmux_set_pane_title_preexec)
+  add-zsh-hook preexec tmux_set_pane_title_preexec
 
   # Fix window name if not set by tmux
   tmux_window_name=$(tmux display -p "#{window_name}")
