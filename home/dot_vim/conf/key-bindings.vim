@@ -394,6 +394,10 @@ tmap <C-W><C-Z> <C-W>:silent call ZoomWin#ZoomWin()<CR>
 nmap ]g <Plug>(GitGutterNextHunk)
 nmap [g <Plug>(GitGutterPrevHunk)
 
+" Brack-G to move between grep/Unite results
+nmap ]G :UniteNext<cr>
+nmap [G :UnitePrevious<cr>
+
 " Use vim-qf functions for navigating quickfix
 nmap [q <Plug>(qf_qf_previous)
 nmap ]q <Plug>(qf_qf_next)
