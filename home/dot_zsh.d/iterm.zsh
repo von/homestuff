@@ -58,28 +58,28 @@ EOF
   iterm_set_chrome_background() {
     if test $# -eq 0 ; then
       # Reset to default
-      printesc "\e]6;1;bg;*;default\a"
+      printosc "6;1;bg;*;default"
     else
       # Arguments are Red, Green, Blue
       # Carriage returns needed here to separate sequences
-      printesc "\e]6;1;bg;red;brightness;${1}\a\n"
-      printesc "\e]6;1;bg;green;brightness;${2}\a\n"
-      printesc "\e]6;1;bg;blue;brightness;${3}\a\n"
+      printosc "6;1;bg;red;brightness;${1}\n"
+      printosc "6;1;bg;green;brightness;${2}\n"
+      printosc "6;1;bg;blue;brightness;${3}\n"
     fi
   }
   set_iterm_badge() {
-    printesc "\e]1337;SetBadgeFormat=%s\a" $(echo -n "$*" | base64)
+    printosc "1337;SetBadgeFormat=%s" $(echo -n "$*" | base64)
   }
 
   # XXX Seems to results in backslashes before whitepsace
   iterm_notification() {
-    printesc "\e]9;%s\a" "${(j. .)${*}}"
+    printosc "9;%s" "${(j. .)${*}}"
   }
 
   # Kudos: https://stackoverflow.com/questions/16768750/iterm2-get-current-session-profile
   # The first time this is run, iTerm will ask for confirmation
   set_iterm_profile() {
-    printesc "\e]50;SetProfile=%s\a" "$1"
+    printosc "50;SetProfile=%s" "$1"
   }
 
   # Kudos: https://stackoverflow.com/a/34452331/197789

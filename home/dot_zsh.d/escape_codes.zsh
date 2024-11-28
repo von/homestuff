@@ -18,6 +18,15 @@ else
   }
 fi
 
+# Print an OSC escape sequence as used by, e.g., iTerm:
+# https://iterm2.com/documentation-escape-codes.html
+# Adds "ESC ]" prefix and "\a" (Bell) terminator.
+printosc() {
+    fmt=$1; shift
+    printesc "\e]"${fmt}"\a" "${@}"
+
+}
+
 # Create attr hash table
 typeset -A attr
 attr[reset]="\e[0m"
