@@ -86,57 +86,57 @@ if test -n "${TMUX}" ; then
     }
 
     alias lco='tmux-last-command-output'
-fi
 
-# Do a git commit in tmux by splitting a pane with the git index and
-# then doing a commit in original pane.
-git-tmux-commit() {
-    if test -z "${TMUX}" ; then
-        echo "Not in tmux."
-        exit 0
+    # Do a git commit in tmux by splitting a pane with the git index and
+    # then doing a commit in original pane.
+    git-tmux-commit() {
+        if test -z "${TMUX}" ; then
+            echo "Not in tmux."
+            exit 0
+        fi
+        # -d = don't focus on new pane
+        # -P = print pane information, so we can kill it later
+        diff_pane=$(tmux split-window -d -P "git diff --cached | less -+F")
+        git commit
+        tmux kill-pane -t ${diff_pane}
+    }
+
+    alias gtc=git-tmux-commit
+
+    # Do a svn commit in tmux by splitting a pane with the svn diff and
+    # then doing a commit in original pane.
+    svn-tmux-commit() {
+        if test -z "${TMUX}" ; then
+            echo "Not in tmux."
+            exit 0
+        fi
+        # -d = don't focus on new pane
+        # -P = print pane information, so we can kill it later
+        diff_pane=$(tmux split-window -d -P "svn diff --cached $* | less -+F")
+        svn commit $*
+        tmux kill-pane -t ${diff_pane}
+    }
+
+    alias stc=svn-tmux-commit
+
+    # Deactivate any virtualenv before running 'tm' to clean up our
+    # environment.
+    function tm() {
+      novenv command tm ${(q)@}
+    }
+
+    if (( $+commands[tmuxp] )) ; then
+      # Disable auto title to turn off tmuxp warning
+      function tmuxp() {
+        DISABLE_AUTO_TITLE=true command tmuxp ${(q)@}
+      }
+
+      # Function to start tmux-server
+      #
+      # Meant to be called from iTerm profile.
+      #
+      function tmux-start() {
+        DISABLE_AUTO_TITLE=true command tmuxp load -y servers homestuff
+      }
     fi
-    # -d = don't focus on new pane
-    # -P = print pane information, so we can kill it later
-    diff_pane=$(tmux split-window -d -P "git diff --cached | less -+F")
-    git commit
-    tmux kill-pane -t ${diff_pane}
-}
-
-alias gtc=git-tmux-commit
-
-# Do a svn commit in tmux by splitting a pane with the svn diff and
-# then doing a commit in original pane.
-svn-tmux-commit() {
-    if test -z "${TMUX}" ; then
-        echo "Not in tmux."
-        exit 0
-    fi
-    # -d = don't focus on new pane
-    # -P = print pane information, so we can kill it later
-    diff_pane=$(tmux split-window -d -P "svn diff --cached $* | less -+F")
-    svn commit $*
-    tmux kill-pane -t ${diff_pane}
-}
-
-alias stc=svn-tmux-commit
-
-# Deactivate any virtualenv before running 'tm' to clean up our
-# environment.
-function tm() {
-  novenv command tm ${(q)@}
-}
-
-if (( $+commands[tmuxp] )) ; then
-  # Disable auto title to turn off tmuxp warning
-  function tmuxp() {
-    DISABLE_AUTO_TITLE=true command tmuxp ${(q)@}
-  }
-
-  # Function to start tmux-server
-  #
-  # Meant to be called from iTerm profile.
-  #
-  function tmux-start() {
-    DISABLE_AUTO_TITLE=true command tmuxp load -y servers homestuff
-  }
 fi
