@@ -14,7 +14,7 @@ export LESSCHARSET='utf-8'
 #  -g  Only highlight last string to match search
 #  -M  Long prompt string
 #  -R  Allow raw ANSI escape sequences
-#  Note: -F causes less not to display files less than one screenfull
-#           due to termcap initialization clearing the screen
+#  -F  Quit immediately if display less than one screen of text.
+#      See https://unix.stackexchange.com/q/107315/29832
 #  Note: -X causes less to ignore mouse events, so I don't set it.
-export LESS='-i -w -z-4 -g -M -R -j8'
+export LESS='-i -w -z-4 -g -M -R -j8 -F'
