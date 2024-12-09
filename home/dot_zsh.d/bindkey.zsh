@@ -42,7 +42,7 @@ bindkey -M viins '^p'    up-line-or-history
 # From plugins/fzf_history_widget
 bindkey -M viins '^r'    my-fzf-history-widget
 bindkey -M viins '^s'    history-incremental-pattern-search-forward
-bindkey -M viins '^u'    backward-kill-line
+bindkey -M viins '^u'    kill-buffer
 bindkey -M viins '^w'    backward-kill-word
 bindkey -M viins '^y'    yank
 
@@ -106,7 +106,7 @@ bindkey -M vicmd '^n'    down-line-or-history
 bindkey -M vicmd '^p'    up-line-or-history
 bindkey -M vicmd '^r'    history-incremental-pattern-search-backward
 bindkey -M vicmd '^s'    history-incremental-pattern-search-forward
-bindkey -M vicmd '^u'    backward-kill-line
+bindkey -M vicmd '^u'    kill-buffer
 bindkey -M vicmd '^w'    backward-kill-word
 bindkey -M vicmd '^y'    yank
 
