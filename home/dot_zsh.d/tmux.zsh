@@ -63,8 +63,9 @@ if test -n "${TMUX}" ; then
     # Reproduce the output from the last run command on stdout
     # Uses the command start marks as produced my tmux-mark-command-start()
     # Kudos: https://ianthehenry.com/posts/tmux-copy-last-command/
-    # XXX Piping from this into 'less' seems to have a race condition
-    #     causing it to fail (no output) about half the time.
+    # XXX Piping from this into 'less' doesn't work well as less
+    #     switches to the alternate screen which causes tmux to 
+    #     to capture from that screen.
     tmux-last-command-output() {
       # There doesn't seem to be any way to output the tux selection directly
       # to stdout, so we use a named pipe.
