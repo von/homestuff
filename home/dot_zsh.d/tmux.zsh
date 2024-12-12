@@ -125,19 +125,19 @@ if test -n "${TMUX}" ; then
     function tm() {
       novenv command tm ${(q)@}
     }
+fi
 
-    if (( $+commands[tmuxp] )) ; then
-      # Disable auto title to turn off tmuxp warning
-      function tmuxp() {
-        DISABLE_AUTO_TITLE=true command tmuxp ${(q)@}
-      }
+if (( $+commands[tmuxp] )) ; then
+  # Disable auto title to turn off tmuxp warning
+  function tmuxp() {
+    DISABLE_AUTO_TITLE=true command tmuxp ${(q)@}
+  }
 
-      # Function to start tmux-server
-      #
-      # Meant to be called from iTerm profile.
-      #
-      function tmux-start() {
-        DISABLE_AUTO_TITLE=true command tmuxp load -y servers homestuff
-      }
-    fi
+  # Function to start tmux-server
+  #
+  # Meant to be called from iTerm profile.
+  #
+  function tmux-start() {
+    DISABLE_AUTO_TITLE=true command tmuxp load -y servers homestuff
+  }
 fi
