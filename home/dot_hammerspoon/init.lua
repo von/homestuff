@@ -33,7 +33,10 @@ hs.window.filter.setLogLevel(1)
 
 ------------------------------------------------------------
 -- Install Spoons
--- This should have been intalled into ~/.hammerspoon/Spoons/ by
+--
+-- Spoons are installed into ~/.hammerspoon/Spoons
+--
+-- SpoonInstall should have been intalled into ~/.hammerspoon/Spoons/ by
 -- ~/homestuff/os/Darwin/init/92-hammerspoon-bootstrap.sh
 
 hs.loadSpoon("SpoonInstall")
