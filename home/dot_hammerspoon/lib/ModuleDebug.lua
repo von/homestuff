@@ -1,6 +1,7 @@
 -- Turn debugging on for modules and Spoons as specified in MyConfig
 --
--- Modules must have a debug() method that is called with true to turn on debugging.
+-- 1) Use module:debug(true) method if that method exists.
+-- 2) Use module.logger.setLogLevel("debug") if module.logger exists.
 
 local Module = {}
 
@@ -26,12 +27,26 @@ function Module:start()
       if v then
         Module.log.df("Turning on debugging for %s", module)
         local f = function()
+          -- Try to call module:debug(true) if it has a debug() method
           local m = require(module)
-          m:debug(true)
+          if m.debug then
+            Module.log.df("Calling %s:debug(true)", module)
+            m:debug(true)
+            return
+          end 
+          -- Try setting level on module.logger
+          if m.logger then
+            Module.log.df("Setting loglevel on %s.logger to debug", module)
+            -- Yes "." not ":" - it's a static function
+            m.logger.setLogLevel("debug")
+            return
+          end
+          Module.log.ef("Could not turn on debugging on %s", module)
         end
         local result, errormsg = pcall(f)
         if not result then
-          Module.log.ef("Error turning on debugging for %s: %s", module, errormsg)
+          Module.log.df("Error enabling debugging for %s: %s",
+            module, errormsg)
         end
       end
     end
