@@ -545,6 +545,10 @@ hs.hotkey.bind(modifiers.opt, "Tab", "Previous Chrome Tab", chrome.wrapped.previ
 
 -- }}} Mod-Tab: Browser window switcher --
 ----------------------------------------------------------------------
+-- Cmd-Tab: Cannot be trivially overridden {{{ --
+-- See https://apple.stackexchange.com/a/402767/104604
+-- }}} Cmd-Tab: Cannot be trivially overridden --
+----------------------------------------------------------------------
 -- Mod-arrows are used by iTerm
 ----------------------------------------------------------------------
 -- CapsLock/f19 modal {{{ --
