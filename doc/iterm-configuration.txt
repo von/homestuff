@@ -5,6 +5,10 @@ to be able to access the clipboard.
   * Preferences/General/Selection/Applications in terminal may access clipboard
 Also see https://evertpot.com/osx-tmux-vim-copy-paste-clipboard/
 
+Turn off scroll bar since it is unnecessary with tmux (one can still scroll
+using trackpad)
+  * Preferences / Appearance / Hide Scrollbars
+
 For title (see my-title-scheme.txt):
   * Preferences/Appearance:
     * Window / "Show window number" should be off
