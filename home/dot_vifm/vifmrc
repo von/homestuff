@@ -540,7 +540,7 @@ endif
 " ------------------------------------------------------------------------------
 " Choosing configuration {{{ "
 " Configuraation to be run only if we are choosing a file
-if chooseopt('files')
+if chooseopt('files') != ''
   " Single pane
   only
 
