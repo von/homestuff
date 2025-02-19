@@ -14,7 +14,8 @@ if test -n "$TMUX" ; then
   }
 else
   printesc() {
-    printf ${(q)@}
+    fmt=$1; shift
+    printf $fmt ${(q)@}
   }
 fi
 
