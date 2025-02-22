@@ -28,8 +28,8 @@ Function keys are controlled by Karabiner-Elements and HammerSpoon
 Kudos: https://apple.stackexchange.com/a/249075/104604
   * System Preference / Keyboard / select "Use all F1, F2, etc keys as standard
     function keys"
-  * karabiner/karabiner.json has the configuration Karabiner-Elements (editing
-    Preferences doesn't seem to persist)
+  * .config/karabiner/karabiner.json has the configuration Karabiner-Elements
+    (editing Preferences doesn't seem to persist)
   * Hammerspoon (specifically hammerspoon/config/hotkeys.lua) then maps
     F7,F8,F9 to controlling Google Music
 
