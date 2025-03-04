@@ -42,7 +42,8 @@ else
   status+="/No interface"
 fi
 
-ssid=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | awk '/ SSID/ {print substr($0, index($0, $2))}')
+# Kudos: https://snelson.us/2024/09/determining-a-macs-ssid-like-an-animal/
+ssid=$(ipconfig getsummary $(networksetup -listallhardwareports | awk '/Hardware Port: Wi-Fi/{getline; print $2}') | awk -F ' SSID : ' '/ SSID : / {print $2}')
 if test -n "${ssid}"; then
   status+="/${ssid}"
 fi
