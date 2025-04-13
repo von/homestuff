@@ -123,10 +123,10 @@ hi ColorColumn    ctermbg=236 guibg=#303030
 " }}} SignColumn
 " Completion Menu {{{
 " Kudos: https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup
-hi Pmenu          ctermbg=white ctermfg=black guibg=White guifg=Black
-hi PmenuSel       ctermbg=blue ctermfg=white cterm=bold guibg=Blue guifg=White
-hi PmenuSbar      ctermbg=grey ctermfg=grey guibg=Gray guifg=Gray
-hi PmenuThumb     ctermbg=blue ctermfg=blue guibg=Blue guifg=Blue
+hi Pmenu          ctermbg=White ctermfg=Blue guibg=White guifg=Blue
+hi PmenuSel       cterm=reverse gui=reverse
+hi PmenuSbar      ctermbg=Grey ctermfg=Grey guibg=Gray guifg=Gray
+hi PmenuThumb     ctermbg=Blue ctermfg=Blue guibg=Blue guifg=Blue
 " }}} Completion Menu
 " Help {{{ "
 " Get rid of colored backgrounds
