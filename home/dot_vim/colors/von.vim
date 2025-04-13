@@ -209,9 +209,6 @@ hi Type			  term=underline  cterm=bold ctermfg=lightgreen  gui=bold  guifg=#60ff
 hi Error		  term=reverse	ctermfg=darkcyan  ctermbg=black  guifg=Red	guibg=Black
 hi Todo			  term=standout  ctermfg=black	ctermbg=darkcyan  guifg=Blue  guibg=Yellow
 hi MatchParen	  term=reverse  ctermfg=blue guibg=Blue
-hi TabLine		  term=bold,reverse  cterm=bold ctermfg=lightblue ctermbg=white gui=bold guifg=blue guibg=white
-hi TabLineFill	  term=bold,reverse  cterm=bold ctermfg=lightblue ctermbg=white gui=bold guifg=blue guibg=white
-hi TabLineSel	  term=reverse	ctermfg=white ctermbg=lightblue guifg=white guibg=blue
 hi Underlined	  term=underline cterm=bold,underline ctermfg=lightblue guifg=lightblue gui=bold,underline
 hi Ignore		  ctermfg=black ctermbg=black guifg=black guibg=black
 
