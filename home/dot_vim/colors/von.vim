@@ -15,6 +15,11 @@ let g:colors_name = "von"
 if has("gui_running")
   " We need to explicity set background for MacVim GUI
   hi Normal		  guifg=white  guibg=black
+
+  " GUI-only highlights
+  hi Scrollbar	  guifg=darkcyan guibg=cyan
+  hi Menu	  guifg=black guibg=cyan
+  " + Tooltip
 else
   " NONE for background lets tmux highlighting of active pane work correctly
   " Kudos: https://stackoverflow.com/a/37720708/197789
@@ -96,6 +101,9 @@ hi Constant		  term=underline  cterm=bold ctermfg=13 guifg=#0087af
 " Special {{{ "
 
 hi Special        term=bold cterm=bold ctermfg=224 guifg=#afd700
+" Unprintable characters
+hi SpecialKey	  term=bold  cterm=bold  ctermfg=darkred  guifg=#cc0000
+hi link SpecialChar		Special
 
 " }}} Special
 " Customize tabbar {{{
@@ -174,34 +182,40 @@ hi link CursorLineNr CursorLineNrNormal
 hi shDerefWordError guifg=red guibg=NONE
 hi shDerefOpError guifg=red guibg=NONE
 " }}} Shell script "
-" Misc {{{ "
-hi Scrollbar	  guifg=darkcyan guibg=cyan
-hi Menu			  guifg=black guibg=cyan
-hi SpecialKey	  term=bold  cterm=bold  ctermfg=darkred  guifg=#cc0000
+" Search results {{{ "
+hi Search		  term=reverse  ctermfg=white  ctermbg=red guifg=white  guibg=#A02020
+" }}} Search results "
+" EndOfBuffer and NonText {{{ "
+" Tildes at the end of the buffer.
+hi EndOfBuffer	  term=bold  cterm=bold  ctermfg=darkred guifg=#5440A5 gui=bold
+" Characters that are used by vim to indicate things
 hi NonText		  term=bold  cterm=bold  ctermfg=darkred  gui=bold      guifg=#cc0000
+" }}} EndOfBuffer and NonText "
+" StatusLine {{{ "
+hi StatusLine	  term=bold,reverse  cterm=bold ctermfg=lightblue ctermbg=white gui=bold guifg=blue guibg=white
+hi StatusLineNC   term=reverse	ctermfg=white ctermbg=lightblue guifg=white guibg=blue
+" }}} StatusLine "
+" Visual mode selected text {{{ "
+hi Visual		  ctermbg=242 guibg=#6C6C6C
+" }}} Visual mode selected text "
+" Concealed text {{{ "
+" soft background with yellow text
+hi Conceal		  guifg=yellow guibg=#303030
+" }}} Concealed text "
+" Character under cursor {{{ "
+hi Cursor		  guifg=bg	guibg=Green
+" }}} Character under cursor "
+" Misc {{{ "
 hi Directory	  term=bold  cterm=bold  ctermfg=brown  guifg=#cc8000
 hi ErrorMsg		  term=standout  cterm=bold  ctermfg=grey  ctermbg=red  guifg=White  guibg=Red
-
-" Search results (hlsearch)
-hi Search		  term=reverse  ctermfg=white  ctermbg=red guifg=white  guibg=#A02020
 
 hi MoreMsg		  term=bold  cterm=bold  ctermfg=darkgreen	gui=bold  guifg=SeaGreen
 hi ModeMsg		  term=bold  cterm=bold  gui=bold  guifg=White	guibg=Blue
 hi Question		  term=standout  cterm=bold  ctermfg=darkgreen	gui=bold  guifg=Green
-hi StatusLine	  term=bold,reverse  cterm=bold ctermfg=lightblue ctermbg=white gui=bold guifg=blue guibg=white
-hi StatusLineNC   term=reverse	ctermfg=white ctermbg=lightblue guifg=white guibg=blue
 hi Title		  term=bold  cterm=bold  ctermfg=darkmagenta  gui=bold	guifg=Magenta
 
-" Visual mode selected text
-hi Visual		  ctermbg=242 guibg=#6C6C6C
-
-" Concealed text - soft background with yellow text
-hi Conceal		  guifg=yellow guibg=#303030
-
 hi WarningMsg	  term=standout  cterm=bold  ctermfg=darkred guifg=Red
-hi Cursor		  guifg=bg	guibg=Green
 hi Constant		  term=underline  cterm=bold ctermfg=magenta  guifg=#ffa0a0
-hi Special		  term=bold  cterm=bold ctermfg=red  guifg=Orange
 hi Identifier	  term=underline   ctermfg=brown  guifg=#40ffff
 hi Statement	  term=bold  cterm=bold ctermfg=yellow	gui=bold  guifg=#ffff60
 hi PreProc		  term=underline  ctermfg=darkmagenta   guifg=#ff80ff
@@ -212,8 +226,6 @@ hi MatchParen	  term=reverse  ctermfg=blue guibg=Blue
 hi Underlined	  term=underline cterm=bold,underline ctermfg=lightblue guifg=lightblue gui=bold,underline
 hi Ignore		  ctermfg=black ctermbg=black guifg=black guibg=black
 
-" Tildes past end of file
-hi EndOfBuffer	  term=bold  cterm=bold  ctermfg=darkred guifg=#5440A5 gui=bold
 hi link IncSearch		Visual
 hi link String			Constant
 hi link Character		Constant
@@ -235,7 +247,6 @@ hi link StorageClass	Type
 hi link Structure		Type
 hi link Typedef			Type
 hi link Tag				Special
-hi link SpecialChar		Special
 hi link Delimiter		Special
 hi link Debug			Special
 " }}} Misc "
