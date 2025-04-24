@@ -12,6 +12,20 @@
 # Determine if we are running within iTerm...
 if test -n "${ITERM_PROFILE}" ; then
 
+  # Set title
+  iterm_set_title() {
+    printosc "2;%s" "${(j. .)${*}}"
+  }
+
+  # Set subtitle
+  # Requires taller tab/subtitle support to be enabled under General
+  # XXX Doesn't seem to work. Source is Google AI and I can't find the
+  #     actual source.
+  # XXX Some other Googling makes me think OSC 52 copies into the pastebuffer
+  iterm_set_subtitle() {
+    printosc "52;%s" "${(j. .)${*}}"
+  }
+
   # Open new tab in iTerm with given command
   # Kudos: https://gist.github.com/bobthecow/757788
   tab() {
