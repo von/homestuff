@@ -39,6 +39,13 @@ export ZSH_CUSTOM=$HOME/.zsh.d/
 export REPOS_PATH=$HOME/repos/
 
 #####################################################################
+# My internal configuration variables
+
+# Use gpg-agent for my SSH keys. I do this to use a yubikey for ssh.
+# Requires gnugp/gpg-agent.conf to have 'enable-ssh-support'
+USE_GPG_AGENT_FOR_SSH=1
+
+#####################################################################
 # Debugging
 
 # Show all files sourced.

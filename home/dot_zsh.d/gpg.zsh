@@ -1,5 +1,8 @@
 # Configuration and support for gpg
 
+# Per man page
+export GPG_TTY=$(tty)
+
 # Kudos: https://askubuntu.com/a/558158/80562
 gpg-agent-clear()
 {
