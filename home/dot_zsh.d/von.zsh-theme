@@ -152,6 +152,8 @@ function von_theme_vcs_job() {
 # }}} von_theme_vcs_job() #
 
 # von_theme_ssh_check_job() {{{ #
+# Note that this may be checking gpg-agent since I use it to use
+# yubikey for git/ssh access. See keychain.zsh
 function von_theme_ssh_check_job() {
   ssh-add -l >& /dev/null
   if test $? -ne 0 ; then
@@ -269,8 +271,7 @@ von_theme_jobs+=(von_theme_vifm_cd_job)
 von_theme_async_jobs=()
 von_theme_async_jobs+=(von_theme_check_cwd)
 von_theme_async_jobs+=(von_theme_vcs_job)
-# Not using SSH much these days, so disable this check
-# von_theme_async_jobs+=(von_theme_ssh_check_job)
+von_theme_async_jobs+=(von_theme_ssh_check_job)
 von_theme_async_jobs+=(von_theme_maint_job)
 von_theme_async_jobs+=(von_theme_background_job)
 von_theme_async_jobs+=(von_theme_chezmoi_job)
