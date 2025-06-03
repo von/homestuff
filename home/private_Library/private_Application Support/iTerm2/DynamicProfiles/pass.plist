@@ -5,7 +5,7 @@
       "Guid": "f9fe2ed0-a592-4653-9b76-599a87fbf179",
       "Window Type" : 0,
       "Dynamic Profile Parent Name": "Default",
-      "Has Hotkey" : true,
+      "Has Hotkey" : false,
       "HotKey Window AutoHides" : true,
       "HotKey Modifier Activation" : 0,
       "HotKey Activated By Modifier" : false,
