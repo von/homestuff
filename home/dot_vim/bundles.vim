@@ -81,6 +81,10 @@ Plug 'klen/python-mode'
 " https://github.com/ludovicchabant/vim-gutentags
 Plug 'ludovicchabant/vim-gutentags'
 
+" Syntax for robotframework
+" https://github.com/mfukar/robotframework-vim
+Plug 'mfukar/robotframework-vim'
+
 " https://github.com/preservim/tagbar
 " Formerly 'majutsushi/tagbar'
 Plug 'preservim/tagbar'
