@@ -4,27 +4,39 @@
 #  Kudos: https://github.com/junegunn/vim-plug/issues/730
 #  Uses autoload/plug.vim
 
-# For vim:
-# "-T dumb" lets me see all the output
-# "-E" Improved Ex mode, stops complaint about output not being
-#     to a TTY.
+# XXX Do I want to upgrade for both vim and neovim?
+vim=${EDITOR:-vim}
+
+case ${vim} in
+  *nvim)
+    # For neovim
+    # "-Es" Silent Ex mode - do not start a UI.
+    vim_args="-Es"
+    ;;
+
+  *)
+    # For vim:
+    # "-T dumb" lets me see all the output
+    # "-E" Improved Ex mode, stops complaint about output not being
+    #     to a TTY.
+    vim_args="-T dumb -E"
+    ;;
+esac
+
+echo "Updating bundles for ${vim}"
+
 # Call "set nomore" turns off waiting for user during output
-# vim='vim -T dumb -E'
-
-# For neovim
-# "-Es" Silent Ex mode - do not start a UI.
-vim='nvim -Es'
-
+# Need 'qall' here instead of just 'quit'
 echo "Updating vim-plug"
-${vim} -c "set nomore|PlugUpgrade|qall"
+${vim} ${vim_args} -c "set nomore|PlugUpgrade|qall"
 
 echo "Updating vim-plug bundles"
-# Need 'qall' here instead of just 'quit'
-${vim} -c "set nomore|PlugUpdate!|qall"
+${vim} ${vim_args} -c "set nomore|PlugUpdate!|qall"
 
 # This is needed with some frequency so that deoplete completes utilisnips
+# XXX Not sure this is working
 echo "Running UpdateRemotePlugins"
-${vim} -c "set nomore|UpdateRemotePlugins|qall"
+${vim} ${vim_args} -c "set nomore|UpdateRemotePlugins|qall"
 
 # Not calling 'PlugClean' - do that manually.
 
