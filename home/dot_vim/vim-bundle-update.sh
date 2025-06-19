@@ -30,13 +30,9 @@ echo "Updating bundles for ${vim}"
 echo "Updating vim-plug"
 ${vim} ${vim_args} -c "set nomore|PlugUpgrade|qall"
 
+# Need to run UpdateRemotePlugins at same time as PlugUpdate
 echo "Updating vim-plug bundles"
-${vim} ${vim_args} -c "set nomore|PlugUpdate!|qall"
-
-# This is needed with some frequency so that deoplete completes utilisnips
-# XXX Not sure this is working
-echo "Running UpdateRemotePlugins"
-${vim} ${vim_args} -c "set nomore|UpdateRemotePlugins|qall"
+${vim} ${vim_args} -c "set nomore|PlugUpdate!|UpdateRemotePlugins|qall"
 
 # Not calling 'PlugClean' - do that manually.
 
