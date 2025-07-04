@@ -155,4 +155,12 @@ module.createStyledTextWithURL = function(text, url)
   return stext
 end
 
+-- Generate a password and place in pastebuffer
+-- Uses '~/bin/genpass'
+module.genpassword = function()
+  hs.alert.show("Generating password in pastebuffer...")
+  local task = hs.task.new(os.getenv("HOME") .. "/bin/genpass", nil)
+  task:start()
+end
+
 return module

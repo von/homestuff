@@ -502,6 +502,10 @@ local utilModalKeys = {
     func = function() EjectMenu:ejectVolumes() end,
     desc = "Eject Mounted Drives"
   },
+  G = {
+    func = util.genpassword,
+    desc = "Generate Password in pastebuffer"
+  },
   H = {
     func = hs.toggleConsole,
     desc = "Toggle Hammerspoon Console"
