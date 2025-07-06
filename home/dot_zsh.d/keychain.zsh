@@ -26,7 +26,7 @@ ssh_key="${HOME}/ssh-key/id_rsa"
 
 if (( $+commands[keychain] )) ; then
     # We have keychain installed
-    export KEYCHAIN_ARGS
+    export KEYCHAIN_ARGS=""
 
     if test ${USE_GPG_AGENT_FOR_SSH:-0} -eq 1 ; then
       KEYCHAIN_ARGS+=" --ssh-spawn-gpg"
