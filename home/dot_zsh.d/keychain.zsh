@@ -2,10 +2,7 @@
 # Run keychain if present
 # http://www.funtoo.org/wiki/Keychain
 
-# GPGTools seems to create ~/.gpg-agent-info instead of
-# setting GPG_AGENT_INFO
-# XXX Is GPG_AGENT_INFO even in use any more?
-if test -z "${GPG_AGENT_INFO}" -a -r ${HOME}/.gpg-agent-info ; then
+if test -r ${HOME}/.gpg-agent-info ; then
   source ${HOME}/.gpg-agent-info
   export GPG_AGENT_INFO
 fi
@@ -47,7 +44,6 @@ if (( $+commands[keychain] )) ; then
       keychain -k all --quiet ${=KEYCHAIN_ARGS}
       eval `keychain --eval ${=KEYCHAIN_ARGS}`
 
-      test -z "$GPG_AGENT_INFO" && echo "Warning: GPG_AGENT_INFO not set"
       if test ${USE_GPG_AGENT_FOR_SSH:-0} -eq 1 ; then
         echo "Keys held by agent:"
         keychain -l
@@ -61,10 +57,6 @@ if (( $+commands[keychain] )) ; then
 
       # Load into GUI environment on OSX
       if (( $+commands[launchctl] )) ; then
-        if test -n "$GPG_AGENT_INFO" ; then
-          echo "Loading GPG_AGENT_INFO into launchctl"
-          launchctl setenv GPG_AGENT_INFO $GPG_AGENT_INFO
-        fi
         if test -n "$SSH_AGENT_PID" ; then
           echo "Loading SSH_AGENT_PID into launchctl"
           launchctl setenv SSH_AGENT_PID $SSH_AGENT_PID
