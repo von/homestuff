@@ -43,7 +43,7 @@ if (( $+commands[keychain] )) ; then
 
     keychain_reload() {
       # -k all: gpg-agent needs to be restarted to detect Yubikey at times
-      echo "Restarting agents: ${KEYCHAIN_AGENTS}"
+      echo "Restarting keychain"
       keychain -k all --quiet ${=KEYCHAIN_ARGS}
       eval `keychain --eval ${=KEYCHAIN_ARGS}`
 
