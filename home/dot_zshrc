@@ -225,6 +225,7 @@ fi
 
 #####################################################################
 # Allow for easy resourcing of zshrc
+# See:https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 
 function zshrc()
 {
@@ -236,7 +237,7 @@ function zshrc()
     # Source a basic configuration if it exists
     test -f /etc/zshenv && source /etc/zshenv
     test -f /etc/zsh/zshenv && source /etc/zsh/zshenv
-    source ~/.zshrc
+    omz reload
     unset RELOAD_ZSHRC
 }
 
