@@ -171,11 +171,15 @@ function von_theme_check_cwd() {
 # }}} von_theme_check_cwd #
 
 # von_theme_chezmoi_job() {{{ #
+# Indicate if my home directory is out of sync ("dirty") with the
+# chezmoi source
 function von_theme_chezmoi_job() {
   if [[ ${1}/ = ${HOME}/.local/share/chezmoi/* ]]; then
     if chezmoi verify ; then
+      # In sync
       echo -ne "%{$VON_THEME_CHEZMOI_COLOR%}[chezmoi]%{$reset_color%}"
     else
+      # Out of sync
       echo -ne "%{$VON_THEME_CHEZMOI_DIRTY_COLOR%}[chezmoi]%{$reset_color%}"
     fi
   fi
