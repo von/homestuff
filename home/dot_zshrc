@@ -107,6 +107,7 @@ fpath=( ${HOMEBREW_PREFIX}/share/zsh/site-functions $fpath)
 #####################################################################
 # Plugins (loaded by Oh-my-zsh)
 # (From $ZSH/plugins/ or $ZSH_CUSTOM/plugins)
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/plugins
 
 plugins=()
 # Load vi-mode first to set base for key bindings
