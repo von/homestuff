@@ -142,11 +142,10 @@ ZSH=$HOME/.oh-my-zsh  # Used by oh-my-zsh
 export OH_MY_ZSH=${ZSH}
 
 # Disable oh-my-zsh auto-update
-# It screws up initial input to tmux windows by eating stdin.
-# I update manually with mac-config.
+# We update oh-my-zsh with chezmoi
 # See:
 # https://github.com/ohmyzsh/ohmyzsh?tab=readme-ov-file#getting-updates
-zstyle ':omz:update' mode reminder
+zstyle ':omz:update' mode disabled
 
 # Set name of the theme to load (from $ZSH/themes/ or $ZSH_CUSTOM/)
 ZSH_THEME="von"
