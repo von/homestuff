@@ -133,7 +133,8 @@ case "$MENU" in
         read SELECTION ; \
         test "${SELECTION}" = "*Last*" && tmux switch-client -l ; \
         if test -n "${SELECTION}" ; then \
-          tmux has-session -t ${SELECTION} || tmuxp load -y -d ${SELECTION} ; \
+          tmux has-session -t ${SELECTION} 2>/dev/null \
+            || tmuxp load -y -d ${SELECTION} ; \
           tmux switch-client -t ${SELECTION} ; \
         fi ;\
       }
