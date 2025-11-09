@@ -1,0 +1,8 @@
+session_name: 3d-printing
+start_directory: ~/Google Drive/My Drive/3D Printing/
+windows:
+  - window_name: 3d-printing
+    layout: even-horizontal
+    panes:
+      -
+      -
