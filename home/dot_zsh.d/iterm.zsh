@@ -12,7 +12,10 @@
 # Determine if we are running within iTerm...
 if test -n "${ITERM_PROFILE}" ; then
 
-  # Set title
+  # Note my default tmux configuration setting of allow-rename to off will
+  # block these from working from within tmux
+
+  # Set window title
   iterm_set_title() {
     printosc "2;%s" "${(j. .)${*}}"
   }
