@@ -6,6 +6,14 @@
 if test -n "${TMUX}" ; then
     # We are in tmux...
 
+    # Unlike other escape codes, window title setting is consumed by tmux
+    # and hence we don't escape it via printesc()
+    # Use 'print -P' to handle prompt expansion
+    # See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+    tmux_set_title() {
+      noglob print -Pn '\e]2;${1}\e\\'
+    }
+
     TMUX_CMD_WRAPPER=""
     if (( $+commands[reattach-to-user-namespace] )) ; then
       # On Mac, make sure cut and paste works
