@@ -14,17 +14,9 @@ if test -n "${TMUX}" ; then
   # Disable oh-my-zsh setting window and tab title
   DISABLE_AUTO_TITLE=true
 
-  # Set pane title
-  # Use 'print -P' to handle prompt expansion
-  # See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-  function tmux_set_pane_title_for_prompt() {
-    # printf '\033]2;%s\033\\' "${(j. .)${(q)@}}"
-    noglob print -Pn '\e]2;${1}\e\\'
-  }
-
   # Set pane title before showing prompt
   function tmux_set_pane_title_precmd() {
-    tmux_set_pane_title_for_prompt "[${ZSH_THEME_TERM_TAB_TITLE_IDLE}]"
+    tmux_set_title "[${ZSH_THEME_TERM_TAB_TITLE_IDLE}]"
   }
 
   add-zsh-hook precmd tmux_set_pane_title_precmd
@@ -36,7 +28,7 @@ if test -n "${TMUX}" ; then
     local CMD=${1[(wr)^(*=*|sudo|ssh|mosh|rake|-*)]:gs/%/%%}
     local LINE="${2:gs/%/%%}"
 
-    tmux_set_pane_title_for_prompt "<${LINE}>"
+    tmux_set_title "<${LINE}>"
   }
 
   add-zsh-hook preexec tmux_set_pane_title_preexec
