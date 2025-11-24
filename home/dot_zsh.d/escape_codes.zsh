@@ -12,12 +12,12 @@ if test -n "$TMUX" ; then
   # tmux and hence should not be escaped.
   printesc() {
     fmt=$1; shift
-    printf "\ePtmux;\e"$fmt"\e\\" ${(q)@}
+    printf "\ePtmux;\e"$fmt"\e\\" ${(j. .)@}
   }
 else
   printesc() {
     fmt=$1; shift
-    printf $fmt ${(q)@}
+    printf $fmt ${(j. .)@}
   }
 fi
 
