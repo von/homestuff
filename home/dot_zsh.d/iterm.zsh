@@ -17,6 +17,16 @@ if test -n "${ITERM_PROFILE}" ; then
     printosc "2;%s" "${(j. .)${*}}"
   }
 
+  # Set pane title
+  iterm_set_pane_title() {
+    printosc "1;%s" "${(j. .)${*}}"
+  }
+
+  # Set pane and window title
+  iterm_set_pane_and_window_title() {
+    printosc "0;%s" "${(j. .)${*}}"
+  }
+
   # Set subtitle
   # Requires taller tab/subtitle support to be enabled under General
   # XXX Doesn't seem to work. Source is Google AI and I can't find the
