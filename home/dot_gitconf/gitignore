@@ -16,6 +16,9 @@ CVS/
 .#*
 \#*
 
+# Mac folder attributes
+.DS_Store
+
 # Vim swap and recovery files
 *.swp
 *.swo
