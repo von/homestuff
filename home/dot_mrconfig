@@ -1,4 +1,6 @@
 # Configuration for myrepos: http://myrepos.branchable.com/
+# Designed to be run from $HOME
+# XXX I can't get $HOME to work in paths
 [DEFAULT]
 state = git state "$@"
 # Note include specifies a command to run (not a file path)
