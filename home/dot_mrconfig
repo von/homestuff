@@ -2,7 +2,7 @@
 [DEFAULT]
 state = git state "$@"
 # Note include specifies a command to run (not a file path)
-include = cat ~/homestuff/mr/*.sh
+include = cat ~/.mr/*.sh
 # Where to link Spoons
 lib= SPOONS_DIR=~/.hammerspoon/MySpoons/
 # Default 'link' command does nothing
