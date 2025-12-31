@@ -59,3 +59,9 @@ skip = test `hostname` != "Vons-WL"
 [develop/cd-utils]
 checkout = git clone 'vwelch@vwelch.com:GIT/cd-utils' 'cd-utils'
 skip = test `hostname` != "Vons-PL"
+
+[develop/homestuff]
+checkout = git clone https://github.com/von/homestuff.git
+
+[develop/mac-config]
+checkout = git clone https://github.com/von/mac-config.git
