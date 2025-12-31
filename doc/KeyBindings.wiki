@@ -37,6 +37,7 @@ Remapping F13-15 for my Code USB KeyBoard.
   * Under System Preferences / Keyboard / Shortcuts / Display:
     * Change De/Increase display brightness from F14/F15 to F13/F14 to free up
       F15 for Mute (as marked on my Code keyboard).
+      * I don't have F13/F14 on my keyboard, so I just disabled these
   * Hammerspoon handles mapping F15 to Mute
 
 Remapping Del and End for my Code USB KeyBoard
