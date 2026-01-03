@@ -1,5 +1,7 @@
 # Configuration for myrepos: http://myrepos.branchable.com/
 # Designed to be run from $HOME
+# For an example, see:
+# https://github.com/RichiH/myrepos/blob/master/mrconfig.complex
 # XXX I can't get $HOME to work in paths
 [DEFAULT]
 state = git state "$@"
