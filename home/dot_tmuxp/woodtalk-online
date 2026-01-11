@@ -1,8 +1,0 @@
-session_name: woodtalk-online
-start_directory: ~/develop/wto-spam
-windows:
-  - window_name: shells
-    layout: even-horizontal
-    panes:
-      -
-      -
