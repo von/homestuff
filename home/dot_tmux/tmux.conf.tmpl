@@ -443,6 +443,18 @@ bind -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel
 bind -T copy-mode-vi C-c send-keys -X clear-selection
 
 ######
+# Make some keys work in copy-mode as they do regularly
+
+# Popup connecting to scratch session
+bind -T copy-mode-vi -n C-Up run-shell "tmuxp-popup -t popup"
+
+# Last session (C-Down)
+bind -T copy-mode-vi -n C-Down switch-client -l
+
+# Choose session (Down)
+bind -T copy-mode-vi Down run-shell "~/.tmux/scripts/tmux-menu.sh SESSIONS"
+
+######
 # Forward and backword prompt in selection mode with n,p,[,]
 # Note the search requires the escape sequence in my prompt as described
 # in the tmux man page.
