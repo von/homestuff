@@ -14,8 +14,8 @@ setopt INTERACTIVE_COMMENTS
 
 # Directory stack {{{
 #
-# Don't push directories onto stack when cd'ing
-setopt NO_AUTOPUSHD
+# Automatically push directories onto stack when cd'ing
+setopt AUTOPUSHD
 
 # Set stack size (not an option)
 DIRSTACKSIZE=10
