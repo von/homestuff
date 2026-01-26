@@ -43,6 +43,9 @@ else
 fi
 
 # Kudos: https://snelson.us/2024/09/determining-a-macs-ssid-like-an-animal/
+# As of MacOSX 15.6 this needs 'sudo ipconfig setverbose 1' to have been called
+# or it will return "<redacted>"
+# Kudos: https://discussions.apple.com/thread/256108303?answerId=261575020022&sortBy=rank#261575020022
 ssid=$(ipconfig getsummary $(networksetup -listallhardwareports | awk '/Hardware Port: Wi-Fi/{getline; print $2}') | awk -F ' SSID : ' '/ SSID : / {print $2}')
 if test -n "${ssid}"; then
   status+="/${ssid}"
