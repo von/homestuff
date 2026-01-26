@@ -60,6 +60,13 @@ alias z='noglob zmv -W'
 # Kudos: http://superuser.com/a/258154/128341
 alias dns="scutil --dns | grep 'nameserver\[[0-9]*\]' | sort | uniq"
 
+# Make directories for each month. I use this in directories for each year
+# with organizations/projects I'm involved in
+# Numberic version (01, 02, etc.)
+alias make_month_dirs="for m in {01..12} ; do mkdir \${m} ; done"
+# Textual version (January, Febryary, etc.)
+alias make_month_dirs_full_names="for m in January February March April May June July August September October November December ; do mkdir \${m} ; done"
+
 ######################################################################
 # Suffix aliases
 # Associate a command with a file extension when file is used as a command
