@@ -27,6 +27,8 @@ if test $newer = "0" ; then
   exit 0
 fi
 
+echo "Rebuilding ${target}"
+
 # One or both jump target files is newer, rebuild 'bookmarks'
 #
 typeset -a JUMP_TARGETS
