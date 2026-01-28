@@ -54,7 +54,7 @@ for i ("$JUMP_TARGETS[@]") do
   # Filter out nonexistant directories.
   # The tilde modifier causes a tilde in the variable to be expanded.
   if test -d ${~i} ; then
-    echo bmark! \"${i}\" ${tag}
+    echo bmark! \"${i}\" $(basename ${i})
   fi
 done >> "${target}"
 exit 0
