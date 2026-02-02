@@ -1,24 +1,7 @@
 #compdef jump
 # Completion for ../jump.zsh
 
-local tpath=${JUMP_TARGETS_PATH:-${HOME}/.jump_targets}
-local ltpath=${JUMP_TARGETS_LOCAL_PATH:-${HOME}/.jump_targets_local}
-
-typeset -a JUMP_TARGETS
-# https://zsh.sourceforge.io/Doc/Release/Zsh-Modules.html#The-zsh_002fmapfile-Module
-zmodload zsh/mapfile
-
-# Read jump_targets into JUMP_TARGETS, removing comments
-# Kudos: https://stackoverflow.com/a/12652267/197789
-JUMP_TARGETS=( "${(f)mapfile[$tpath]}" )
-
-if test -f "${ltpath}" ; then
-  JUMP_TARGETS+=( "${(f)mapfile[$ltpath]}" )
-fi
-
-# Remove comments
-# Kudos: https://stackoverflow.com/a/41876600/197789
-JUMP_TARGETS=( ${JUMP_TARGETS:#\#*} )
+typeset -a JUMP_TARGETS=( $(~/.bin/jumplist.sh -l) )
 
 # Escape spaces. Use this instead of "(q)" quoting so we don't escape
 # tildes, so zsh can expand them after completion.
