@@ -50,9 +50,6 @@ Options:
   -T              Force 'fzf' instead of 'fzf-tmux'
 
 <fzf options>     Options passed to fzf (or fzf-tmux)
-
-Environment variables:
-  \$JUMP_ROOT      Root of paths print [DEFAULT: \$HOME]
 END
 # Note 'END' above most be fully left justified.
 }
