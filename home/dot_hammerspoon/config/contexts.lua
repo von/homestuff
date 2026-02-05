@@ -68,10 +68,12 @@ local baseContext = Contexts.new({
     -- MH-1000XM3 == Sony Headphones
     -- USB2.0 Device == work speaker
     -- OWC Thunderbolt 3 Audio Device == audio out on work dock
+    -- USB PnP Audio Device == UCB-C hub, I should ignore this.
     defaultInputDevice = {
       "Jabra Elite 75t", "Von's Pixel Buds",
       "WH-1000XM3", "Samson Meteor Mic", "Motorola EQ5",
-      "LG UltraFine Display Audio", "Macbook Air Microphone"
+      "LG UltraFine Display Audio", "Macbook Air Microphone",
+      "USB PnP Audio Device"
     },
     defaultOutputDevice = {
       -- Earbuds/headphones
@@ -82,7 +84,9 @@ local baseContext = Contexts.new({
       -- Monitors
       "LG UltraFine Display Audio", "SONY TV", "SAMSUNG",
       -- And finally, the laptop speakers
-      "MacBook Air Speakers"
+      "MacBook Air Speakers",
+      -- USB-C Hub
+      "USB PnP Audio Device"
     },
     apps = {
       {
