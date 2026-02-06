@@ -11,35 +11,14 @@
 #   %name will be converted into key
 list_format="%path"
 
-# Read jump list from files into associate array JUMP_TARGETS
-_read_jump_list()
-{
-  local tpath=${JUMP_TARGETS_PATH:-${HOME}/.jump_targets}
-  local ltpath=${JUMP_TARGETS_LOCAL_PATH:-${HOME}/.jump_targets_local}
+{{ template "bookmarks.zsh" -}}
 
-  typeset -Ag JUMP_TARGETS=()
-
-  for file in ${tpath} ${ltpath} ; do
-    if test -f ${file} ; then
-      while read -r key value; do
-        if [[ ${key} == \#* ]] ; then
-          : # comment
-        else
-          JUMP_TARGETS[$key]="$value"
-        fi
-      done < ${file}
-    fi
-  done
-
-  # success. JUMP_TARGETS set.
-}
+typeset -Ag JUMP_TARGETS=(${(v)BOOKMARKS})
 
 # List jumplist directories
 cmd-list()
 {
-  _read_jump_list  # Sets JUMP_TARGETS
-
-  for name path in ${(kv)JUMP_TARGETS}; do
+  for name path in ${(kv)BOOKMARKS}; do
     echo ${list_format:gs/%name/$name/:gs/%path/$path/}
   done
 

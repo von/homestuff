@@ -161,10 +161,8 @@ mark t /tmp/
 " Clear all bookmarks (for restarts)
 delbmarks!
 
-if system("test -x ~/.vifm/bin/update-vifm-bookmarks.sh && ~/.vifm/bin/update-vifm-bookmarks.sh && echo true") == "true"
-  if system("test -f ~/.vifm/bookmarks.vifm && echo true") == "true"
-    source ~/.vifm/bookmarks.vifm
-  end
+if system("test -f ~/.vifm/bookmarks.vifm && echo true") == "true"
+  source ~/.vifm/bookmarks.vifm
 end
 
 " }}} Configure bookmarks "
