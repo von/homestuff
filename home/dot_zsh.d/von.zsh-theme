@@ -404,7 +404,7 @@ function von_theme_init() {
     # We are not running in tmux. Need to display stuff ourselves.
     PROMPT=$'%{${VON_THEME_WORKINGDIR_COLOR}%}%~%{$reset_color%} %{${VON_THEME_PROMPT_COLOR}%}${VON_THEME_PROMPT}%{$reset_color%} '
 
-    if [ -n "$ITERM_PROFILE" ] ; then
+    if [ -n "$ITERM_PROFILE" ] && (( $+commands[iterm2_prompt_mark] )) ; then
       # We are running in iTerm, mark our prompts
       # This doesn't work well in tmux as the mark is always at the far
       # left so is confusing with multiple columns.
