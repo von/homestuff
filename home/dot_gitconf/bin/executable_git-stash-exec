@@ -1,0 +1,34 @@
+#!/bin/sh
+# Stash any local changes, execute command given as argument, and then
+# re-apply local changes
+#
+# Complete this as _precommand, e.g.:
+# compdef _precommand git-stash-exec
+
+# Check to see if current stash is ours, which would indicate we failed
+# last time we ran.
+if $(git stash list -1 | grep "git-stash-exec" > /dev/null) ; then
+  echo "Last stash seems to be ours. Cowardly refusing to run."
+  exit 1
+fi
+
+# Stash diffs if they exist and set did_stash if we did
+if $(git diff --quiet --exit-code) ; then
+  echo "Nothing to stash."
+  did_stash=0
+else
+  git stash save "git-stash-exec save $(date +%F)" || exit $?
+  did_stash=1
+fi
+
+${@} || { echo "Command failed: Leaving stash unapplied." 1>&2 ; exit $? ; }
+
+if test ${did_stash} ; then
+  echo "Restoring from stash..."
+  git stash pop --quiet || { echo "Failed to restore from stash" 4>&2 ; exit 1 ; }
+else
+  echo "Nothing to unstash."
+fi
+
+echo "Success."
+exit 0

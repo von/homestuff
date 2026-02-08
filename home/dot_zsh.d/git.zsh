@@ -106,3 +106,6 @@ sub() {
     cd "${1}"
   fi
 }
+
+# Complete arguments to git-stash-exec as a command
+compdef _precommand git-stash-exec
