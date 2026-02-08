@@ -12,4 +12,4 @@ git pull || { echo "Pull failed: Leaving stash unapplied." 1>&2 ; exit $? ; }
 git stash pop || { echo "Failed to restore from stash" 1>&2 ; exit 1 ; }
 
 echo "Success."
-exit 1
+exit 0
