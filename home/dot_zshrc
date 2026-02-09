@@ -109,6 +109,18 @@ fpath=( ${HOMEBREW_PREFIX}/share/zsh/site-functions $fpath)
 # (From $ZSH/plugins/ or $ZSH_CUSTOM/plugins)
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/plugins
 
+# Check for a plugin by looking for the file
+function omz_plugin_exists() {
+  local plugin=$1; shift
+  if [ -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/${plugin}" ] || 
+     [ -d "${ZSH:-$HOME/.oh-my-zsh}/plugins/${plugin}" ]; then
+    # plugin found
+    return 0
+  fi
+  # plugin not found
+  return 1
+}
+
 plugins=()
 # Load vi-mode first to set base for key bindings
 plugins+=(vi-mode)  # from oh-my-zsh
@@ -127,7 +139,8 @@ plugins+=(increase-number)
 if test -n "$ITERM_PROFILE" -a -z "$TMUX" ; then
   # Only enable if not in tmux as that confuses things
   export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
-  plugins+=(iterm_shell_integration) # see iterm.zsh
+  # see iterm.zsh
+  omz_plugin_exists iterm_shell_integration && plugins+=(iterm_shell_integration)
 fi
 plugins+=(pass)  # from oh-my-zsh
 plugins+=(stack)
