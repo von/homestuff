@@ -454,8 +454,11 @@ bind -T copy-mode-vi -n C-Up run-shell "tmuxp-popup -t popup"
 # Last session (C-Down)
 bind -T copy-mode-vi -n C-Down switch-client -l
 
+# XXX This doesn't work as it causes Down without a prefix in copy-mode-vi to
+#     execute the command which is problematic as it thwarts navigation.
+#     If I want this functionality, I need some way to require the prefix.
 # Choose session (Down)
-bind -T copy-mode-vi Down run-shell "~/.tmux/scripts/tmux-menu.sh SESSIONS"
+# bind -T copy-mode-vi Down run-shell "~/.tmux/scripts/tmux-menu.sh SESSIONS"
 
 ######
 # Forward and backword prompt in selection mode with n,p,[,]
