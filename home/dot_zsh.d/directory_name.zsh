@@ -5,10 +5,13 @@
 # https://zsh.sourceforge.io/Doc/Release/Expansion.html#Dynamic-named-directories
 # https://www.zsh.org/mla/users/2015/msg00963.html
 
-# Current dynamic directory names implemented:
-#   g:<directory>    ~/Google Drive/My Drive/<directory>
+# Array of functions called for each operation
+typeset -ag zsh_directory_name_functions=()
 
-zsh_directory_name() {
+# zsh_directory_name_gdrive()
+# Implements
+# g:<directory>    ~/Google Drive/My Drive/<directory>
+zsh_directory_name_gdrive() {
   test $# -ge 1 || return 1
 
   setopt extendedglob
@@ -60,3 +63,5 @@ zsh_directory_name() {
   fi
   return 0
 }
+
+zsh_directory_name_functions+=(zsh_directory_name_gdrive)
