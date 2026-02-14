@@ -9,5 +9,5 @@ if test $? -eq 0 ; then
   echo $root
   exit 0
 fi
-# Failued to find a root
+# Failed to find a root
 exit 1
