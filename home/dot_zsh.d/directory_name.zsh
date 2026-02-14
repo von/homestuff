@@ -13,8 +13,9 @@ zsh_directory_name() {
 
   setopt extendedglob
 
-  # g: prefix
-  local gdrive="/Users/von/Google Drive/My Drive"
+  # Google drive prefix matched by 'g:'
+  # Must end with a slash
+  local gdrive="/Users/von/Google Drive/My Drive/"
 
 
   # Function. Should be d,n, or c
