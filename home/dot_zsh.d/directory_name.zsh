@@ -65,3 +65,51 @@ zsh_directory_name_gdrive() {
 }
 
 zsh_directory_name_functions+=(zsh_directory_name_gdrive)
+
+# zsh_directory_name_vcs_root()
+# Currently only supports git
+# Implements
+# ~[root]       Version control system root
+zsh_directory_name_vcs_root() {
+  # Function. Should be d,n, or c
+  local f=$1 ; shift
+
+  # Determine git root
+  # Will be "" if we're not in a repository
+  local root=$(git rev-parse --show-toplevel 2> /dev/null)
+
+  # XXX if root == "" we can test for other repository types here
+
+  if [[ $f = d ]]; then
+    # We never map a directory to ~[root]
+    return 1
+
+  elif [[ $f = n ]]; then
+    # Only convert from name to directory if we have a root
+    if test -d "${root}" ; then
+      typeset -ga reply
+      # reply should contain a single element which is the directory
+      # corresponding to the name
+      reply=($root)
+      return 0
+    fi
+    # Not in a repository
+    return 1
+
+  elif [[ $f = c ]]; then
+    # Don't bother offering completion if we don't have a root
+    if test -d "${root}" ; then
+      _wanted dynamic-dirs expl 'dynamic directory' compadd -S\] root
+    fi
+    return
+
+  else
+    # Unrecognized character
+    return 1
+  fi
+
+  return 0
+}
+
+
+zsh_directory_name_functions+=(zsh_directory_name_vcs_root)
