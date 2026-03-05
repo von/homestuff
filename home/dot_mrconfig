@@ -43,7 +43,7 @@ checkout = git clone 'ssh://vwelch@git.vwelch.com/home/vwelch/GIT/password-store
 skip = test `hostname` != "Vons-PL"
 
 [develop/dvd-util]
-checkout = git clone 'ssh://vwelch@git.vwelch.com:/home/vwelch/GIT/dvd-rip' 'dvd-util'
+checkout = git clone 'ssh://vwelch@git.vwelch.com:/home/vwelch/GIT/dvd-util' 'dvd-util'
 skip = test `hostname` != "Vons-PL"
 
 [develop/pigshare]
