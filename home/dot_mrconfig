@@ -69,3 +69,6 @@ checkout = git clone https://github.com/von/homestuff.git
 
 [develop/mac-config]
 checkout = git clone https://github.com/von/mac-config.git
+
+[develop/scripts]
+checkout = git clone https://github.com/von/scripts.git
