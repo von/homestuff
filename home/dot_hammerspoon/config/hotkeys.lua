@@ -228,8 +228,8 @@ local browserModalKeys = {
     desc = "Open TripIt"
   },
   V = {
-    func = chrome.wrapped.selectPersona("vonwelch.com"),
-    desc = "Chrome vonwelch.com Persona"
+    func = chrome.wrapped.selectPersona("Elevate"),
+    desc = "Chrome Elevate Persona"
   },
   W = {
     func = function() WebNotes:open() end,
