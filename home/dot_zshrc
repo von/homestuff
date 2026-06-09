@@ -100,10 +100,6 @@ fpath=( ${ZSH_CUSTOM}/completions $fpath)
 # To pick up _tm for tm completion
 fpath=( ${REPOS_PATH}/tm $fpath)
 
-# Pick up completions forom hombrew
-# https://docs.brew.sh/Shell-Completion
-fpath=( ${HOMEBREW_PREFIX}/share/zsh/site-functions $fpath)
-
 #####################################################################
 # Plugins (loaded by Oh-my-zsh)
 # (From $ZSH/plugins/ or $ZSH_CUSTOM/plugins)
