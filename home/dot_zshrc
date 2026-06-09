@@ -94,6 +94,17 @@ source ${REPOS_PATH}/to-env/to-env.sh
 # Completion stuff
 # Add any completion stuff here as oh-my-zsh calls compinit
 
+# Bootstrap fpath to fix following error:
+#   oh-my-zsh.sh:127: compinit: function definition file not found
+# Not sure what is going on such that fpath is not set correctly.
+# 'unset fpath' doesn't solve the problem.
+fpath=(
+  ${HOMEBREW_PREFIX}/share/zsh/src
+  ${HOMEBREW_PREFIX}/share/zsh/current/functions
+  ${HOMEBREW_PREFIX}/share/zsh/functions
+  ${fpath}
+)
+
 # Pick up my completion scripts
 fpath=( ${ZSH_CUSTOM}/completions $fpath)
 
