@@ -21,6 +21,10 @@ maint() {
     # Allow pip to install without virtualenv
     export PIP_REQUIRE_VIRTUALENV="false"
 
+    # Don't ask, just update
+    # See https://github.com/Homebrew/brew/issues/22597
+    export HOMEBREW_NO_ASK=1
+
     nice -n 15 ${SETUP_PATH} || return 0
 
     for file in ${MAINT_DIRECTORY}/*.zsh(.N) ; do
