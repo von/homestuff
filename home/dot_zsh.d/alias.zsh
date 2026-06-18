@@ -56,10 +56,6 @@ alias nb='ipython notebook'
 # Intuitive zmv wrapper, e.g. z *.c.orig origin/*.c
 alias z='noglob zmv -W'
 
-# Show DNS servers (Mac specific)
-# Kudos: http://superuser.com/a/258154/128341
-alias dns="scutil --dns | grep 'nameserver\[[0-9]*\]' | sort | uniq"
-
 # Make directories for each month. I use this in directories for each year
 # with organizations/projects I'm involved in
 # Numberic version (01, 02, etc.)
