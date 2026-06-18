@@ -71,8 +71,44 @@ if test $(uname) = "Darwin" ; then
     ioreg -p IOUSB -w0
   }
 
+  # Kudos on Mac DNS CLI:
+  # https://www.kittell.net/code/mac-osx-terminal-change-dns/
+  # https://superuser.com/a/86188/128341
+  # https://superuser.com/a/86245/128341
+  # https://superuser.com/a/1081501/128341
+  # scutil and networksetup and both interfaces to making changes.
+  # scutil is emphemeral while networksetup is permanent.
+
+  # Flush DNS cache
   dns-flush() {
     sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder
+  }
+
+  # Show active DNS servers
+  dns-show-servers() {
+    # Use tail to skip first line which is a header
+    local services=$(networksetup -listallnetworkservices | tail -n +2)
+    # Use (f) modifier to split on newline
+    for service in ${(f)services} ; do
+      echo "DNS servers for ${service}:"
+      networksetup -getdnsservers "${service}"
+    done
+  }
+
+  # Clear any DNS servers.
+  dns-clear-servers() {
+    # Use tail to skip first line which is a header
+    local services=$(networksetup -listallnetworkservices | tail -n +2)
+    # Use (f) modifier to split on newline
+    for service in ${(f)services} ; do
+      echo "DNS servers for ${service}:"
+      sudo networksetup -setdnsservers "${service}" empty
+    done
+  }
+
+  # Use the Google public DNS servers
+  dns-use-google-servers() {
+    networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
   }
 
   wifi-connect() {
