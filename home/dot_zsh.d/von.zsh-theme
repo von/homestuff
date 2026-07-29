@@ -153,11 +153,18 @@ function von_theme_vcs_job() {
 
 # von_theme_ssh_check_job() {{{ #
 # Note that this may be checking gpg-agent since I use it to use
-# yubikey for git/ssh access. See keychain.zsh
+# yubikey for git/ssh access.
 function von_theme_ssh_check_job() {
   ssh-add -l >& /dev/null
-  if test $? -ne 0 ; then
+  local ssh_status=$?
+  if test $ssh_status -eq 0 ; then
+    : # no-op
+  elif test $ssh_status -eq 1 ; then
     echo -ne "%{$VON_THEME_WARNING_COLOR%}[No SSH keys]%{$reset_color%}"
+  elif test $ssh_status -eq 2 ; then
+    echo -ne "%{$VON_THEME_WARNING_COLOR%}[No SSH agent]%{$reset_color%}"
+  else
+    echo -ne "%{$VON_THEME_WARNING_COLOR%}[Unknwon SSH agent error: ${ssh_status}]%{$reset_color%}"
   fi
   return 0
 }
