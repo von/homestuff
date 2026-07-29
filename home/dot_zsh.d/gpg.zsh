@@ -1,10 +1,32 @@
 # Configuration and support for gpg
+# https://www.gnupg.org/documentation/manuals/gnupg/index.html
+
+# Note we use gpg-agent to access my yubi-key and to provide ssh key access
+# ~/.gnupg/gpg-agent.conf should have 'enable-ssh-support'
+# See ssh.zsh
+# See https://github.com/drduh/yubikey-guide
 
 # Per man page
+# https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
 export GPG_TTY=$(tty)
 
+gpg-agent-check()
+{
+  gpg-connect-agent /bye
+}
+
+gpg-agent-kill()
+{
+  gpgconf --kill gpg-agent
+}
+
+gpg-check-yubikey()
+{
+  gpg --card-status
+}
+
 # Kudos: https://askubuntu.com/a/558158/80562
-gpg-agent-clear()
+gpg-agent-reload()
 {
   echo RELOADAGENT | gpg-connect-agent
 }
