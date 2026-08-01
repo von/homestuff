@@ -59,7 +59,7 @@ function WebNotes:open()
   local t = hs.task.new(self.path.macvim, callbackFn, { "--nofork", filepath })
   t:setWorkingDirectory(self.notesPath)
   if not t:start() then
-    log.e("Failed to launch " .. self.path.macvim)
+    self.log.e("Failed to launch " .. self.path.macvim)
   end
 end
 
@@ -82,7 +82,7 @@ function WebNotes:_gitAdd(filename, exitCode, stdOut, stdErr)
   local t = hs.task.new(self.path.git, callbackFn, { "add", filename })
   t:setWorkingDirectory(self.notesPath)
   if not t:start() then
-    log.e("Failed to launch " .. self.path.git)
+    self.log.e("Failed to launch " .. self.path.git)
   end
 end
 
@@ -106,7 +106,7 @@ function WebNotes:_gitCommit(filename, exitCode, stdOut, stdErr)
     { "commit", "-m", "Update to " .. filename, filename })
   t:setWorkingDirectory(self.notesPath)
   if not t:start() then
-    log.e("Failed to launch " .. self.path.git)
+    self.log.e("Failed to launch " .. self.path.git)
   end
 end
 
