@@ -12,7 +12,7 @@ export FZF_DEFAULT_OPTS=""
 FZF_DEFAULT_OPTS+="--bind=ctrl-b:half-page-up,ctrl-f:half-page-down"
 # ^k kills to end of line, ^u cleans line (aborts if line empty)
 FZF_DEFAULT_OPTS+=" --bind=ctrl-k:kill-line,ctrl-u:cancel"
-# Alt-shift-arroes move preview window
+# Alt-shift-arrows move preview window
 FZF_DEFAULT_OPTS+=" --bind=alt-shift-up:preview-up,alt-shift-down:preview-down"
 FZF_DEFAULT_OPTS+=" --bind=alt-shift-left:preview-page-up,alt-shift-right:preview-page-down"
 
