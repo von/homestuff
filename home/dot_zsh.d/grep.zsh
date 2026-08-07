@@ -2,7 +2,7 @@
 
 # call grep recursively with useful defaults
 # Arguments: <Pattern> <Starting directory>
-# 
+#
 # Kudos: http://chneukirchen.org/dotfiles/.zshrc
 # With changes (s/-P/-E) to adjust for OSX
 rgrep() {
