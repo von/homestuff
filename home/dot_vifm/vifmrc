@@ -464,6 +464,14 @@ endif " $TMUX
 
 " }}} Normal mode key mappings "
 " ------------------------------------------------------------------------------
+" Menu mode key mappings {{{ "
+" Menu mode is also used for, e.g., displaying key mappings
+
+" Feels intuitive to me
+mnoremap <space> <pagedown>
+
+" }}} Memu mode key mappings "
+" ------------------------------------------------------------------------------
 " fileviewers {{{ "
 " For explore mode. 'e' Explores in current pane. 'w' explores in other pane.
 " XXX: These don't seem to work with files that start with a '.'
