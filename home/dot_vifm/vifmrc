@@ -273,7 +273,7 @@ filetype * open
 
 " }}} Fold description "
 " ------------------------------------------------------------------------------
-" Key mappings {{{ "
+" Normal mode key mappings {{{ "
 
 " Have left and right arrow change panes
 nnoremap <left> <c-w>h
@@ -462,7 +462,7 @@ if $TMUX != ''
 endif " $TMUX
 " }}} Window manipulation "
 
-" }}} Key mappings "
+" }}} Normal mode key mappings "
 " ------------------------------------------------------------------------------
 " fileviewers {{{ "
 " For explore mode. 'e' Explores in current pane. 'w' explores in other pane.
