@@ -159,12 +159,6 @@ local openAppMode = Modal:new(modifiers.opt, 'A', "Open application", openAppMod
 -- Mod-B: Modal hotkey for Browser control {{{ --
 
 local browserModalKeys = {
-  A = {
-    func = chrome.wrapped.activateTab("My Tasks",
-      { url = "https://app.asana.com/",
-        persona = defaultChromePersona, newWindow = true }),
-    desc = "Open Asana"
-  },
   C = {
     func = function()
       local url = chrome.getActiveTabURL()
@@ -217,10 +211,6 @@ local browserModalKeys = {
   R = {
     func = function() URLOpener.setWindow(nil) end,
     desc = "Reset browser window opening URLs"
-  },
-  S = {
-    func = chrome.wrapped.selectPersona("Social"),
-    desc = "Chrome Social Persona"
   },
   T = {
     func = chrome.wrapped.activateTab("TripIt",
