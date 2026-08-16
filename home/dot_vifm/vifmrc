@@ -322,7 +322,7 @@ nnoremap <space>Q :quit<cr>
 nnoremap <space>R :w<cr>:restart<cr>:echo "vifmrc reloaded..."<cr>
 
 " <space>t to run tig
-nnoremap <space>t :!tig<cr>
+nnoremap <space>t :!tig status<cr>
 
 " }}}
 
