@@ -14,3 +14,9 @@ rgrep() {
     --exclude-dir _build \
     -r -E ${@:?regexp missing} $p
 }
+
+# Grep for unicode
+# Kudos: https://stackoverflow.com/a/3208902/197789
+grep_unicode() {
+  LC_ALL=C \grep --color=auto $'[^\t\r -~]' ${(q)@}
+}
