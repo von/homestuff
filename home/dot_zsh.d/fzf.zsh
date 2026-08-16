@@ -30,16 +30,22 @@ dict() {
   cat /usr/share/dict/words | fzf -q "$1"
 }
 
-# Fuzzy grep and open
+# Fuzzy grep and open with vi
 # Kudos: https://github.com/junegunn/fzf/wiki/examples
 vg() {
   local file
   local line
 
+  # fzf options:
+  #   -0  Exit immediately if there are no matches
+  #   -1  If there is only one match, return it immediately.
   read -r file line <<<"$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1, $2}')"
 
   if [[ -n $file ]]
   then
-     vim $file +$line +foldopen\!
+    echo "Editing $file"
+    # $EDITOR, if set, is assumed to be some form of vi
+    # Use 'silent!' to surpress error message if there is no fold
+    ${EDITOR:-vi} $file +$line -c "silent! foldopen!"
   fi
 }
