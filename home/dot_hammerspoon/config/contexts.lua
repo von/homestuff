@@ -70,14 +70,14 @@ local baseContext = Contexts.new({
     -- OWC Thunderbolt 3 Audio Device == audio out on work dock
     -- USB PnP Audio Device == UCB-C hub, I should ignore this.
     defaultInputDevice = {
-      "Jabra Elite 75t", "Von's Pixel Buds",
+      "Jabra Elite 75t", "Von's Pixel Buds", "Kenective Ear Buds",
       "WH-1000XM3", "Samson Meteor Mic", "Motorola EQ5",
       "LG UltraFine Display Audio", "Macbook Air Microphone",
       "USB PnP Audio Device"
     },
     defaultOutputDevice = {
       -- Earbuds/headphones
-      "Jabra Elite 75t", "Von's Pixel Buds", "WH-1000XM3",
+      "Jabra Elite 75t", "Von's Pixel Buds", "Kenective Ear Buds", "WH-1000XM3",
       -- Soundbars
       "USB2.0 Device", "USB PnP Audio Device", "Dell AC511 USB SoundBar",
       "Motorola EQ5",
