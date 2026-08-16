@@ -43,3 +43,8 @@ gpg-test()
   echo "Hello world" | gpg -a --encrypt -r "${id}" | gpg -a --decrypt
   return $?
 }
+
+# Make sure gpg-agent is running
+# Needed because it is acting as our ssh-agent and it needs to be manually
+# started in order to do so.
+gpg-agent-check
