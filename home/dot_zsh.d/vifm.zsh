@@ -30,3 +30,18 @@ function vifm_cd_setup() {
     chpwd_functions+=(vifm_cd_pwd)
   fi
 }
+
+# Use vifm to select and output a list of files
+# We use a temporary file because vifm seems to redirect stdout in a way
+# such we can't just run 'vifm > list'
+function vifm_select_files() {
+  local tmpfile=$(mktemp -t vifm_select_files)
+  # XXX There will be a flash as vifm switches to echo command. I'm not sure
+  #     how avoid this.
+  # XXX It would be nice to provide guidance on the 'o' command here, but
+  #     -c "echo 'foo'" doesn't seem to work
+  vifm -c "nnoremap o :!echo %f:p >> ${tmpfile}<cr>"
+  cat ${tmpfile}
+  rm -f ${tmpfile}
+}
+
