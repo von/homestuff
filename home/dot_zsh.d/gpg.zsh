@@ -20,11 +20,6 @@ gpg-agent-kill()
   gpgconf --kill gpg-agent
 }
 
-gpg-check-yubikey()
-{
-  gpg --card-status
-}
-
 # Kudos: https://askubuntu.com/a/558158/80562
 gpg-agent-reload()
 {
