@@ -12,7 +12,8 @@ export GPG_TTY=$(tty)
 
 gpg-agent-check()
 {
-  gpg-connect-agent /bye
+  # Manually time out since gpg-connect-agent doesn't seem to do so on its own
+  timeout 30s gpg-connect-agent /bye
 }
 
 gpg-agent-kill()
