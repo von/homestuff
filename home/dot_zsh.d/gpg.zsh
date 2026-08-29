@@ -21,6 +21,12 @@ gpg-agent-kill()
   gpgconf --kill gpg-agent
 }
 
+# Because gpg-agent-kill() doesn't always work
+gpg-agent-kill-hard()
+{
+  killall gpg-agent
+}
+
 # Kudos: https://askubuntu.com/a/558158/80562
 gpg-agent-reload()
 {
