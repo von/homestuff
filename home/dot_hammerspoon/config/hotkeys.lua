@@ -26,6 +26,7 @@ local PasteRegister = hs.loadSpoon("PasteRegister")
 local PasteStack = hs.loadSpoon("PasteStack")
 local PasteTransform = hs.loadSpoon("PasteTransform")
 local presmode = require("PresentationMode")
+local QRCode = require("QRCode")
 local RescueWindows = require("RescueWindows")
 local seal = hs.loadSpoon("Seal")
 local screensaver = hs.loadSpoon("ScreenSaver")
@@ -395,6 +396,10 @@ local pastebufferModalKeys = {
     func = function() PasswordGenerator:copyPassword() end,
     desc = "Generate password and place in clipboard"
   },
+  I = {
+    func = function() QRCode:decodePasteboard() end,
+    desc = "Decode QR Code image in pastebuffer"
+  },
   L = {
     func = PasteRegister.queryAndLoadPasteBuffer,
     desc = "Load Paste Buffer from register"
@@ -406,6 +411,10 @@ local pastebufferModalKeys = {
   P = {
     func = PasteRegister.queryAndPasteRegister,
     desc = "Paste register"
+  },
+  Q = {
+    func = function() QRCode:encodePasteboard() end,
+    desc = "Encode Paste Buffer to QRCode"
   },
   S = {
     func = PasteRegister.queryAndSavePasteBuffer,
