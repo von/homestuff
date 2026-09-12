@@ -75,7 +75,7 @@ if test -n "${TMUX}" ; then
     #     switches to the alternate screen which causes tmux to
     #     to capture from that screen.
     tmux-last-command-output() {
-      # There doesn't seem to be any way to output the tux selection directly
+      # There doesn't seem to be any way to output the tmux selection directly
       # to stdout, so we use a named pipe.
       local pipedir=$(mktemp -d -t tmux-lco)
       local pipefile="${pipedir}/fifo"
