@@ -6,7 +6,7 @@ if not spoon.Seal then
 end
 
 -- Including "apps" here causes some slow down and I don't really use it.
-spoon.Seal:loadPlugins({"useractions"})
+spoon.Seal:loadPlugins({"calc", "useractions"})
 
 local Contexts = require("Contexts")
 local gdocs = require("GDocs")
