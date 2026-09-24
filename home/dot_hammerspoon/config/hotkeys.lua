@@ -349,11 +349,11 @@ local helpMode = Modal:new(modifiers.opt, 'H', "Show Help", helpModalKeys,
 if config["PersonalMounts"] then
   local mountModalKeys = {
     M = {
-      func = mounter.new("afp://von@EmmaCrate.local/music"),
+      func = mounter.new("smb://von@EmmaCrate/music"),
       desc = "Mount music"
     },
     V = {
-      func = mounter.new("afp://von@EmmaCrate.local/video"),
+      func = mounter.new("smb://von@EmmaCrate/video"),
       desc = "Mount video"
     }
   }
