@@ -110,6 +110,11 @@ endif
 " Quit all buffers with 'Q'
 :map <leader>Q :qa<cr>
 
+" Run current file
+" Assumes it is a script with execute permissions
+" Kudos: https://stackoverflow.com/a/15449678/197789
+:map <leader>r :!%:p<cr>
+
 " Redraw with 'R'
 :map <leader>R :GitGutter<cr>:redraw!<cr>
 
