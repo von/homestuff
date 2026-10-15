@@ -16,8 +16,6 @@ set t_Te=[0m
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 
-endif " TMUX
-
 " TmuxPopupGitroot
 "
 " Create a tmux popup running a session in the gitroot of the current
@@ -75,3 +73,5 @@ function! TmuxPopupGitroot()
   let cmd = "tmux new-session " . session_opts
   let output = system("tmux popup " . popup_opts . " \"" . cmd . "\"")
 endfunction
+
+endif " TMUX
