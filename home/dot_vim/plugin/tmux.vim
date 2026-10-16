@@ -16,6 +16,23 @@ set t_Te=[0m
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 
+
+" TmuxOpenFloatingPane
+"
+" Open a floating pane in the current working directory
+" Requres tmux >=3.8
+"
+" Arguments:
+"   * None
+"
+" Returns:
+"   * Nothing
+
+function! TmuxOpenFloatingPane()
+  silent !tmux new-pane -A
+endfunction
+
+
 " TmuxPopupGitroot
 "
 " Create a tmux popup running a session in the gitroot of the current

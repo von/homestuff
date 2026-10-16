@@ -124,10 +124,8 @@ endif
 " Toggle session menu
 :map <leader>S :call SessionMenu()<CR>
 
-" Open a tmux popup with a given session name and starting with
-" root of current git repository as current directory.
-" Uses TmuxPopupGitroot() from ../conf/tmux.vim
-:map <leader>t :call TmuxPopupGitroot()<CR>
+" Open a tmux floating pane in the current directory
+:map <leader>t :call TmuxOpenFloatingPane()<CR>
 
 " Use fzf to search tags
 :map <leader>T :Tags<cr>
