@@ -23,6 +23,7 @@ module.debug = function(enable)
   end
 end
 
+-- TODO: Add guard to avoid mounting something twice
 module.new = function(volname)
   return function()
     local taskFunction = function(callback)
