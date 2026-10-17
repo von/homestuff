@@ -18,6 +18,7 @@ local Zoom = require("Zoom")
 
 local iconPath = hs.configdir .. "/icons/"
 
+-- See https://www.hammerspoon.org/Spoons/Seal.plugins.useractions.html
 local actions = spoon.Seal.plugins.useractions.actions or {}
 
 actions["New Google Doc"] = {
