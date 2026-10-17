@@ -257,6 +257,8 @@ function zshrc()
 #####################################################################
 # Move cursor to bottom of screen
 # Kudos: https://superuser.com/a/1546467/128341
+# Force zsh to update window size
+kill -WINCH $$
 tput cup "$LINES"
 
 #####################################################################
