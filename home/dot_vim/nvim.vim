@@ -19,3 +19,8 @@ set inccommand=split
 " (This may be true for vim as well.)
 " Kudos: https://github.com/neovim/neovim/issues/11330#issuecomment-723667383
 autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
+
+" For remote connections to neovim, see:
+" https://neovim.io/doc/user/gui/#_stop-or-detach-the-current-ui
+" https://neovim.io/doc/user/remote/
+" :echo g:servername
