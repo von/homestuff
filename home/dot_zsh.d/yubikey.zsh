@@ -15,7 +15,8 @@ yubikey-test()
 {
   echo "Checking that gpg sees yubikey..."
   # Note space in sed argument to trim whitespace after colon
-  local card_id=$(gpg --card-status | grep "Application ID" | sed 's/.*\: //')
+  # timeout since 'gpg --card-status' doesn't seem to time out on its own
+  local card_id=$(timeout 30s gpg --card-status | grep "Application ID" | sed 's/.*\: //')
   if test $? -ne 0 ; then
     echo "yubikey not found by gpg"
     return 1
