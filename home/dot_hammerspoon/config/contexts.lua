@@ -79,7 +79,7 @@ local baseContext = Contexts.new({
       -- Earbuds/headphones
       "Jabra Elite 75t", "Von's Pixel Buds", "Kenective Ear Buds", "WH-1000XM3",
       -- Soundbars
-      "USB2.0 Device", "USB PnP Audio Device", "Dell AC511 USB SoundBar",
+      "USB2.0 Device", "Dell AC511 USB SoundBar",
       "Motorola EQ5",
       -- Monitors
       "LG UltraFine Display Audio", "SONY TV", "SAMSUNG",
