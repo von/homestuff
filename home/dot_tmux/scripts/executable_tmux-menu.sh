@@ -9,7 +9,9 @@
 
 SELF="$0"
 MENU="${1:-DEFAULT}"
-ARGS=""
+
+# Use double lines for menu border
+ARGS="-b double"
 
 # Session name of popup session
 POPUP_SESSION="popup"
