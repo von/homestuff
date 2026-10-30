@@ -225,6 +225,9 @@ Contexts:applyMapping()
 -- Load other modules
 local focusOnMinimize = require("focusTweaks")
 
+local timeMachineEjector = require("TimeMachineEjector")
+timeMachineEjector:start()
+
 ------------------------------------------------------------
 -- hs.shutdownCallback
 
