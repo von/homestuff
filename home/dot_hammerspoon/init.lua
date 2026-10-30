@@ -91,6 +91,14 @@ package.path = package.path .. ";" ..  hs.configdir .. "/lib/?.lua"
 -- Include MySpoons, my personal spoons
 package.path = package.path .. ";" ..  hs.configdir .. "/MySpoons/?.spoon/init.lua"
 
+-- Include all lua versions from Homebrew so we can get packages installed via luarocks
+-- XXX It may be we just need the latest version
+for d in hs.fs.dir(homebrew_prefix .. "/share/lua/" ) do
+  if d ~= "." and d ~= ".." then
+    package.path = package.path .. ";" ..  homebrew_prefix .. "/share/lua/" .. d .. "/?.lua"
+  end
+end
+
 ------------------------------------------------------------
 -- Read extensions from ~/.hammerspoon/ext/*.lua
 -- Then configuration from ~/.hammerspoon/config/*.lua
