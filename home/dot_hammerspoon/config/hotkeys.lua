@@ -312,15 +312,13 @@ local displayMode = Modal:new(modifiers.opt, 'D', "Display Mode", displayModalKe
 ------------------------------------------------------------
 -- Mod-E: Modal hotkey for Email {{{ --
 
-local emailTemplatePath = os.getenv("HOME") .. "/.email-templates"
-
 local emailModalKeys = {
   R = {
     func = function() defaultEmail:composeLastTemplate() end,
     desc = "Email from last template selected"
   },
   T = {
-    func = function() defaultEmail:composeFromChooser(emailTemplatePath) end,
+    func = function() defaultEmail:composeFromChooser() end,
     desc = "New email from template"
   },
   U = {
