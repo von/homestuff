@@ -103,6 +103,13 @@ if test $(uname) = "Darwin" ; then
 
   # Clear any DNS servers.
   dns-clear-servers() {
+    # Clear subkeys in scutil
+    local subkeys=$(echo "list" | scutil | grep -e "State:/Network/Service/.*/DNS" | cut -w -f 5)
+    for subkey in ${subkeys} ; do
+      echo "Clearing ${subkey}"
+      echo "remove ${subkey}" | sudo scutil
+    done
+
     # Use tail to skip first line which is a header
     local services=$(networksetup -listallnetworkservices | tail -n +2)
     # Use (f) modifier to split on newline
