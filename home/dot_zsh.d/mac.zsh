@@ -85,7 +85,13 @@ if test $(uname) = "Darwin" ; then
   }
 
   # Show active DNS servers
+  # XXX 'scutil --dns' will show DNS servers not listed in the following
   dns-show-servers() {
+    echo "System-wide DNS servers (from scutil):"
+    # The uniq eliminates duplicate scoped servers
+    scutil --dns | grep nameserver | uniq
+
+    echo "Service-specific DNS servers"
     # Use tail to skip first line which is a header
     local services=$(networksetup -listallnetworkservices | tail -n +2)
     # Use (f) modifier to split on newline
