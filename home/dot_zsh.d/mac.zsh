@@ -114,7 +114,6 @@ if test $(uname) = "Darwin" ; then
     local services=$(networksetup -listallnetworkservices | tail -n +2)
     # Use (f) modifier to split on newline
     for service in ${(f)services} ; do
-      echo "DNS servers for ${service}:"
       sudo networksetup -setdnsservers "${service}" empty
     done
   }
