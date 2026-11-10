@@ -124,6 +124,29 @@ if test $(uname) = "Darwin" ; then
     networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
   }
 
+  # Do/re-do DHCP
+  # Kudos:
+  # https://apple.stackexchange.com/a/17429/104604
+  # https://superuser.com/a/627581/128341
+  dhcp() {
+    local if=$(route -n get 0.0.0.0 2>/dev/null | awk '/interface: / {print $2}')
+    test -z "${if}" && if="en0"
+    echo "Doing DHCP on ${if}"
+    sudo ipconfig set ${if} BOOTP
+    sudo ipconfig set ${if} DHCP
+  }
+
+  # Renew my DHCP lease
+  # Kudos:
+  # https://apple.stackexchange.com/a/76606/104604
+  # https://superuser.com/a/627581/128341
+  dhcp-renew() {
+    local if=$(route -n get 0.0.0.0 2>/dev/null | awk '/interface: / {print $2}')
+    test -z "${if}" && if="en0"
+    echo "Renewing DHCP for ${if}"
+    echo "add State:/Network/Interface/${if}/RefreshConfiguration temporary" | sudo scutil
+  }
+
   wifi-connect() {
     test $# -ne 2 && { echo "Usage: $0 SSID PASSWORD" ; return 1 ; }
     SSID=$1; shift
