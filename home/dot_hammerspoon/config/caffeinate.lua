@@ -23,9 +23,14 @@ local watcherFunction = function(event)
   logger.f("watcher() called. Event = %s", eventNames[event])
 
   if event == hs.caffeinate.watcher.systemWillSleep then
-    -- Enable screensaver before sleep in case I disabled it for a presentation
-    logger.w("Enabling screensaver before sleep")
-    screensaver:enable()
+    if screensaver:getTimeout() > 0 then
+      logger.d("Screensaver already enabled.")
+    else
+      -- Enable screensaver before sleep
+      -- I often disable it for a presentation and forget to re-enable it.
+      logger.w("Enabling screensaver before sleep")
+      screensaver:enable()
+    end
     return
   end -- systemWillSleep
 
