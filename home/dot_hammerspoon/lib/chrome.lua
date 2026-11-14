@@ -26,6 +26,26 @@ module.debug = function(enable)
   end
 end
 
+-- findChromeApp() {{{ --
+-- Report Chrome application and make it ready for use.
+-- Returns hs.application object on success, nil on failure (logging message)
+local function findChromeApp()
+  local chrome = hs.application.find("Google Chrome")
+  if not chrome then
+    log.e("Could not find Chrome application")
+    return nil
+  end
+  -- Activate application. This is needed if we have multiple screens
+  -- otherwise this doesn't work reliably.
+  if not chrome:activate() then
+    log.e("Could not activate Chrome application")
+    -- Go ahead and proceed
+  end
+  return chrome
+end
+
+-- }}} FindeChromeApp()
+
 -- selectPersona() {{{ --
 -- Activate (open if needed) a chrome window for a certain persona.
 -- Returns true on success, false otherwise (e.g. if the persona
@@ -33,16 +53,9 @@ end
 -- If optional parameter minimizeOtherWindows is true, then minimize
 -- all other Chrome windows.
 local function selectPersona(persona, minimizeOtherWindows)
-  local chrome = hs.application.find("Google Chrome")
+  local chrome = findChromeApp()
   if not chrome then
-    log.e("Could not find Chrome application")
     return false
-  end
-  -- Activate application. This is needed if we have multiple screens
-  -- otherwise this doesn't work reliably.
-  if not chrome:activate() then
-    log.e("Could not activate Chrome application")
-    -- Go ahead and try...
   end
   log.df("Selecting persona %s", persona)
   if minimizeOtherWindows then
