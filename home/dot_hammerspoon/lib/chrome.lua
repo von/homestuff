@@ -289,43 +289,60 @@ end
 
 -- }}} urlToPastebuffer() --
 
--- previousTab {{{ --
--- Activates active tab last time this function was called.
--- First time called, does nothing.
-
-local previousTabId = nil
-
--- Current running task, serves as a guard for reentrance
-local previousTabTask = nil
-
-function previousTabCallback(table)
-  previousTabTask = nil
-  if previousTabId then
-    log.df("Activating Previous Tab: %d", previousTabId)
-    chromeCLI.activate(previousTabId)
-  else
-    hs.alert("Previous Tab Set")
+-- nextTab {{{ --
+-- Select next tab using Tab/Select Next Tab menu item
+-- Returns true on success, false on error (logging message)
+local function nextTab()
+  log.d("nextTab() called")
+  local chrome = findChromeApp()
+  if not chrome then
+    return false
   end
-  previousTabId = table.Id
-  log.df("previousTabId set: %d ", previousTabId)
+  local menuChoice = { "Tab", "Select Next Tab" }
+  if not chrome:selectMenuItem(menuChoice) then
+    self.log.e("Failed to select next tab")
+    return false
+  end
+  return true
 end
 
-function previousTab()
-  if previousTabTask then
-    log.i("previosTab: re-entered and ignoring")
-    return
+module.nextTab = nextTab
+
+module.wrapped.nextTab = function()
+  return function()
+    if not nextTab() then
+      hs.alert("Failed to select next Chrome tab")
+    end
   end
-  previousTabTask = chromeCLI.info(nil, previousTabCallback)
+end
+-- }}} nextTab --
+--
+-- previousTab {{{ --
+-- Select previous tab using Tab/Select Previous Tab menu item
+-- Returns true on success, false on error (logging message)
+local function previousTab()
+  log.d("previousTab() called")
+  local chrome = findChromeApp()
+  if not chrome then
+    return false
+  end
+  local menuChoice = { "Tab", "Select Previous Tab" }
+  if not chrome:selectMenuItem(menuChoice) then
+    self.log.e("Failed to select previous tab")
+    return false
+  end
+  return true
 end
 
 module.previousTab = previousTab
 
 module.wrapped.previousTab = function()
   return function()
-    return previousTab()
+    if not previousTab() then
+      hs.alert("Failed to select previous Chrome tab")
+    end
   end
 end
-
 -- }}} previousTab --
 
 return module
