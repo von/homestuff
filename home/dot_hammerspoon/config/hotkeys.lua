@@ -52,7 +52,7 @@ defaultEmail:useHTMLforCompose(false)  -- Use 'true' for New Outlook
 -- Configure Modal Spoon
 Modal.defaults.cheatsheetDelay = 2
 ------------------------------------------------------------
--- Configure music interface
+-- Configure music interface {{{ -
 if config["Vox"] then
   musicPrevious = function() hs.vox.previous() end
   musicRewind = function() hs.vox.backward() end
@@ -70,7 +70,7 @@ else
 end
 
 musicMute = function() hs.audiodevice.defaultOutputDevice():setMuted(true) end
-
+-- }}} Configure music interface
 ------------------------------------------------------------
 -- Mod-A: Modal hotkey for Opening Applications {{{ --
 
