@@ -660,6 +660,20 @@ hs.hotkey.bind(modifiers.none, "f20", "Open Seal", nil, function() seal:show() e
 -- appkeys {{{ --
 -- Configuration application-specific hotkeys
 
+appkeys.register("Google Chrome",
+  {
+    -- Chrome has these bound to C-Tab and C-S-Tab by default but if one
+    -- turns on C-Tab binding to most recently used tab, then both
+    -- of these bindings change to that function.
+    -- Do both Up/Down and Left/Right to cover both tab list orientations.
+    hs.hotkey.new(modifiers.ctrl, "Left", chrome.wrapped.previousTab()),
+    hs.hotkey.new(modifiers.ctrl, "Up", chrome.wrapped.previousTab()),
+    hs.hotkey.new(modifiers.ctrl, "Right", chrome.wrapped.nextTab()),
+    -- I had to remap System Settings / Keyboard / Keyboard Shortcuts / 
+    -- Mission Control / Applicaiton Windows to allow the following to work.
+    hs.hotkey.new(modifiers.ctrl, "Down", chrome.wrapped.nextTab())
+  })
+
 appkeys.register("zoom.us",
   {
     hs.hotkey.new(modifiers.none, "UP", function() Zoom.unmute() end),
