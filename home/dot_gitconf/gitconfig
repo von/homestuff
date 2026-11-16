@@ -32,6 +32,7 @@
         stash-diff = stash show -p
         stash-patch = stash save --patch
         stash-interactive = stash save --patch
+        # Kudos: https://stackoverflow.com/q/927358/197789
         uncommit = reset --soft HEAD^
         unstage = reset HEAD
         unadd = reset HEAD
