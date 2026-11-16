@@ -13,6 +13,8 @@ applications as follows:
   * Opt-Z is used to toggle iTerm
   * Opt-S is used in Chrome to activate Workona search
   * Opt-T is used in Chrome to activate Workona Task extensions
+  * TODO: Sometimes Hammerspoon doesn't seem to get Option key presses. It will
+    then fix itself somehow and behave normally.
 
 *Control* is used for tmux (tmux/tmux.conf), in particular C-Space is my prefix.
   * Hammerspoon installs application-specific hotkeys for Mail (Control-T and
