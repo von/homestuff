@@ -16,10 +16,12 @@ applications as follows:
   * TODO: Sometimes Hammerspoon doesn't seem to get Option key presses. It will
     then fix itself somehow and behave normally.
 
-*Control* is used for tmux (tmux/tmux.conf), in particular C-Space is my prefix.
-  * Hammerspoon installs application-specific hotkeys for Mail (Control-T and
-    control-P). I found this works better than System Preferences / Keyboard /
-    Shortcuts
+*Control* is used for application-specific stuff.
+E.g. tmux (tmux/tmux.conf), in particular C-Space is my prefix.
+  * Hammerspoon installs application-specific hotkeys for various applications in
+    hotkeys.laus. For example
+    * Mail: Control-T and control-P. I found this works better than
+      System Preferences / Keyboard / Shortcuts
 
 *Shift* is used in conjunction with the above.
 
