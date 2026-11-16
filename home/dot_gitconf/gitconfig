@@ -37,7 +37,9 @@
         unadd = reset HEAD
         unadd-file = reset --
         # Kudos: http://megakemp.com/2016/08/25/git-undo/
-        undo = "!f() { \\\n    git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; \\\n}; f"
+        # This seems dangerous as it caused uncommitted work to be lost.
+        # https://stackoverflow.com/questions/5473/how-can-i-undo-git-reset-hard-head1
+        # undo = "!f() { \\\n    git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; \\\n}; f"
         wdiff = diff --color-words
 [branch]
         # always setup 'git pull' to rebase instead of merge
